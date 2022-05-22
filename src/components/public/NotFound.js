@@ -1,5 +1,5 @@
 import React from 'react';
-import Error404 from '../error.gif'
+import Error404 from '../../error.gif'
 
 const NotFound = () => {
     return (

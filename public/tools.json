@@ -1,0 +1,56 @@
+[
+    {
+        "id": "628a51732a031c67e5f5a7d8",
+        "name": "IR Obstacle Sensor",
+        "img": "https://admin.techshopbd.com/uploads/product/IRObstacleSensor_1.jpg",
+        "details": "The sensor module has a pair of infrared transmitting and receiving tube, when detecting direction meets with obstacles (reflecting surface), reflected infrared receiving by the tube.",
+        "unitPrice": "1.20",
+        "minQuantity": "50",
+        "availableQuantity": "300"
+    },
+    {
+        "id": "628a517306c5079969a9f84b",
+        "name": "Smoke Sensor",
+        "img": "https://admin.techshopbd.com/uploads/product/Smoke-Sensor-Module-(MQ-2).jpg",
+        "details": "The resistance of the sensor is different depending on the type of the gas.The smoke sensor has a built-in potentiometer that allows you to adjust the sensor digital output (D0) threshold. This threshold sets the value above which the digital pin will output a LOW signal.",
+        "unitPrice": "2.00",
+        "minQuantity": "25",
+        "availableQuantity": "200"
+    },
+    {
+        "id": "628a51738a7185ef0c194138",
+        "name": "Alcohol Sensor",
+        "img": "https://admin.techshopbd.com/uploads/product/Grove-AlcoholSensor.jpg",
+        "details": "Alcohol sensor is semiconductor sensor for alcohol detection. It has good sensitivity and fast response to alcohol, suitable for portable alcohol detector.Alcohol level over-limit alarm. Stand-alone/background sensing device. Environmental monitoring equipment",
+        "unitPrice": "9.50",
+        "minQuantity": "50",
+        "availableQuantity": "600"
+    },
+    {
+        "id": "628a5173e906af7f5d670b31",
+        "name": "Sound Sensor",
+        "img": "https://admin.techshopbd.com/uploads/product/Grove---Sound-Sensor.jpg",
+        "details": "The Sound sensor module is a simple microphone compatible with many microcontrollers and SBCs like Arduino and Raspberry Pi. It can be used to detect whether there's sound (like the sound of clapping, noise, etc) surround or not and output the sound strength of the environment.",
+        "unitPrice": "7.00",
+        "minQuantity": "50",
+        "availableQuantity": "550"
+    },
+    {
+        "id": "628a51734eff4f000fad7596",
+        "name": "Laser Sensor",
+        "img": "https://admin.techshopbd.com/uploads/product/LaserSensor.jpg",
+        "details": "This Laser Sensor features boost circuit and signal output indicator. Obstacle detection. Pipeline counter. Smart robot. Obstacle-avoiding car.",
+        "unitPrice": "12.10",
+        "minQuantity": "30",
+        "availableQuantity": "350"
+    },
+    {
+        "id": "628a5173b9704a544bff3522",
+        "name": "Dust Sensor",
+        "img": "https://admin.techshopbd.com/uploads/product/DustSensor.jpg",
+        "details": "Sharp GP2Y1010AU0F onboard, detecting fine particle larger than 0.8μm in diameter, even like the cigarette smoke. Low power consumption, analog voltage output, the output level is linear with dust density. Embedded voltage boost circuit to support wide range of power supply.",
+        "unitPrice": "15.75",
+        "minQuantity": "20",
+        "availableQuantity": "250"
+    }
+]
