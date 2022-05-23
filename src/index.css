@@ -114,4 +114,11 @@
 
 }
 
-
+@layer components{
+  .link{
+    @apply font-normal;
+  }
+  .link-active{
+    @apply font-medium underline underline-offset-4;
+  }
+}

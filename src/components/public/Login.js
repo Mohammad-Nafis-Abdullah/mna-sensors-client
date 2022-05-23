@@ -15,7 +15,7 @@ const Login = () => {
     const emailRef = useRef("");
     const navigate = useNavigate();
     const location = useLocation();
-    let from = location.state?.from?.pathname || "/";
+    let from = location?.state?.from?.pathname || "/home";
     const {
         register,
         formState: { errors },
@@ -70,7 +70,7 @@ const Login = () => {
     };
     return (
         <div className="fadeIn min-h-screen flex justify-center items-center py-5">
-            <div className="card w-96 shadow-2xl bg-white">
+            <div className="card w-96 border-2 shadow-md bg-white">
                 <div className="card-body">
                     <h2 className="text-center text-xl font-bold">Login</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>

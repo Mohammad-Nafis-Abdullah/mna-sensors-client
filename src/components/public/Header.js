@@ -1,14 +1,16 @@
 import { signOut } from "firebase/auth";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 
 const Navbar = () => {
     const [user] = useAuthState(auth);
+    const navigate = useNavigate();
 
     const logout = () => {
         signOut(auth);
+        navigate('/');
         localStorage.removeItem("accessToken");
     };
     const menuItems = (
@@ -16,17 +18,30 @@ const Navbar = () => {
             <li>
                 <Link to="/">Home</Link>
             </li>
-            {user && (
+            {user && 
                 <>
-                    <li>
+                <li tabindex="0">
+                    <span>
+                        User
+                        <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>
+                    </span>
+                    <ul class="p-2 z-50 border-2 bg-gray-700 text-white">
+                        <li>
+                            <Link to="/dashboard">Dashboard</Link>
+                        </li>
+                        <li>
+                            <Link to="/myprofile">My Profile</Link>
+                        </li>
+                    </ul>
+                </li>
+                    {/* <li>
                         <Link to="/dashboard">Dashboard</Link>
                     </li>
                     <li>
                         <Link to="/myprofile">My Profile</Link>
-                    </li>
+                    </li> */}
                 </>
-            )}
-
+            }
             <li>
                 <Link to="/reviews">Reviews</Link>
             </li>
@@ -39,16 +54,16 @@ const Navbar = () => {
             </li>
             <li>
                 {user ? (
-                    <button onClick={logout}>Sign Out</button>
+                    <button className="btn text-white" onClick={logout}>Sign Out</button>
                 ) : (
-                    <Link to="/login">Login</Link>
+                    <Link className="btn text-white" to="/login">Login</Link>
                 )}
             </li>
         </>
     );
     return (
-        <div className="navbar bg-base-100 border-4">
-            <div className="navbar-start border-4">
+        <div className="navbar bg-base-100 shadow-md">
+            <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex="0" className="btn btn-ghost lg:hidden">
                         <svg
@@ -77,16 +92,8 @@ const Navbar = () => {
                     MNA Sensors
                 </Link>
             </div>
-            <div className="navbar-center hidden lg:flex mx-auto">
+            <div className="navbar-end hidden lg:flex mx-auto">
                 <ul className="menu menu-horizontal p-0">{menuItems}</ul>
-            </div>
-            <div className="navbar-end lg:hidden">
-                <label
-                    htmlFor="dashboard-drawer"
-                    className="btn btn-primary text-white drawer-button lg:hidden"
-                >
-                    Sidebar
-                </label>
             </div>
         </div>
     );
