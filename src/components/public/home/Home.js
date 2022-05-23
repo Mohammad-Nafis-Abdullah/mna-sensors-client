@@ -4,7 +4,12 @@ import useFetch from '../../../hooks/useFetch'
 import Card from './Card';
 
 const Home = () => {
-    const tools = useFetch('tools.json');
+    
+
+    const {myData:tools,refetch} = useFetch('http://localhost:5000/sensors');
+
+    console.log(tools);
+
 
     return (
         <div className='container'>
@@ -12,7 +17,7 @@ const Home = () => {
             <h2 className='text-3xl font-medium underline text-center mt-10 mb-8'>Sensors</h2>
             <div className='flex flex-wrap justify-center gap-5 mb-16'>
                 {
-                    tools.map((tool) => <Card key={tool._id} tool={tool} />)
+                    tools?.map((tool) => <Card key={tool._id} tool={tool} refetch={refetch}/>)
                 }
             </div>
         </div>

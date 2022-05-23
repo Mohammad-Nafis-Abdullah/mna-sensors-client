@@ -1,14 +1,23 @@
-import { useEffect, useState } from "react"
+/* eslint-disable no-unused-vars */
+import axios from "axios";
+import { useQuery } from "react-query";
+import Loading from "../components/public/Loading";
 
-const useFetch = (url,initialValue=[],dependencies=[])=> {
-    const [fetchedData,setFetch] = useState(initialValue);
+const useFetch = (url)=> {
 
-    useEffect(()=> {
-        fetch(url).then(response => response.json()).then(data => setFetch(data))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },dependencies);
+    const {data:myData,isLoading,refetch} = useQuery('myData',()=> 
+        axios.get(url).then((data)=> {
+            // console.log(data.data);
+            return data.data;
+        })
+    );
+    console.log(myData);
 
-    return fetchedData;
+    if (isLoading) {
+        return <Loading/>
+    }
+
+    return {myData,refetch};
 }
 
 export default useFetch;

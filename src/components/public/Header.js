@@ -18,22 +18,22 @@ const Navbar = () => {
             <li>
                 <Link to="/">Home</Link>
             </li>
-            {user && 
+            {user &&
                 <>
-                <li tabindex="0">
-                    <span>
-                        User
-                        <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>
-                    </span>
-                    <ul class="p-2 z-50 border-2 bg-gray-700 text-white">
-                        <li>
-                            <Link to="/dashboard">Dashboard</Link>
-                        </li>
-                        <li>
-                            <Link to="/myprofile">My Profile</Link>
-                        </li>
-                    </ul>
-                </li>
+                    <li tabIndex="0">
+                        <span>
+                            User
+                            <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>
+                        </span>
+                        <ul className="p-2 z-50 border-2 bg-gray-700 text-white">
+                            <li>
+                                <Link to="/dashboard">Dashboard</Link>
+                            </li>
+                            <li>
+                                <Link to="/myprofile">My Profile</Link>
+                            </li>
+                        </ul>
+                    </li>
                     {/* <li>
                         <Link to="/dashboard">Dashboard</Link>
                     </li>
