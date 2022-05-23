@@ -11,7 +11,6 @@ const useFetch = (url)=> {
             return data.data;
         })
     );
-    console.log(myData);
 
     if (isLoading) {
         return <Loading/>

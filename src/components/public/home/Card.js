@@ -1,7 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Card = ({ tool }) => {
-    const { name, img, details, unitPrice, minQuantity, availableQuantity } = tool;
+    const {_id, name, img, details, unitPrice, minQuantity, availableQuantity } = tool;
+    const navigate = useNavigate();
 
 
     return (
@@ -14,7 +16,9 @@ const Card = ({ tool }) => {
                 <h3 className='font-medium text-base'>Available Quantity : {availableQuantity}</h3>
                 <h3 className='font-medium text-base'>Price per Unit : ${unitPrice}</h3>
                 <div className="card-actions justify-end">
-                    <button className="btn">Book Now</button>
+                    <button onClick={()=> {
+                        navigate(`/purchase/${_id}`)
+                    }} className="btn">Book Now</button>
                 </div>
             </div>
         </div>

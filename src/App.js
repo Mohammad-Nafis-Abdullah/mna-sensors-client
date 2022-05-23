@@ -6,6 +6,8 @@ import Login from "./components/public/Login";
 import SignUp from "./components/public/SignUp";
 import Home from "./components/public/home/Home";
 import Footer from "./components/public/Footer";
+import Private from "./components/private/Private";
+import Purchase from "./components/public/purchase/Purchase";
 
 
 function App() {
@@ -24,6 +26,9 @@ function App() {
         <Routes>
           <Route path="/home" element={<Navigate to={"/"}/>}/>
           <Route path="/" element={<Home/>}/>
+          <Route path="/purchase/:id" element={<Private>
+            <Purchase/>
+          </Private>}/>
 
           
 
