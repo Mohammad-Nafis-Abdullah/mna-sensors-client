@@ -7,7 +7,7 @@ import SignUp from "./components/public/SignUp";
 import Home from "./components/public/home/Home";
 import Footer from "./components/public/Footer";
 import Private from "./components/private/Private";
-import Purchase from "./components/public/purchase/Purchase";
+import Purchase from "./components/private/purchase/Purchase";
 
 
 function App() {

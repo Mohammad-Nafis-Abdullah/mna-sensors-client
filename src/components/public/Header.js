@@ -16,21 +16,21 @@ const Navbar = () => {
     const menuItems = (
         <>
             <li>
-                <Link to="/">Home</Link>
+                <Link to="/" className="btn-xs font-medium text-sm">Home</Link>
             </li>
             {user &&
                 <>
                     <li tabIndex="0">
-                        <span>
+                        <span className="btn-xs font-medium text-sm">
                             User
                             <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>
                         </span>
                         <ul className="p-2 z-50 border-2 bg-gray-700 text-white">
                             <li>
-                                <Link to="/dashboard">Dashboard</Link>
+                                <Link to="/dashboard" className="btn-xs font-medium text-sm">Dashboard</Link>
                             </li>
                             <li>
-                                <Link to="/myprofile">My Profile</Link>
+                                <Link to="/myprofile" className="btn-xs font-medium text-sm">My Profile</Link>
                             </li>
                         </ul>
                     </li>
@@ -43,20 +43,20 @@ const Navbar = () => {
                 </>
             }
             <li>
-                <Link to="/reviews">Reviews</Link>
+                <Link to="/reviews" className="btn-xs font-medium text-sm">Reviews</Link>
             </li>
 
             <li>
-                <Link to="/myporfolio">My Portfolio</Link>
+                <Link to="/myporfolio" className="btn-xs font-medium text-sm">My Portfolio</Link>
             </li>
             <li>
-                <Link to="/blogs">Blogs</Link>
+                <Link to="/blogs" className="btn-xs font-medium text-sm">Blogs</Link>
             </li>
             <li>
                 {user ? (
-                    <button className="btn text-white" onClick={logout}>Sign Out</button>
+                    <button className="link" onClick={logout}>Logout</button>
                 ) : (
-                    <Link className="btn text-white" to="/login">Login</Link>
+                    <Link className="link" to="/login">Login</Link>
                 )}
             </li>
         </>

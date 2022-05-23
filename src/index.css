@@ -116,13 +116,24 @@
 
 @layer components{
   .link{
-    @apply font-normal;
+    @apply font-medium bg-gray-800/90 px-1.5 py-0.5 hover:bg-gray-800 active:scale-95 duration-150 no-underline text-white
+    ;
   }
   .link-active{
     @apply font-medium underline underline-offset-4;
   }
   .container{
     @apply mx-auto;
+  }
+  .input-container{
+    @apply relative z-0 mb-8 w-full;
+  }
+  .input-field{
+    @apply block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-4 border-gray-900/20 appearance-none focus:outline-none focus:border-gray-800 placeholder:font-medium placeholder:text-xl;
+  }
+  
+  .input-label{
+    @apply absolute text-base font-medium text-gray-900 duration-300 -translate-y-8 top-3 -z-10 origin-[0];
   }
 }
 
