@@ -10,12 +10,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyBMi1V-rTPIGh6nsmXbF5oFh1pjrmXmVXg",
-    authDomain: "mna-sensors.firebaseapp.com",
-    projectId: "mna-sensors",
-    storageBucket: "mna-sensors.appspot.com",
-    messagingSenderId: "783423432684",
-    appId: "1:783423432684:web:6606fe12b40ee1da7ac2c9"
+    apiKey: process.env.REACT_APP_apiKey,
+    authDomain: process.env.REACT_APP_authDomain,
+    projectId: process.env.REACT_APP_projectId,
+    storageBucket: process.env.REACT_APP_storageBucket,
+    messagingSenderId: process.env.REACT_APP_messagingSenderId,
+    appId: process.env.REACT_APP_appId
 };
 
 // Initialize Firebase

@@ -125,3 +125,11 @@
     @apply mx-auto;
   }
 }
+
+
+.card-container:hover .child-card:not(:hover){
+  @apply xl:blur-sm;
+}
+.child-card:hover{
+  @apply xl:scale-105 xl:z-10 transition-all duration-300 cursor-default;
+}
