@@ -121,4 +121,7 @@
   .link-active{
     @apply font-medium underline underline-offset-4;
   }
+  .container{
+    @apply mx-auto;
+  }
 }
