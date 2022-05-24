@@ -159,3 +159,8 @@
 .blog-card p{
   @apply h-[13.1rem] rounded overflow-auto text-sm font-medium text-gray-800/70;
 }
+
+
+.dashboard-btn{
+  @apply text-gray-800 font-bold btn-ghost;
+}

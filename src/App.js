@@ -11,6 +11,9 @@ import Private from "./components/private/Private";
 import Purchase from "./components/private/purchase/Purchase";
 import { ToastContainer } from "react-toastify";
 import Blog from "./components/public/blog/Blog";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "./firebase.init";
+import Dashboard from "./components/private/Dashboard";
 
 
 function App() {
@@ -19,6 +22,7 @@ function App() {
     window.scrollTo(0, 0);
   }, [pathname]);
 
+  const [user] = useAuthState(auth);
 
   return (
     <div className="">
@@ -33,6 +37,10 @@ function App() {
             <Purchase/>
           </Private>}/>
 
+          {
+            user && 
+            <Route path="/dashboard" element={<Dashboard/>}/>
+          }
           
           <Route path="/blogs" element={<Blog/>}/>
           <Route path="/login" element={<Login/>}/>
