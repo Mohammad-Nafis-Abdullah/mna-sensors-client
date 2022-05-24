@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+import axios from 'axios';
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useParams } from 'react-router-dom';
@@ -28,21 +29,27 @@ const Purchase = () => {
         const productId= selected._id;
         const productName= selected.name;
         const orderQuantity= quantity || selected.minQuantity;
-        const orderCost= quantity?(quantity*selected.unitPrice).toFixed(2):(selected.minQuantity*selected.unitPrice).toFixed(2);
+        const orderCost= quantity?parseFloat((quantity*selected.unitPrice).toFixed(2)):parseFloat((selected.minQuantity*selected.unitPrice).toFixed(2));
 
 
         const order = {name,email,phone,address,productId,productName,orderQuantity,orderCost};
-        console.log(order);
 
-        await fetch('http://localhost:5000/order',{
-            method:'POST',
-            headers:{
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(order)
-        }).then(res => res.json()).then((data) => {
-            toast.success(`${data.orderQuantity} pieces of ${data.productName} ordered successfully`,{theme:'colored'})
+        await axios.post('http://localhost:5000/order',order).then(res => {
+            toast.success(`${orderQuantity} pieces of ${productName} ordered successfully`,{theme:'colored'});
         });
+
+        const remaniningQuantity = selected.availableQuantity - orderQuantity;
+        const updateQuantity = { remaniningQuantity };
+        await axios.put(`http://localhost:5000/sensor/${selected._id}`, updateQuantity).then((res) => {
+            if (res) {
+                refetch();
+            }
+        });
+
+
+        e.target.phone.value='';
+        e.target.address.value='';
+        
     }
 
     const [quantity, setQuantity] = useState(0);
@@ -55,7 +62,6 @@ const Purchase = () => {
         if (inputValue < selected.minQuantity || inputValue > selected.availableQuantity) {
             setQuantity(selected.minQuantity);
         }
-
     }
 
     return (
