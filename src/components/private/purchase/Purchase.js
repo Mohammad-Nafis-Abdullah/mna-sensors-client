@@ -21,10 +21,25 @@ const Purchase = () => {
 
     const checkedOut = (e) => {
         e.preventDefault();
-        e.target.email.value = '';
-        e.target.name.value = '';
-        e.target.phone.value = '';
-        e.target.address.value = '';
+
+        const name = user.displayName;
+        const email = user.email;
+        const phone = e.target.phone.value;
+        const address = e.target.address.value;
+        const orderDetails = [
+            {
+                productId: selected._id,
+                productName: selected.name,
+                orderQuantity : quantity || selected.minQuantity,
+                orderCost : quantity*selected.unitPrice || selected.minQuantity*selected.unitPrice
+            }
+        ]
+
+        // const orderQuantity = quantity || selected.minQuantity;
+        // const orderCost = quantity*selected.unitPrice || selected.minQuantity*selected.unitPrice;
+
+        const order = {name,email,phone,address,orderDetails}
+        console.log(order);
 
         selected ? toast('Thanks for checking out our service') : alert('No service selected');
     }
@@ -44,7 +59,7 @@ const Purchase = () => {
 
     return (
         <div className='container min-h-[calc(100vh-166.5px)] flex flex-wrap justify-center items-center px-3 py-8 gap-8'>
-            <form onSubmit={checkedOut} className='p-5 rounded-xl shadow-[0_0_15px_1px_rgba(0,0,0,0.343)] w-full flex flex-wrap justify-center items-center gap-x-16 gap-y-5'>
+            <form onSubmit={checkedOut} className='p-5 rounded-xl shadow-[0_0_15px_1px_rgba(0,0,0,0.343)] flex flex-wrap justify-center items-center gap-x-16 gap-y-5'>
                 <h3 className='text-center text-gray-800 font-medium text-3xl basis-full'>Purchase Form</h3>
                 <section className='fromLeft max-w-sm w-full flex flex-col justify-center items-center p-3 rounded-xl gap-3'>
                     <div className="input-container">
@@ -81,6 +96,9 @@ const Purchase = () => {
                                     {
                                         (quantity<selected.minQuantity || quantity>selected.availableQuantity) && <small className='text-red-600'>{`Enter quantity between ${selected.minQuantity} to ${selected.availableQuantity}`}</small>
                                     }
+                                </div>
+                                <div className="input-container">
+                                    <label htmlFor="" className='flex justify-between items-center gap-2 text-sm sm:text-lg'>Total Cost :<input type="number" className="input-field basis-1/2 text-center" placeholder={`$ ${quantity*selected.unitPrice || selected.minQuantity*selected.unitPrice}`} disabled /></label>
                                 </div>
                                 <div className="input-container">
                                     <label htmlFor="" className='flex justify-between items-center gap-2 text-sm sm:text-lg'>Total Available :<input type="number" className="input-field basis-1/2 text-center" placeholder={selected.availableQuantity} disabled /></label>
