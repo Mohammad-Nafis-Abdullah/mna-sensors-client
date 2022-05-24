@@ -10,6 +10,7 @@ import Footer from "./components/public/Footer";
 import Private from "./components/private/Private";
 import Purchase from "./components/private/purchase/Purchase";
 import { ToastContainer } from "react-toastify";
+import Blog from "./components/public/blog/Blog";
 
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
           </Private>}/>
 
           
-
+          <Route path="/blogs" element={<Blog/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/Signup" element={<SignUp/>}/>
           <Route path="/*" element={<NotFound/>}/>
