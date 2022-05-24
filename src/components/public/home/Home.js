@@ -3,11 +3,12 @@ import React from 'react';
 import Banner from './Banner';
 import useFetch from '../../../hooks/useFetch'
 import Card from './Card';
+import Summary from './Summary';
 
 const Home = () => {
     
 
-    const {myData:tools,refetch} = useFetch('http://localhost:5000/sensors');
+    const {data:tools,refetch} = useFetch('http://localhost:5000/sensors');
 
 
 
@@ -20,6 +21,7 @@ const Home = () => {
                     tools?.map((tool) => <Card key={tool._id} tool={tool} />)
                 }
             </div>
+            <Summary/>
         </div>
     );
 };

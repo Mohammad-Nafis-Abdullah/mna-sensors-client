@@ -1,22 +1,22 @@
 /* eslint-disable no-unused-vars */
 import axios from "axios";
+import { useState } from "react";
 import { useQuery } from "react-query";
 import Loading from "../components/public/Loading";
 
 const useFetch = (url)=> {
-
-    const {data:myData,isLoading,refetch} = useQuery('myData',()=> 
-        axios.get(url).then((data)=> {
-            // console.log(data.data);
-            return data.data;
+    const [data,setData] = useState([]);
+    const { isLoading, refetch } = useQuery("tools", () =>
+        axios.get(url).then((data) => {
+            setData(data?.data);
+            refetch();
         })
     );
-
+    
     if (isLoading) {
-        return <Loading/>
+        return <Loading />;
     }
-
-    return {myData,refetch};
+    return {data,refetch};
 }
 
 export default useFetch;

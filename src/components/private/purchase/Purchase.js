@@ -12,7 +12,7 @@ const Purchase = () => {
     const params = useParams();
     const { id: serviceId } = params;
     let selected = [];
-    const { myData: select, refetch } = useFetch(`http://localhost:5000/sensor/${serviceId}`);
+    const { data: select, refetch } = useFetch(`http://localhost:5000/sensor/${serviceId}`);
     if(select){
         selected = select[0];
     }
@@ -25,20 +25,14 @@ const Purchase = () => {
         const email = user.email;
         const phone = e.target.phone.value;
         const address = e.target.address.value;
-        const orderDetails = [
-            {
-                productId: selected._id,
-                productName: selected.name,
-                orderQuantity : quantity || selected.minQuantity,
-                orderCost : quantity?(quantity*selected.unitPrice).toFixed(2):(selected.minQuantity*selected.unitPrice).toFixed(2),
-            }
-        ]
+        const productId= selected._id;
+        const productName= selected.name;
+        const orderQuantity= quantity || selected.minQuantity;
+        const orderCost= quantity?(quantity*selected.unitPrice).toFixed(2):(selected.minQuantity*selected.unitPrice).toFixed(2);
 
-        // const orderQuantity = quantity || selected.minQuantity;
-        // const orderCost = quantity*selected.unitPrice || selected.minQuantity*selected.unitPrice;
 
-        const order = {name,email,phone,address,orderDetails}
-        // console.log(order);
+        const order = {name,email,phone,address,productId,productName,orderQuantity,orderCost};
+        console.log(order);
 
         await fetch('http://localhost:5000/order',{
             method:'POST',
@@ -47,7 +41,7 @@ const Purchase = () => {
             },
             body: JSON.stringify(order)
         }).then(res => res.json()).then((data) => {
-            toast.success(`${data.orderDetails[0].orderQuantity} ${data.orderDetails[0].productName} ordered successfully`)
+            toast.success(`${data.orderQuantity} pieces of ${data.productName} ordered successfully`,{theme:'colored'})
         });
     }
 
