@@ -129,7 +129,7 @@
     @apply relative z-0 mb-8 w-full;
   }
   .input-field{
-    @apply block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-4 border-gray-900/20 appearance-none focus:outline-none focus:border-gray-800 placeholder:font-medium placeholder:text-xl;
+    @apply block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-4 border-gray-900/20 appearance-none focus:outline-none focus:border-gray-800 placeholder:font-medium placeholder:text-sm sm:placeholder:text-xl placeholder:text-gray-800;
   }
   
   .input-label{
