@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import 'react-toastify/dist/ReactToastify.css';
 import NotFound from "./components/public/NotFound";
 import Header from "./components/public/Header";
 import { useEffect } from "react";
@@ -8,6 +9,7 @@ import Home from "./components/public/home/Home";
 import Footer from "./components/public/Footer";
 import Private from "./components/private/Private";
 import Purchase from "./components/private/purchase/Purchase";
+import { ToastContainer } from "react-toastify";
 
 
 function App() {
@@ -40,6 +42,8 @@ function App() {
 
 
       <Footer/>
+
+      <ToastContainer/>
     </div>
   );
 }
