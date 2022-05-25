@@ -3,6 +3,7 @@ import useFetching from '../../../hooks/useFetching';
 
 const Summary = () => {
     const items = useFetching('http://localhost:5000/sensors');
+    const users = useFetching('http://localhost:5000/users/count');
     const orders = useFetching('http://localhost:5000/orders/count');
 
 
@@ -19,7 +20,7 @@ const Summary = () => {
 
                 <div className="stat">
                     <div className="stat-title">Total Users</div>
-                    <div className="stat-value">4,200</div>
+                    <div className="stat-value">{users.usersNumber}</div>
                     <div className="stat-desc text-transparent">---</div>
                 </div>
 

@@ -2,7 +2,7 @@ import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, Outlet } from "react-router-dom";
 import auth from "../../firebase.init";
-import useAdmin from "../../hooks/useAdmin"
+import useAdmin from "../../hooks/useAdmin";
 
 const Dashboard = () => {
     const [user] = useAuthState(auth);
@@ -10,59 +10,71 @@ const Dashboard = () => {
     return (
         <div className="drawer drawer-mobile bg-neutral-focus">
             <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content pt-5 space-y-3">
-                <h2 className="font-bold text-white underline-offset-2 underline text-2xl text-center">
-                    Dashboard
+            <div className="drawer-content mt-2">
+                <h2 className="font-bold btn-ghost text-white text-xs text-center">
+                    Logged In as : {user.email}
                 </h2>
-                <h2 className="font-bold text-white text-xs text-center">
-                    Logged In as : {user?.email}
+                <h2 className="font-bold btn-ghost text-white text-2xl text-center">
+                    Dashboard
                 </h2>
 
                 <Outlet />
             </div>
             <div className="drawer-side ">
-                {/* <label htmlFor="dashboard-drawer" className="drawer-overlay"></label> */}
-                <ul className="menu p-4 overflow-y-auto w-64 bg-base-100 text-base-content">
+                <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
+                <ul className="menu p-4 overflow-y-auto w-64 bg-neutral glass text-base-content">
                     {/* <!-- Sidebar content here --> */}
+
                     <li>
-                        <Link className="dashboard-btn" to="/dashboard">
-                            My Appointments
+                        <Link className="btn-ghost text-white font-bold" to="/dashboard">
+                            My Profile
                         </Link>
                     </li>
-                    <li>
-                        <Link className="dashboard-btn" to="/dashboard/review">
-                            Add a Review
-                        </Link>
-                    </li>
-                    <li>
-                        <Link className="dashboard-btn" to="/dashboard/history">
-                            My Treatment History
-                        </Link>
-                    </li>
+                    {user && !admin && (
+                        <>
+                            <li>
+                                <Link
+                                    className="btn-ghost text-white font-bold"
+                                    to="/dashboard/myOrders"
+                                >
+                                    My Orders
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    className="btn-ghost text-white font-bold"
+                                    to="/dashboard/addReview"
+                                >
+                                    Add A Review
+                                </Link>
+                            </li>
+                        </>
+                    )}
+
                     {admin && (
                         <>
                             <li>
                                 <Link
-                                    className="dashboard-btn"
-                                    to="/dashboard/users"
+                                    className="btn-ghost text-white font-bold"
+                                    to="/dashboard/makeAdmin"
                                 >
-                                    All Users
+                                    Make Admin
                                 </Link>
                             </li>
                             <li>
                                 <Link
-                                    className="dashboard-btn"
-                                    to="/dashboard/addDoctor"
+                                    className="btn-ghost text-white font-bold"
+                                    to="/dashboard/addSensor"
                                 >
-                                    Add A Doctor
+                                    Add A Sensor
                                 </Link>
                             </li>
                             <li>
                                 <Link
-                                    className="dashboard-btn"
-                                    to="/dashboard/manageDoctor"
+                                    className="btn-ghost text-white font-bold"
+                                    to="/dashboard/manageSensors"
                                 >
-                                    Manage Doctors
+                                    Manage Sensors
                                 </Link>
                             </li>
                         </>

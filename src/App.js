@@ -11,10 +11,9 @@ import Private from "./components/private/Private";
 import Purchase from "./components/private/purchase/Purchase";
 import { ToastContainer } from "react-toastify";
 import Blog from "./components/public/blog/Blog";
-import { useAuthState } from "react-firebase-hooks/auth";
-import auth from "./firebase.init";
 import Dashboard from "./components/private/Dashboard";
 import MyPortfolio from "./components/public/myportfolio/MyPortfolio";
+import MyProfile from "./components/private/MyProfile";
 
 
 function App() {
@@ -23,7 +22,6 @@ function App() {
     window.scrollTo(0, 0);
   }, [pathname]);
 
-  const [user] = useAuthState(auth);
 
   return (
     <div className="">
@@ -38,12 +36,42 @@ function App() {
             <Purchase/>
           </Private>}/>
 
-          {
-            user && 
-            <Route path="/dashboard" element={<Dashboard/>}>
-
-            </Route>
-          }
+          <Route
+            path="/dashboard"
+            element={
+              <Private>
+                <Dashboard />
+              </Private>
+            }
+          >
+            <Route index element={<MyProfile />} />
+            {/* <Route path="addReview" element={<AddAReview />} />
+            <Route path="myOrders" element={<MyOrders />} />
+            <Route
+              path="makeAdmin"
+              element={
+                <RequireAdmin>
+                  <MakeAdmin />
+                </RequireAdmin>
+              }
+            /> */}
+            {/* <Route
+              path="addTool"
+              element={
+                <RequireAdmin>
+                  <AddATool />
+                </RequireAdmin>
+              }
+            />
+            <Route
+              path="manageTools"
+              element={
+                <RequireAdmin>
+                  <ManageTools />
+                </RequireAdmin>
+              }
+            /> */}
+          </Route>
           
           <Route path="/myportfolio" element={<MyPortfolio/>}/>
           <Route path="/blogs" element={<Blog/>}/>
