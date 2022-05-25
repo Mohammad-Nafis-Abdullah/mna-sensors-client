@@ -9,7 +9,7 @@ const Summary = () => {
     return (
         <section className='flex flex-col items-center justify-center mb-10'>
             <h2 className='font-semibold text-3xl mb-5'>Bussiness Summary</h2>
-            <div className="stats stats-vertical lg:stats-horizontal shadow-[0_0_15px_1px_rgba(0,0,0,0.343)]">
+            <div className="stats stats-vertical lg:stats-horizontal my-shadow">
 
                 <div className="stat">
                     <div className="stat-title">Total Items</div>

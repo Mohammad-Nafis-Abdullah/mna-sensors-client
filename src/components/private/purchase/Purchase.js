@@ -14,7 +14,7 @@ const Purchase = () => {
     const { id: serviceId } = params;
     let selected = [];
     const { data: select, refetch } = useFetch(`http://localhost:5000/sensor/${serviceId}`);
-    if(select){
+    if (select) {
         selected = select[0];
     }
 
@@ -26,16 +26,16 @@ const Purchase = () => {
         const email = user.email;
         const phone = e.target.phone.value;
         const address = e.target.address.value;
-        const productId= selected._id;
-        const productName= selected.name;
-        const orderQuantity= quantity || selected.minQuantity;
-        const orderCost= quantity?parseFloat((quantity*selected.unitPrice).toFixed(2)):parseFloat((selected.minQuantity*selected.unitPrice).toFixed(2));
+        const productId = selected._id;
+        const productName = selected.name;
+        const orderQuantity = quantity || selected.minQuantity;
+        const orderCost = quantity ? parseFloat((quantity * selected.unitPrice).toFixed(2)) : parseFloat((selected.minQuantity * selected.unitPrice).toFixed(2));
 
 
-        const order = {name,email,phone,address,productId,productName,orderQuantity,orderCost};
+        const order = { name, email, phone, address, productId, productName, orderQuantity, orderCost };
 
-        await axios.post('http://localhost:5000/order',order).then(res => {
-            toast.success(`${orderQuantity} pieces of ${productName} ordered successfully`,{theme:'colored'});
+        await axios.post('http://localhost:5000/order', order).then(res => {
+            toast.success(`${orderQuantity} pieces of ${productName} ordered successfully`, { theme: 'colored' });
         });
 
         const remaniningQuantity = selected.availableQuantity - orderQuantity;
@@ -47,9 +47,9 @@ const Purchase = () => {
         });
 
 
-        e.target.phone.value='';
-        e.target.address.value='';
-        
+        e.target.phone.value = '';
+        e.target.address.value = '';
+
     }
 
     const [quantity, setQuantity] = useState(0);
@@ -66,7 +66,7 @@ const Purchase = () => {
 
     return (
         <div className='container min-h-[calc(100vh-166.5px)] flex flex-wrap justify-center items-center px-3 py-1 gap-8'>
-            <form onSubmit={ordering} className='p-5 rounded-xl shadow-[0_0_15px_1px_rgba(0,0,0,0.343)] flex flex-wrap justify-center items-center gap-x-16 gap-y-5 bg-gray-700'>
+            <form onSubmit={ordering} className='p-5 rounded-xl my-shadow flex flex-wrap justify-center items-center gap-x-16 gap-y-5 bg-gray-700'>
                 <h3 className='text-center text-white font-medium text-3xl basis-full'>Purchase Form</h3>
                 <section className='fromLeft max-w-sm w-full flex flex-col justify-center items-center p-3 rounded-xl gap-3 bg-white pt-10'>
                     <div className="input-container">
@@ -88,40 +88,40 @@ const Purchase = () => {
                 </section>
                 {
                     selected &&
-                        <div className='max-w-sm w-full flex flex-col justify-center items-center p-3 shadow-[0_0_15px_1px_rgba(0,0,0,0.343)] rounded-xl fromRight bg-white'>
-                            <img className='h-[6.8rem] w-36 object-cover rounded-md' src={selected.img} alt="" />
-                            <div className='text-center font-medium space-y-3 grow'>
-                                <h5 className='text-gray-800 text-left text-xl'>{selected.name}</h5>
-                                <div className="input-container">
-                                    <label htmlFor="" className='flex justify-between items-center gap-2 text-sm text-gray-900/70 sm:text-lg'>Price per unit :<input type="number" className="input-field px-0 py-0 basis-1/2 text-center" placeholder={`$ ${selected.unitPrice}`} disabled /></label>
-                                </div>
-                                <div className="input-container">
-                                    <label htmlFor="" className='flex justify-between items-center gap-2 text-sm text-gray-900/70 sm:text-lg'>Minimum Order :<input type="number" className="input-field px-0 py-0  basis-1/2 text-center" placeholder={selected.minQuantity} disabled /></label>
-                                </div>
-                                <div className="input-container">
-                                    <label 
-                                    htmlFor="" 
+                    <div className='max-w-sm w-full flex flex-col justify-center items-center p-3 my-shadow rounded-xl fromRight bg-white'>
+                        <img className='h-[6.8rem] w-36 object-cover rounded-md' src={selected.img} alt="" />
+                        <div className='text-center font-medium space-y-3 grow'>
+                            <h5 className='text-gray-800 text-left text-xl'>{selected.name}</h5>
+                            <div className="input-container">
+                                <label htmlFor="" className='flex justify-between items-center gap-2 text-sm text-gray-900/70 sm:text-lg'>Price per unit :<input type="number" className="input-field px-0 py-0 basis-1/2 text-center" placeholder={`$ ${selected.unitPrice}`} disabled /></label>
+                            </div>
+                            <div className="input-container">
+                                <label htmlFor="" className='flex justify-between items-center gap-2 text-sm text-gray-900/70 sm:text-lg'>Minimum Order :<input type="number" className="input-field px-0 py-0  basis-1/2 text-center" placeholder={selected.minQuantity} disabled /></label>
+                            </div>
+                            <div className="input-container">
+                                <label
+                                    htmlFor=""
                                     className='flex justify-between items-center gap-2 text-sm text-gray-900/70 sm:text-lg'>
-                                        Quantity :
-                                        <input 
-                                        type="number" 
-                                        className="input-field px-0 py-0  basis-1/2 text-center text-xl font-medium" 
+                                    Quantity :
+                                    <input
+                                        type="number"
+                                        className="input-field px-0 py-0  basis-1/2 text-center text-xl font-medium"
                                         required
-                                        onBlur={checkQuantity} 
+                                        onBlur={checkQuantity}
                                         onChange={quantifing}
                                         value={quantity || selected.minQuantity} /></label>
-                                    {
-                                        (quantity<selected.minQuantity || quantity>selected.availableQuantity) && <small className='text-red-600'>{`Enter quantity between ${selected.minQuantity} to ${selected.availableQuantity}`}</small>
-                                    }
-                                </div>
-                                <div className="input-container">
-                                    <label htmlFor="" className='flex justify-between items-center gap-2 text-sm text-gray-900/70 sm:text-lg'>Total Cost :<input type="number" className="input-field px-0 py-0  basis-1/2 text-center" placeholder={`$ ${quantity?(quantity*selected.unitPrice).toFixed(2):(selected.minQuantity*selected.unitPrice).toFixed(2)}`} disabled /></label>
-                                </div>
-                                <div className="input-container">
-                                    <label htmlFor="" className='flex justify-between items-center gap-2 text-sm text-gray-900/70 sm:text-lg'>Total Available :<input type="number" className="input-field px-0 py-0  basis-1/2 text-center" placeholder={selected.availableQuantity} disabled /></label>
-                                </div>
+                                {
+                                    (quantity < selected.minQuantity || quantity > selected.availableQuantity) && <small className='text-red-600'>{`Enter quantity between ${selected.minQuantity} to ${selected.availableQuantity}`}</small>
+                                }
+                            </div>
+                            <div className="input-container">
+                                <label htmlFor="" className='flex justify-between items-center gap-2 text-sm text-gray-900/70 sm:text-lg'>Total Cost :<input type="number" className="input-field px-0 py-0  basis-1/2 text-center" placeholder={`$ ${quantity ? (quantity * selected.unitPrice).toFixed(2) : (selected.minQuantity * selected.unitPrice).toFixed(2)}`} disabled /></label>
+                            </div>
+                            <div className="input-container">
+                                <label htmlFor="" className='flex justify-between items-center gap-2 text-sm text-gray-900/70 sm:text-lg'>Total Available :<input type="number" className="input-field px-0 py-0  basis-1/2 text-center" placeholder={selected.availableQuantity} disabled /></label>
                             </div>
                         </div>
+                    </div>
                 }
                 <div className='basis-full'>
                     <button type='submit' className="block mx-auto px-16 py-1.5 rounded-md text-white font-bold

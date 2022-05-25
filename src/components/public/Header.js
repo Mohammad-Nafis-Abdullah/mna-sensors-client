@@ -47,7 +47,7 @@ const Navbar = () => {
             </li>
 
             <li>
-                <Link to="/myporfolio" className="btn-xs font-medium text-sm">My Portfolio</Link>
+                <Link to="/myportfolio" className="btn-xs font-medium text-sm">My Portfolio</Link>
             </li>
             <li>
                 <Link to="/blogs" className="btn-xs font-medium text-sm">Blogs</Link>

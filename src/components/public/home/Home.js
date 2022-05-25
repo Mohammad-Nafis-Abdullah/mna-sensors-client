@@ -10,8 +10,6 @@ const Home = () => {
 
     const {data:tools,refetch} = useFetch('http://localhost:5000/sensors');
 
-
-
     return (
         <div className='container'>
             <Banner/>

@@ -14,6 +14,7 @@ import Blog from "./components/public/blog/Blog";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "./firebase.init";
 import Dashboard from "./components/private/Dashboard";
+import MyPortfolio from "./components/public/myportfolio/MyPortfolio";
 
 
 function App() {
@@ -39,9 +40,12 @@ function App() {
 
           {
             user && 
-            <Route path="/dashboard" element={<Dashboard/>}/>
+            <Route path="/dashboard" element={<Dashboard/>}>
+
+            </Route>
           }
           
+          <Route path="/myportfolio" element={<MyPortfolio/>}/>
           <Route path="/blogs" element={<Blog/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/Signup" element={<SignUp/>}/>

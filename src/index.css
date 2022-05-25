@@ -164,3 +164,24 @@
 .dashboard-btn{
   @apply text-gray-800 font-bold btn-ghost;
 }
+
+
+.my-shadow{
+  @apply shadow-[0_0_15px_1px_rgba(0,0,0,0.343)];
+}
+
+.portfolio h3{
+  @apply text-lg font-medium;
+}
+.portfolio input{
+  @apply text-base font-medium text-neutral-focus;
+}
+.portfolio td , .portfolio h5{
+  @apply text-sm font-medium;
+}
+.portfolio div{
+  @apply flex justify-start sm:justify-center gap-2 items-center;
+}
+.portfolio div>input{
+  @apply text-center max-w-[15rem];
+}
