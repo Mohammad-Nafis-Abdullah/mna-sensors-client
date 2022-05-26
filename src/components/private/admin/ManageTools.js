@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 // import { toast } from "react-toastify";
-import useReactQuery from "../../../Hooks/useReactQuery";
+import useReactQuery from "../../../hooks/useFetch";
 import DeleteConfirmModel from "./DeleteConfirmModal";
 import ManageTool from "./ManageTool";
 

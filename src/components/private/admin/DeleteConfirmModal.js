@@ -1,6 +1,8 @@
 import axios from "axios";
 import React from "react";
 import { toast } from "react-toastify";
+
+
 const DeleteConfirmModel = ({ deleteTool, setDeleteTool, refetch }) => {
   const { _id, name } = deleteTool;
   const handleDelete = (id) => {

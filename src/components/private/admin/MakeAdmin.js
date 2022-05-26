@@ -1,8 +1,10 @@
 // import axios from "axios";
 import React from "react";
-import useReactQuery from "../../../Hooks/useReactQuery";
+import useReactQuery from "../../../hooks/useFetch";
 // import Loading from "../../Shared/Loading";
 import UserList from "./UserList";
+
+
 const MakeAdmin = () => {
   const url = "http://localhost:5000/users";
   const header = {

@@ -16,6 +16,12 @@ import MyPortfolio from "./components/public/myportfolio/MyPortfolio";
 import MyProfile from "./components/private/MyProfile";
 import AddAReview from "./components/private/user/AddAReview";
 import MyOrders from "./components/private/user/MyOrders";
+import Payment from "./components/private/user/Payment"
+import RequireAdmin from "./components/private/RequireAdmin"
+import MakeAdmin from "./components/private/admin/MakeAdmin"
+import AddATool from "./components/private/admin/AddATool"
+import ManageTools from "./components/private/admin/ManageTools"
+
 
 
 function App() {
@@ -49,7 +55,8 @@ function App() {
             <Route index element={<MyProfile />} />
             <Route path="addReview" element={<AddAReview />} />
             <Route path="myOrders" element={<MyOrders />} />
-            {/* <Route
+            <Route path="payment/:id" element={<Payment />} />
+            <Route
               path="makeAdmin"
               element={
                 <RequireAdmin>
@@ -72,7 +79,7 @@ function App() {
                   <ManageTools />
                 </RequireAdmin>
               }
-            /> */}
+            />
           </Route>
           
           <Route path="/myportfolio" element={<MyPortfolio/>}/>

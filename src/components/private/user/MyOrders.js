@@ -36,6 +36,12 @@ const MyOrders = () => {
   }, [user, navigate]);
 
 
+  const cancelling = async ()=> {
+      
+      
+  }
+
+
 
   return (
     <div>
@@ -72,9 +78,9 @@ const MyOrders = () => {
                       <Link to={`/dashboard/payment/${order._id}`} className="btn btn-xs btn-success text-neutral-focus">
                         Pay Now
                       </Link><br />
-                      <Link to=""  className="btn btn-xs btn-error text-white ">
+                      <button onClick={cancelling} className="btn btn-xs btn-error text-white ">
                         Cancel Order
-                      </Link>
+                      </button>
                     </div>
                   )}
                   {order.totalPrice && order.paid && (

@@ -37,7 +37,7 @@ const AddAReview = () => {
 
         const review = {email,comment,rating};
 
-        await axios.post(`http://localhost:5000/review/${email}`,review).then(data => {
+        await axios.put(`http://localhost:5000/review/${email}`,review).then(data => {
             if(data?.data?.success){
                 toast.success('Review submitted successfully',{theme:'colored'})
             }

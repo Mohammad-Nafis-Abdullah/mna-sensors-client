@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Loading from "../../Shared/Loading";
+import Loading from "../../public/Loading";
 
 const CheckoutForm = ({ order }) => {
   const stripe = useStripe();
@@ -15,15 +16,16 @@ const CheckoutForm = ({ order }) => {
   const _id = order?._id;
   const name = order?.name;
   const email = order?.email;
-  const totalPrice = order?.totalPrice;
-  const toolName = order?.toolName;
+  const orderCost = order?.orderCost;
+  const productName = order?.productName;
+  // console.log(order);
 
   useEffect(() => {
     const url = "http://localhost:5000/create-payment-intent";
     axios
       .post(
         url,
-        { totalPrice },
+        { orderCost },
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -31,12 +33,12 @@ const CheckoutForm = ({ order }) => {
         }
       )
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data.data.clientSecret) {
           setClientSecret(data.data.clientSecret);
         }
       });
-  }, [totalPrice]);
+  }, [orderCost]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -75,8 +77,8 @@ const CheckoutForm = ({ order }) => {
       setProcessing(false);
     } else {
       setCardError("");
-      setTransactionId(paymentIntent.id);
-      setSuccess(`Your Payment of ${toolName} is Completed`);
+      setTransactionId(paymentIntent?.id);
+      setSuccess(`Your Payment of ${productName} is Completed`);
 
       const payment = {
         appointment: _id,
@@ -94,9 +96,12 @@ const CheckoutForm = ({ order }) => {
         });
     }
   };
+
+  // console.log(transactionId);
+
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="flex flex-col justify-evenly h-[55%]" >
         <CardElement
           options={{
             style: {
@@ -114,7 +119,7 @@ const CheckoutForm = ({ order }) => {
           }}
         />
         <button
-          className="btn btn-success btn-sm mt-4"
+          className="btn btn-success btn-sm"
           type="submit"
           disabled={!stripe || !clientSecret || success}
         >
@@ -123,11 +128,11 @@ const CheckoutForm = ({ order }) => {
       </form>
       {cardError && <p className="text-error font-semibold">{cardError}</p>}
       {success && (
-        <div className="text-success font-semibold">
-          <p>{success}</p>
-          <p>
+        <div className="text-success font-semibold text-xs space-y-2">
+          <p className="text-emerald-600">{success}</p>
+          <p className="text-emerald-600">
             Transaction Id:{" "}
-            <span className="font-bold text-gray-800">{transactionId}</span>
+            <span className="font-bold text-sm text-neutral-focus">{transactionId}</span>
           </p>
         </div>
       )}

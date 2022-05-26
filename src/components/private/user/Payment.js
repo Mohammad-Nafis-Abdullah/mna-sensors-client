@@ -6,16 +6,16 @@ import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import axios from "axios";
 import { useQuery } from "react-query";
-import Loading from "../../Shared/Loading";
+import Loading from "../../public/Loading";
 
 const stripePromise = loadStripe(
-  "pk_test_51L0ozSFQMC6ZB6bzt0dxa1LaoMEuD6gRJRf610DtiJ5HQ8OUPWSK5UBcaF13eDEGuncz7XIkz8ggSzRwL42z1HxR00AQ59TUxV"
-);
+  'pk_test_51L3eYcIsG6t6EWnkOiJzzkmaaKd3tr3LcGjdbhkuKH1YYdZ1Qfvcf6IFMt1ChcJ7eJCXtpl7RZiPaj9HH3W3fk8M00rIbRpG9V'
+  );
 const Payment = () => {
-  const { orderId } = useParams();
-  const url = `http://localhost:5000/order/${orderId}`;
+  const { id } = useParams();
+  const url = `http://localhost:5000/order/${id}`;
 
-  const { data: order, isLoading } = useQuery(["order", orderId], () =>
+  const { data: order, isLoading } = useQuery(["order", id], () =>
     axios
       .get(url, {
         headers: {
@@ -29,36 +29,36 @@ const Payment = () => {
   if (isLoading) {
     return <Loading />;
   }
+
+
+  // console.log(order);
   return (
     <div>
-      <h2 className="text-lg text-primary font-bold text-left ml-3">
-        Payment of {orderId} and {order?.toolName}
+      <h2 className="text-xl text-white font-bold text-left ml-3">
+        Payment for {order?.productName}
       </h2>
-      <div className="hero min-h-screen">
-        <div className="flex-col ">
-          <div className="card w-50 max-w-md bg-secondary shadow-xl mb-4 ">
-            <div className="card-body glass text-white">
-              <h2 className="card-title text-xl font-bold">
-                Hello<span className="">{order?.name}</span>
-              </h2>
+      <div className="hero mt-5">
+        <div className="flex flex-wrap gap-3 justify-center w-full p-5">
+          <div className="card w-50 max-w-xs w-full ">
+            <div className="text-white">
+              <div className="text-xl font-bold">
+                <small>Hello,</small><br/><h3 className="">{order?.name}</h3>
+              </div>
               <p>
                 Your have an Order about{" "}
-                <span className="text-primary font-semibold">
-                  {order?.quantity}
-                </span>{" "}
-                Peices of{" "}
-                <span className="text-primary font-semibold">
-                  {order?.toolName}
+                <span className="text-amber-300 text-2xl font-semibold">{order?.orderQuantity}</span>{" "}Peices of{" "}
+                <span className="text-amber-300 text-2xl font-semibold">
+                  {order?.productName}
                 </span>
               </p>
               <p className="text-lg font-bold">
                 Like to Pay{" "}
-                <span className="text-primary">${order?.totalPrice}</span> Now?
+                <span className="text-amber-300 text-2xl">${order?.orderCost}</span> Now?
               </p>
             </div>
           </div>
-          <div className="card w-50 max-w-md bg-base-100 shadow-xl mb-4">
-            <div className="card-body">
+          <div className="card w-50 max-w-xs w-full bg-neutral-focus">
+            <div className="bg-white rounded-xl h-40 p-5 ">
               <Elements stripe={stripePromise}>
                 <CheckoutForm order={order} />
               </Elements>
