@@ -1,6 +1,6 @@
 // import axios from "axios";
 import React from "react";
-import useReactQuery from "../../../hooks/useFetch";
+import useFetch from "../../../hooks/useFetch";
 // import Loading from "../../Shared/Loading";
 import UserList from "./UserList";
 
@@ -30,10 +30,10 @@ const MakeAdmin = () => {
   //   if (isLoading) {
   //     return <Loading />;
   //   }
-  const { data: users, refetch } = useReactQuery(url, header);
+  const { data: users, refetch } = useFetch(url, header);
   return (
     <div className="fadeIn">
-      <h2 className="text-left ml-3 text-lg text-primary font-bold">
+      <h2 className="text-left ml-3 text-lg text-white font-bold">
         All Users: {users?.length}
       </h2>
       <div className="overflow-x-auto mx-5">
