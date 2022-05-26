@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from "react";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
@@ -23,14 +24,14 @@ const Signup = () => {
         useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
 
     //Updating Profile
-    // const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
     const onSubmit = async (data) => {
-        // console.log(data);
         const email = data.email;
         const password = data.password;
         await createUserWithEmailAndPassword(email, password);
-        // await updateProfile({ displayName: data.name });
+        await updateProfile({ displayName:data.name });
+        // console.log(updateError);
     };
 
     const [token] = useToken(user);

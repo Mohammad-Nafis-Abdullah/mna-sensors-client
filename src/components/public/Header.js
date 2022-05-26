@@ -37,13 +37,15 @@ const Navbar = () => {
             </li>
             <li>
                 {user ? (
-                    <button className="link" onClick={logout}>Logout</button>
+                    <button className="link text-xs" onClick={logout}>Logout <br />{user?.displayName}</button>
                 ) : (
                     <Link className="link" to="/login">Login</Link>
                 )}
             </li>
         </>
     );
+
+    // console.log(user);
     return (
         <div className="shadow-md">
             <div className="navbar bg-base-100 container">
