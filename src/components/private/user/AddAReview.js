@@ -79,7 +79,8 @@ const AddAReview = () => {
             </form>
             <section className='max-w-sm w-full p-2 ring-4 ring-white rounded fromBottom max-h-[334px]'>
                 <div className='bg-white font-medium text-neutral-focus p-3 rounded h-full flex flex-col justify-between'>
-                    <p className='text-lg underline'>Submitted Review :</p>
+                    <p className='text-lg underline'>Submitted Review : </p>
+                    <small className='text-red-600'>{userReview?.comment?'':'No review is submitted'}</small>
                     <p className='h-36 overflow-auto p-1 rounded text-gray-800/70'><span className='text-neutral-focus'>Comment :</span><br />{userReview?.comment}</p>
                     <p className='py-1 px-3 bg-neutral-focus text-white rounded'>Rating : {showRating()}</p>
                 </div>
