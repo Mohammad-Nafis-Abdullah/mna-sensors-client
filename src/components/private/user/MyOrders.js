@@ -11,7 +11,6 @@ const MyOrders = () => {
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
   const [orders, setOrders] = useState([]);
-  console.log(orders);
 
   useEffect(() => {
     if (user) {
