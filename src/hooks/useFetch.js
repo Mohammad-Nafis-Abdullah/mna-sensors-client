@@ -4,9 +4,9 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import Loading from "../components/public/Loading";
 
-const useFetch = (url,headerValue={})=> {
+const useFetch = (url,headerValue={},ref='tools')=> {
     const [data,setData] = useState([]);
-    const { isLoading, refetch } = useQuery("tools", () =>
+    const { isLoading, refetch } = useQuery(ref, () =>
         axios.get(url,headerValue).then((data) => {
             setData(data?.data);
             refetch();

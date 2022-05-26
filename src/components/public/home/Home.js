@@ -4,6 +4,7 @@ import Banner from './Banner';
 import useFetch from '../../../hooks/useFetch'
 import Card from './Card';
 import Summary from './Summary';
+import Reviews from './Reviews';
 
 const Home = () => {
     
@@ -13,13 +14,15 @@ const Home = () => {
     return (
         <div className='container'>
             <Banner/>
-            <h2 className='text-3xl font-medium underline text-center mt-10 mb-8'>Sensors</h2>
+            <h2 className='font-semibold text-3xl mb-3 mt-5 text-center'>Sensors</h2>
             <div className='flex flex-wrap justify-center gap-5 mb-16'>
                 {
                     tools?.map((tool) => <Card key={tool._id} tool={tool} />)
                 }
             </div>
             <Summary/>
+            <h2 className='font-semibold text-3xl mb-3 mt-5 text-center'>Reviews</h2>
+            <Reviews/>
         </div>
     );
 };

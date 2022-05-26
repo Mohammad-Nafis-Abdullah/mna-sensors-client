@@ -21,6 +21,7 @@ import RequireAdmin from "./components/private/RequireAdmin"
 import MakeAdmin from "./components/private/admin/MakeAdmin"
 import AddATool from "./components/private/admin/AddATool"
 import ManageTools from "./components/private/admin/ManageTools"
+import ReviewsComp from "./components/public/ReviewsComp";
 
 
 
@@ -82,6 +83,7 @@ function App() {
             />
           </Route>
           
+          <Route path="/reviews" element={<ReviewsComp/>}/>
           <Route path="/myportfolio" element={<MyPortfolio/>}/>
           <Route path="/blogs" element={<Blog/>}/>
           <Route path="/login" element={<Login/>}/>

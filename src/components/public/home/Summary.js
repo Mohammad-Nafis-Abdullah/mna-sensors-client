@@ -1,10 +1,10 @@
 import React from 'react';
-import useFetching from '../../../hooks/useFetching';
+import useFetch from '../../../hooks/useFetch';
 
 const Summary = () => {
-    const items = useFetching('http://localhost:5000/sensors');
-    const users = useFetching('http://localhost:5000/users/count');
-    const orders = useFetching('http://localhost:5000/orders/count');
+    const {data:items} = useFetch('http://localhost:5000/sensors',{},'itemsCount');
+    const {data:users} = useFetch('http://localhost:5000/users/count',{},'usersCount');
+    const {data:orders} = useFetch('http://localhost:5000/orders/count',{},'ordersCount');
 
 
     return (
@@ -14,13 +14,13 @@ const Summary = () => {
 
                 <div className="stat">
                     <div className="stat-title">Total Items</div>
-                    <div className="stat-value">{items.length || 0}</div>
+                    <div className="stat-value">{items?.length || 0}</div>
                     <div className="stat-desc">In 2022</div>
                 </div>
 
                 <div className="stat">
                     <div className="stat-title">Total Users</div>
-                    <div className="stat-value">{users.usersNumber || 0}</div>
+                    <div className="stat-value">{users?.usersNumber || 0}</div>
                     <div className="stat-desc text-transparent">---</div>
                 </div>
 
