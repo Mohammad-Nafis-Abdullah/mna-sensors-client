@@ -15,7 +15,7 @@ import Dashboard from "./components/private/Dashboard";
 import MyPortfolio from "./components/public/myportfolio/MyPortfolio";
 import MyProfile from "./components/private/MyProfile";
 import AddAReview from "./components/private/user/AddAReview";
-// import MyOrders from "./components/private/user/MyOrders";
+import MyOrders from "./components/private/user/MyOrders";
 
 
 function App() {
@@ -48,7 +48,7 @@ function App() {
           >
             <Route index element={<MyProfile />} />
             <Route path="addReview" element={<AddAReview />} />
-            {/* <Route path="myOrders" element={<MyOrders />} /> */}
+            <Route path="myOrders" element={<MyOrders />} />
             {/* <Route
               path="makeAdmin"
               element={
