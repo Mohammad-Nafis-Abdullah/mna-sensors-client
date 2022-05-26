@@ -14,19 +14,19 @@ const Summary = () => {
 
                 <div className="stat">
                     <div className="stat-title">Total Items</div>
-                    <div className="stat-value">{items.length}</div>
+                    <div className="stat-value">{items.length || 0}</div>
                     <div className="stat-desc">In 2022</div>
                 </div>
 
                 <div className="stat">
                     <div className="stat-title">Total Users</div>
-                    <div className="stat-value">{users.usersNumber}</div>
+                    <div className="stat-value">{users.usersNumber || 0}</div>
                     <div className="stat-desc text-transparent">---</div>
                 </div>
 
                 <div className="stat">
                     <div className="stat-title">Total Order</div>
-                    <div className="stat-value">{orders?.orders}</div>
+                    <div className="stat-value">{orders?.orders || 0}</div>
                     <div className="stat-desc text-transparent">---</div>
                 </div>
 

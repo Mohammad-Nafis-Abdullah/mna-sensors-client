@@ -10,15 +10,16 @@ const Dashboard = () => {
     return (
         <div className="drawer drawer-mobile bg-neutral-focus">
             <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content mt-2">
-                <h2 className="font-bold btn-ghost text-white text-xs text-center">
-                    Logged In as : {user.email}
-                </h2>
+            <div className="drawer-content mt-2 px-2 flex justify-between flex-wrap items-center content-start gap-3">
                 <h2 className="font-bold btn-ghost text-white text-2xl text-center">
                     Dashboard
                 </h2>
-
-                <Outlet />
+                <h2 className="font-bold btn-ghost text-white text-xs text-center">
+                    {user.email}
+                </h2>
+                <div className="basis-full">
+                    <Outlet />
+                </div>
             </div>
             <div className="drawer-side ">
                 <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>

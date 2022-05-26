@@ -34,7 +34,8 @@ const MyProfile = () => {
 
     return (
         <div className='flex justify-center items-center'>
-            <form onSubmit={profileUpdating} className='fromRight max-w-sm w-full flex flex-col justify-center items-center p-3 rounded-xl gap-0 bg-white pt-10 my-5 mx-1'>
+            <form onSubmit={profileUpdating} className='fromRight max-w-sm w-full flex flex-col justify-center items-center p-3 rounded-xl gap-0 bg-white my-5 mx-1'>
+                    <h2 className='mb-5 text-2xl font-medium underline'>My Profile</h2>
                     <div className="input-container">
                         <input type="text" name="name" className="input-field" placeholder={user.displayName} required="" disabled />
                         <label className="input-label">Name</label>
