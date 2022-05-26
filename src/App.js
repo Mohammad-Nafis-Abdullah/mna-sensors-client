@@ -65,7 +65,7 @@ function App() {
               }
             />
             <Route
-              path="addTool"
+              path="addSensor"
               element={
                 <RequireAdmin>
                   <AddATool />
