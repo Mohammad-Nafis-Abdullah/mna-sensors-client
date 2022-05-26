@@ -73,7 +73,7 @@ function App() {
               }
             />
             <Route
-              path="manageTools"
+              path="manageSensors"
               element={
                 <RequireAdmin>
                   <ManageTools />

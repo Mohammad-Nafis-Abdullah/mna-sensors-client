@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 const DeleteConfirmModel = ({ deleteTool, setDeleteTool, refetch }) => {
   const { _id, name } = deleteTool;
   const handleDelete = (id) => {
-    const url = `http://localhost:5000/tool/${id}`;
+    const url = `http://localhost:5000/sensor/${id}`;
     const header = {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -15,7 +15,7 @@ const DeleteConfirmModel = ({ deleteTool, setDeleteTool, refetch }) => {
     axios.delete(url, header).then((data) => {
       console.log(data);
       if (data.data.acknowledged) {
-        toast.success(`${name} is Deleted Successfully`, { theme: "colored" });
+        toast.success(`${name} is Deleted Successfully`, { theme: "dark" });
         refetch();
         setDeleteTool(null);
       } else {
@@ -24,7 +24,7 @@ const DeleteConfirmModel = ({ deleteTool, setDeleteTool, refetch }) => {
     });
   };
   return (
-    <div>
+    <div className="">
       <input
         type="checkbox"
         id="delete-confirm-modal"

@@ -8,7 +8,7 @@ import ManageTool from "./ManageTool";
 
 const ManageTools = () => {
   const [deleteTool, setDeleteTool] = useState(null);
-  const url = "http://localhost:5000/tools";
+  const url = "http://localhost:5000/sensors";
   const header = {
     headers: {
       authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -17,11 +17,11 @@ const ManageTools = () => {
   const { data: tools, refetch } = useReactQuery(url, header);
   return (
     <div className="">
-      <h2 className="text-left ml-3 text-lg text-primary font-bold">
+      <h2 className="text-left ml-3 text-lg text-white font-bold">
         Manage Tools : {tools?.length}
       </h2>
-      <div className="my-3 ">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mx-3">
+      <div className="my-3">
+        <div className="flex flex-wrap justify-center gap-2 items-center">
           {tools?.map((tool) => (
             <ManageTool
               key={tool._id}
@@ -33,8 +33,8 @@ const ManageTools = () => {
 
         <div className="flex justify-center">
           <Link
-            className="no-underline inline-block bg-primary text-secondary font-bold py-1 px-3 mt-4 rounded-md mx-auto w-2/5 text-center"
-            to="/dashboard/addTool"
+            className="no-underline inline-block bg-white border-none text-neutral-focus font-bold py-2 px-3 mt-4 rounded-md mx-auto w-2/5 text-center "
+            to="/dashboard/addSensor"
           >
             Add New Tool
           </Link>
