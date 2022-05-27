@@ -37,8 +37,8 @@ const MyOrders = () => {
 
 
   const cancelling = async ()=> {
-      
-      
+
+
   }
 
 
@@ -66,11 +66,11 @@ const MyOrders = () => {
           </thead>
           <tbody>
             {orders?.map((order, index) => (
-              <tr key={index}>
+              <tr key={order._id}>
                 <th>{index + 1}</th>
                 <td>{order.name}</td>
                 <td>{order.productName}</td>
-                <td>{order.orderQuantity} Pieces</td>
+                <td>{order.orderQuantity}</td>
                 <td>${order.orderCost}</td>
                 <td>
                   {order.orderCost && !order.paid && (
@@ -83,17 +83,17 @@ const MyOrders = () => {
                       </button>
                     </div>
                   )}
-                  {order.totalPrice && order.paid && (
+                  {order.paid && (
                     <div>
-                      <div className="text-center text-white w-1/3 font-semibold bg-accent rounded-md mx-auto">
+                      <div className="text-center text-teal-500 w-1/3 font-semibold rounded-md mx-auto">
                         PAID
                       </div>
-                      <p className="font-semibold">
+                      <small className="font-semibold">
                         Transaction Id:{" "}
-                        <span className="text-success ">
+                        <small className="text-sky-500">
                           {order.transactionId}
-                        </span>
-                      </p>
+                        </small>
+                      </small>
                     </div>
                   )}
                 </td>

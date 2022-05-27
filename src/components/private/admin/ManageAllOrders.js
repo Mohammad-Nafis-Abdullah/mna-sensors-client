@@ -26,7 +26,7 @@ const ManageAllOrders = () => {
         }
       )
       .then((data) => {
-        console.log(data?.data);
+        // console.log(data?.data);
         if (data?.data?.modifiedCount > 0) {
           toast.success("Product Successfully Shifted");
           refetch();
@@ -53,17 +53,17 @@ const ManageAllOrders = () => {
       });
   };
   return (
-    <>
-      <h2 className="text-center text-3xl mt-5 mb-5 font-bold">
+    <div className="space-y-2">
+      <h2 className="text-center text-3xl font-bold text-white">
         Manage All Orders
       </h2>
-      <h2 className="text-center text-2xl mt-5 mb-5 font-bold">
+      <h2 className="text-left ml-3 text-2xl font-bold text-white">
         {" "}
         Total Orders: {orders?.length}{" "}
       </h2>
 
-      <div className="overflow-x-auto mx-3">
-        <table className="table w-full">
+      <div className="overflow-x-auto mx-3 rounded-xl">
+        <table className="table w-full rounded-xl">
           <thead>
             <tr>
               <th>Sl No.</th>
@@ -73,7 +73,7 @@ const ManageAllOrders = () => {
                 Quantity <small>(Pcs)</small>
               </th>
               <th>
-                Total Amount <small>(USD)</small>
+                Total Amount <small>($)</small>
               </th>
               <th>Status</th>
               <th>Transaction ID</th>
@@ -97,7 +97,7 @@ const ManageAllOrders = () => {
           order={order}
         ></CancelOrderAdmin>
       </div>
-    </>
+    </div>
   );
 };
 

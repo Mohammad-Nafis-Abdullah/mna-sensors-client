@@ -17,7 +17,7 @@ const Dashboard = () => {
                 <h2 className="font-bold btn-ghost text-white text-xs text-center">
                     {user.email}
                 </h2>
-                <div className="basis-full overflow-auto py-8">
+                <div className="basis-full overflow-auto py-2">
                     <Outlet />
                 </div>
             </div>

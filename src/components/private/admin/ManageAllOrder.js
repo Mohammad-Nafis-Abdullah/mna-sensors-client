@@ -9,7 +9,7 @@ const ManageAllOrder = ({ order, index, handelShift, setOrder }) => {
       <td>{name}</td>
       <td>{productName.slice(0, 26)}</td>
       <td>{orderQuantity}</td>
-      <td>{orderCost}</td>
+      <td>$ {orderCost}</td>
       <td>
         {" "}
         {paid?"Paid":"Not Paid"};{" "}
