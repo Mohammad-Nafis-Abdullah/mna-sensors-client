@@ -22,6 +22,7 @@ import MakeAdmin from "./components/private/admin/MakeAdmin"
 import AddATool from "./components/private/admin/AddATool"
 import ManageTools from "./components/private/admin/ManageTools"
 import ReviewsComp from "./components/public/ReviewsComp";
+import ManageAllOrders from "./components/private/admin/ManageAllOrders";
 
 
 
@@ -41,46 +42,20 @@ function App() {
         <Routes>
           <Route path="/home" element={<Navigate to={"/"}/>}/>
           <Route path="/" element={<Home/>}/>
-          <Route path="/purchase/:id" element={<Private>
-            <Purchase/>
-          </Private>}/>
+          <Route path="/purchase/:id" element={<Private> <Purchase/> </Private>}/>
 
-          <Route
-            path="/dashboard"
-            element={
-              <Private>
-                <Dashboard />
-              </Private>
-            }
-          >
+          <Route path="/dashboard" element={ <Private> <Dashboard /> </Private> } >
+          
             <Route index element={<MyProfile />} />
             <Route path="addReview" element={<AddAReview />} />
             <Route path="myOrders" element={<MyOrders />} />
             <Route path="payment/:id" element={<Payment />} />
-            <Route
-              path="makeAdmin"
-              element={
-                <RequireAdmin>
-                  <MakeAdmin />
-                </RequireAdmin>
-              }
-            />
-            <Route
-              path="addSensor"
-              element={
-                <RequireAdmin>
-                  <AddATool />
-                </RequireAdmin>
-              }
-            />
-            <Route
-              path="manageSensors"
-              element={
-                <RequireAdmin>
-                  <ManageTools />
-                </RequireAdmin>
-              }
-            />
+            
+            <Route path="makeAdmin" element={ <RequireAdmin> <MakeAdmin /> </RequireAdmin> } />
+            <Route path="addSensor" element={ <RequireAdmin> <AddATool /> </RequireAdmin> } />
+            <Route path="manageSensors" element={ <RequireAdmin> <ManageTools /> </RequireAdmin> } />
+            <Route path="manageAllOrders" element={ <RequireAdmin> <ManageAllOrders /> </RequireAdmin> } />
+          
           </Route>
           
           <Route path="/reviews" element={<ReviewsComp/>}/>

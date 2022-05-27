@@ -78,6 +78,14 @@ const Dashboard = () => {
                                     Manage Sensors
                                 </Link>
                             </li>
+                            <li>
+                                <Link
+                                    className="btn-ghost text-white font-bold"
+                                    to="/dashboard/manageAllOrders"
+                                >
+                                    Manage All Orders
+                                </Link>
+                            </li>
                         </>
                     )}
                 </ul>
