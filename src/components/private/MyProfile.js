@@ -43,7 +43,7 @@ const MyProfile = () => {
 
 
     return (
-        <div className='flex justify-center my-5 gap-5'>
+        <div className='flex justify-center my-5 gap-5 flex-wrap'>
             <ViewProfile profile={profile} />
             <form onSubmit={profileUpdating} className='fromRight max-w-sm w-full flex flex-col justify-center items-center p-3 rounded-xl gap-0 bg-white'>
                 <h2 className='mb-5 text-2xl font-medium underline'>My Profile</h2>

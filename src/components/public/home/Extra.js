@@ -18,7 +18,7 @@ const Extra = () => {
                 <h3 className='text-xl text-gray-900 font-medium my-3 uppercase'>Dhaka Office :</h3>
                 <p className='text-lg font-medium text-gray-800 underline decoration-2'>Address :</p><address className='text-lg font-medium text-gray-700 no-underline'>14/a, Road No. 05, Elephant Road, Dhaka</address>
                 </div>
-                <img src="https://thumbs.dreamstime.com/b/bangladesh-april-top-views-empty-shapla-chattar-motijheel-coronavirus-shutdown-movement-dhaka-178442642.jpg" alt="" className='max-w-sm w-full object-cover object-top rounded' />
+                <img src="https://statemag.state.gov/wp-content/uploads/2021/02/0321POM-29.jpg" alt="" className='max-w-sm w-full object-cover object-top rounded' />
             </div>
 
         </div>
