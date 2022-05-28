@@ -8,6 +8,7 @@ import useToken from "../../hooks/useToken";
 import Loading from "../public/Loading";
 import SocialLogin from "./SocialLogin";
 import trimError from "../../hooks/trimError";
+import axios from "axios";
 
 const Signup = () => {
     const navigate = useNavigate();
@@ -29,9 +30,11 @@ const Signup = () => {
     const onSubmit = async (data) => {
         const email = data.email;
         const password = data.password;
+        const name = data.name;
         await createUserWithEmailAndPassword(email, password);
-        await updateProfile({ displayName:data.name });
+        await updateProfile({ displayName:name });
         // console.log(updateError);
+        await axios.put(`http://localhost:5000/user/${email}`,{ email: email,name: name,phone:'',address:'',linkedIn:'' });
     };
 
     const [token] = useToken(user);

@@ -5,7 +5,7 @@ const ManageTool = ({ tool, setDeleteTool }) => {
     tool;
 
   return (
-    <div className="border-2 rounded-md fadeIn justify-around bg-white max-w-xs">
+    <div className="border-2 rounded-md fadeIn justify-around bg-white max-w-xs w-full">
       <div className="flex items-center ">
         <img className="rounded-md w-40 object-cover mx-auto" src={img} alt="" />
       </div>

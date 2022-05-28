@@ -5,6 +5,7 @@ import useFetch from '../../../hooks/useFetch'
 import Card from './Card';
 import Summary from './Summary';
 import Reviews from './Reviews';
+import Extra from './Extra';
 
 const Home = () => {
     
@@ -23,6 +24,8 @@ const Home = () => {
             <Summary/>
             <h2 className='font-semibold text-3xl mb-3 mt-5 text-center'>Reviews</h2>
             <Reviews/>
+            <h2 className='font-semibold text-3xl mb-3 mt-5 text-center'>Our Offices</h2>
+            <Extra/>
         </div>
     );
 };

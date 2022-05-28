@@ -3,9 +3,18 @@ import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
+import useFetch from '../../hooks/useFetch';
+import ViewProfile from './ViewProfile'
 
 const MyProfile = () => {
     const [user] = useAuthState(auth);
+
+    // console.log(user?.email);
+    const { data: profile, refetch } = useFetch(`http://localhost:5000/user/${user?.email}`, {
+        headers: {
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+    })
 
 
 
@@ -29,12 +38,14 @@ const MyProfile = () => {
         e.target.phone.value='';
         e.target.address.value='';
         e.target.linkedIn.value='';
+        refetch();
     }
 
 
     return (
-        <div className='flex justify-center items-center'>
-            <form onSubmit={profileUpdating} className='fromRight max-w-sm w-full flex flex-col justify-center items-center p-3 rounded-xl gap-0 bg-white my-5 mx-1'>
+        <div className='flex justify-center my-5 gap-5'>
+            <ViewProfile profile={profile}/>
+            <form onSubmit={profileUpdating} className='fromRight max-w-sm w-full flex flex-col justify-center items-center p-3 rounded-xl gap-0 bg-white'>
                     <h2 className='mb-5 text-2xl font-medium underline'>My Profile</h2>
                     <div className="input-container">
                         <input type="text" name="name" className="input-field" placeholder={user.displayName} required="" disabled />
