@@ -1,52 +1,44 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import auth from "../../../firebase.init";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
-import { signOut } from "firebase/auth";
+import { toast } from "react-toastify";
+import useFetch from "../../../hooks/useFetch";
 
 
 
 const MyOrders = () => {
   const [user] = useAuthState(auth);
-  const navigate = useNavigate();
-  const [orders, setOrders] = useState([]);
+  // const navigate = useNavigate();
+  // const [orders, setOrders] = useState([]);
 
-  useEffect(() => {
-    if (user) {
-      const url = `http://localhost:5000/orders?email=${user.email}`;
-      axios
-        .get(url, {
+
+  
+
+    const url = `http://localhost:5000/orders?email=${user.email}`;
+    const {data:orders,refetch} = useFetch(url, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      },'userOrders');
+
+
+      const cancelling = async (id,productId,quantity)=> {
+        await axios.delete(`http://localhost:5000/cancel/order/${id}`,{
           headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },
-        })
-        .then((data) => {
-          // console.log(data);
-          setOrders(data.data);
-        })
-        .catch((err) => {
-          if (err.response.status === 401 || err.response.status === 403) {
-            signOut(auth);
-            localStorage.removeItem("accessToken");
-            navigate("/home");
-          }
-        });
-    }
-  }, [user, navigate]);
-
-
-  const cancelling = async ()=> {
-
-
-  }
+        }).then(data => data?.data?.deleted && toast.success('Order deleted successfully',{theme:'dark'}));
+        refetch();
+      }  
 
 
 
   return (
     <div>
       <h2 className="text-lg text-white font-bold text-left ml-3">
-        My Orders : {orders.length}
+        My Orders : {orders?.length}
       </h2>
       <div className="overflow-x-auto w-full mx-0 min-w-0 ">
         <table className="table table-compact w-full text-center">
@@ -78,7 +70,7 @@ const MyOrders = () => {
                       <Link to={`/dashboard/payment/${order._id}`} className="btn btn-xs btn-success text-neutral-focus">
                         Pay Now
                       </Link><br />
-                      <button onClick={cancelling} className="btn btn-xs btn-error text-white ">
+                      <button onClick={() => cancelling(order._id,order.productId,order.orderQuantity)} className="btn btn-xs btn-error text-white ">
                         Cancel Order
                       </button>
                     </div>
