@@ -4,7 +4,7 @@ import BlogCard from './BlogCard';
 
 
 const Blog = () => {
-    const blogs = useFetching('http://localhost:5000/blogs')
+    const blogs = useFetching('https://cryptic-tor-95332.herokuapp.com/blogs')
 
 
     return (
@@ -12,7 +12,7 @@ const Blog = () => {
             <h3 className='text-center text-2xl sm:text-3xl font-medium'>Question and Answer</h3>
             <section className='flex flex-wrap justify-center items-center gap-8'>
                 {
-                    blogs.map((blog,index) => <BlogCard key={blog._id} blog={blog} index={index}/>)
+                    blogs.map((blog, index) => <BlogCard key={blog._id} blog={blog} index={index} />)
                 }
             </section>
         </div>

@@ -14,24 +14,24 @@ const MyOrders = () => {
   // const [orders, setOrders] = useState([]);
 
 
-  
-
-    const url = `http://localhost:5000/orders?email=${user.email}`;
-    const {data:orders,refetch} = useFetch(url, {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      },'userOrders');
 
 
-      const cancelling = async (id,productId,quantity)=> {
-        await axios.delete(`http://localhost:5000/cancel/order/${id}`,{
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        }).then(data => data?.data?.deleted && toast.success('Order deleted successfully',{theme:'dark'}));
-        refetch();
-      }  
+  const url = `https://cryptic-tor-95332.herokuapp.com/orders?email=${user.email}`;
+  const { data: orders, refetch } = useFetch(url, {
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+    },
+  }, 'userOrders');
+
+
+  const cancelling = async (id, productId, quantity) => {
+    await axios.delete(`https://cryptic-tor-95332.herokuapp.com/cancel/order/${id}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then(data => data?.data?.deleted && toast.success('Order deleted successfully', { theme: 'dark' }));
+    refetch();
+  }
 
 
 
@@ -70,7 +70,7 @@ const MyOrders = () => {
                       <Link to={`/dashboard/payment/${order._id}`} className="btn btn-xs btn-success text-neutral-focus">
                         Pay Now
                       </Link><br />
-                      <button onClick={() => cancelling(order._id,order.productId,order.orderQuantity)} className="btn btn-xs btn-error text-white ">
+                      <button onClick={() => cancelling(order._id, order.productId, order.orderQuantity)} className="btn btn-xs btn-error text-white ">
                         Cancel Order
                       </button>
                     </div>

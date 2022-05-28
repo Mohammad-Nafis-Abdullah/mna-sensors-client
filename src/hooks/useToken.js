@@ -8,10 +8,10 @@ const useToken = (user) => {
         // console.log(user?.user?.email);
         const email = user?.user?.email;
         const name = user?.user?.displayName || '';
-        const currentUser = { email: email,name: name,phone:'',address:'',linkedIn:'' };
+        const currentUser = { email: email, name: name, phone: '', address: '', linkedIn: '' };
         if (email) {
             axios
-                .put(`http://localhost:5000/user/${email}`, currentUser)
+                .put(`https://cryptic-tor-95332.herokuapp.com/user/${email}`, currentUser)
                 .then((data) => {
                     const accessToken = data?.data?.accessToken;
                     localStorage.setItem("accessToken", accessToken);

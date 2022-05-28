@@ -10,10 +10,10 @@ import Loading from "../../public/Loading";
 
 const stripePromise = loadStripe(
   'pk_test_51L3eYcIsG6t6EWnkOiJzzkmaaKd3tr3LcGjdbhkuKH1YYdZ1Qfvcf6IFMt1ChcJ7eJCXtpl7RZiPaj9HH3W3fk8M00rIbRpG9V'
-  );
+);
 const Payment = () => {
   const { id } = useParams();
-  const url = `http://localhost:5000/order/${id}`;
+  const url = `https://cryptic-tor-95332.herokuapp.com/order/${id}`;
 
   const { data: order, isLoading } = useQuery(["order", id], () =>
     axios
@@ -42,7 +42,7 @@ const Payment = () => {
           <div className="card w-50 max-w-xs w-full ">
             <div className="text-white">
               <div className="text-xl font-bold">
-                <small>Hello,</small><br/><h3 className="">{order?.name}</h3>
+                <small>Hello,</small><br /><h3 className="">{order?.name}</h3>
               </div>
               <p>
                 Your have an Order about{" "}

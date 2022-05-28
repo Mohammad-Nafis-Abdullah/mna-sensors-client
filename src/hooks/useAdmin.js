@@ -8,18 +8,18 @@ const useAdmin = (user) => {
         const email = user?.email;
         if (email) {
             axios
-                .get(`http://localhost:5000/admin/${email}`, {
+                .get(`https://cryptic-tor-95332.herokuapp.com/admin/${email}`, {
                     headers: {
-                    authorization: `Bearer ${ localStorage.getItem("accessToken") }`,
-            },
-    })
-        .then((data) => {
-            setAdmin(data.data.admin);
-            setAdminLoading(false);
-        });
-}
+                        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+                    },
+                })
+                .then((data) => {
+                    setAdmin(data.data.admin);
+                    setAdminLoading(false);
+                });
+        }
     }, [user]);
-return [admin, adminLoading];
+    return [admin, adminLoading];
 };
 
 export default useAdmin;

@@ -6,7 +6,7 @@ import UserList from "./UserList";
 
 
 const MakeAdmin = () => {
-  const url = "http://localhost:5000/users";
+  const url = "https://cryptic-tor-95332.herokuapp.com/users";
   const header = {
     headers: {
       authorization: `Bearer ${localStorage.getItem("accessToken")}`,

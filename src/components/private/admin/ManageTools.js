@@ -8,7 +8,7 @@ import ManageTool from "./ManageTool";
 
 const ManageTools = () => {
   const [deleteTool, setDeleteTool] = useState(null);
-  const url = "http://localhost:5000/sensors";
+  const url = "https://cryptic-tor-95332.herokuapp.com/sensors";
   const header = {
     headers: {
       authorization: `Bearer ${localStorage.getItem("accessToken")}`,

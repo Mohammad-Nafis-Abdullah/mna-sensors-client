@@ -7,17 +7,17 @@ import auth from '../../../firebase.init';
 
 const AddAReview = () => {
     const [user] = useAuthState(auth);
-    const [userReview,setUserReview] = useState({});
+    const [userReview, setUserReview] = useState({});
 
-    const { refetch } = useQuery("review", () =>{
-        axios.get(`http://localhost:5000/review/${user?.email}`).then(data => setUserReview(data.data));
+    const { refetch } = useQuery("review", () => {
+        axios.get(`https://cryptic-tor-95332.herokuapp.com/review/${user?.email}`).then(data => setUserReview(data.data));
     });
 
 
-    const showRating = ()=> {
+    const showRating = () => {
         const rate = userReview?.rating;
         let star = '';
-        for(let i=0;i<rate;i++){
+        for (let i = 0; i < rate; i++) {
             star += '⭐';
         }
         return star;
@@ -25,7 +25,7 @@ const AddAReview = () => {
 
 
 
-    const reviewing = async (e)=> {
+    const reviewing = async (e) => {
         e.preventDefault();
 
 
@@ -35,14 +35,14 @@ const AddAReview = () => {
 
         const rating = parseInt(activeRating.find(rating => rating.checked)?.value) || 5;
 
-        const review = {email,comment,rating};
+        const review = { email, comment, rating };
 
-        await axios.put(`http://localhost:5000/review/${email}`,review).then(data => {
-            if(data?.data?.success){
-                toast.success('Review submitted successfully',{theme:'colored'})
+        await axios.put(`https://cryptic-tor-95332.herokuapp.com/review/${email}`, review).then(data => {
+            if (data?.data?.success) {
+                toast.success('Review submitted successfully', { theme: 'colored' })
             }
-            if(data?.data?.update){
-                toast.success('Review updated successfully',{theme:'dark'})
+            if (data?.data?.update) {
+                toast.success('Review updated successfully', { theme: 'dark' })
             }
         });
         refetch();
@@ -80,7 +80,7 @@ const AddAReview = () => {
             <section className='max-w-sm w-full p-2 ring-4 ring-white rounded fromBottom max-h-[334px]'>
                 <div className='bg-white font-medium text-neutral-focus p-3 rounded h-full flex flex-col justify-between'>
                     <p className='text-lg underline'>Submitted Review : </p>
-                    <small className='text-red-600'>{userReview?.comment?'':'No review is submitted'}</small>
+                    <small className='text-red-600'>{userReview?.comment ? '' : 'No review is submitted'}</small>
                     <p className='h-36 overflow-auto p-1 rounded text-gray-800/70'><span className='text-neutral-focus'>Comment :</span><br />{userReview?.comment}</p>
                     <p className='py-1 px-3 bg-neutral-focus text-white rounded'>Rating : {showRating()}</p>
                 </div>

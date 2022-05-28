@@ -32,9 +32,9 @@ const Signup = () => {
         const password = data.password;
         const name = data.name;
         await createUserWithEmailAndPassword(email, password);
-        await updateProfile({ displayName:name });
+        await updateProfile({ displayName: name });
         // console.log(updateError);
-        await axios.put(`http://localhost:5000/user/${email}`,{ email: email,name: name,phone:'',address:'',linkedIn:'' });
+        await axios.put(`https://cryptic-tor-95332.herokuapp.com/user/${email}`, { email: email, name: name, phone: '', address: '', linkedIn: '' });
     };
 
     const [token] = useToken(user);

@@ -8,23 +8,23 @@ import axios from "axios";
 
 const ManageAllOrders = () => {
   const [order, setOrder] = useState(null);
-  const url = "http://localhost:5000/get/orders";
+  const url = "https://cryptic-tor-95332.herokuapp.com/get/orders";
   const header = {
     headers: {
       authorization: `Bearer ${localStorage.getItem("accessToken")}`,
     },
   };
 
-  const { data: orders, refetch } = useFetch(url, header,'manageOrders');
+  const { data: orders, refetch } = useFetch(url, header, 'manageOrders');
 
   const handelShift = (id) => {
-    axios.put(`http://localhost:5000/shift/order/${id}`,{shift:true},
-        {
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        }
-      )
+    axios.put(`https://cryptic-tor-95332.herokuapp.com/shift/order/${id}`, { shift: true },
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    )
       .then((data) => {
         // console.log(data?.data);
         if (data?.data?.modifiedCount > 0) {
@@ -36,7 +36,7 @@ const ManageAllOrders = () => {
 
   const cancelOrder = (id) => {
     fetch(
-      `http://localhost:5000/cancel/order/${id}`,
+      `https://cryptic-tor-95332.herokuapp.com/cancel/order/${id}`,
       {
         method: "DELETE",
         headers: {

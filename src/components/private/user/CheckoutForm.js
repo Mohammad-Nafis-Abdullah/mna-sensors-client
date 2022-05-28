@@ -21,7 +21,7 @@ const CheckoutForm = ({ order }) => {
   // console.log(order);
 
   useEffect(() => {
-    const url = "http://localhost:5000/create-payment-intent";
+    const url = "https://cryptic-tor-95332.herokuapp.com/create-payment-intent";
     axios
       .post(
         url,
@@ -85,7 +85,7 @@ const CheckoutForm = ({ order }) => {
         transactionId: paymentIntent.id,
       };
       axios
-        .patch(`http://localhost:5000/order/${_id}`, payment, {
+        .patch(`https://cryptic-tor-95332.herokuapp.com/order/${_id}`, payment, {
           headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },

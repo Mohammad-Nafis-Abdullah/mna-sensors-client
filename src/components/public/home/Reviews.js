@@ -2,8 +2,8 @@ import React from 'react';
 import useFetch from '../../../hooks/useFetch';
 
 const Reviews = () => {
-    const {data:allreviews} = useFetch('http://localhost:5000/reviews',{},'reviews');
-    const reviews = allreviews?.slice(0,3);
+    const { data: allreviews } = useFetch('https://cryptic-tor-95332.herokuapp.com/reviews', {}, 'reviews');
+    const reviews = allreviews?.slice(0, 3);
 
     return (
         <div className='mb-8 container p-3 flex flex-wrap gap-5'>

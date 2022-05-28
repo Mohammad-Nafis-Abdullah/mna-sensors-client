@@ -25,7 +25,7 @@ const AddATool = () => {
     };
     console.log(sensor);
 
-    const url = "http://localhost:5000/sensor";
+    const url = "https://cryptic-tor-95332.herokuapp.com/sensor";
     axios
       .post(url, sensor, {
         headers: {
