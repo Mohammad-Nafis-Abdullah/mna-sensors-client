@@ -6,7 +6,7 @@ const Reviews = () => {
     const reviews = allreviews?.slice(0, 3);
 
     return (
-        <div className='mb-8 container p-3 flex flex-wrap gap-5'>
+        <div className='mb-8 container p-3 flex flex-wrap justify-center gap-5'>
             {
                 allreviews?.length &&
                 reviews?.map((review) => {

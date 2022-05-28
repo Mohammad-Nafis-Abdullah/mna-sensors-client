@@ -5,7 +5,7 @@ const ReviewsComp = () => {
     const { data: reviews } = useFetch('https://cryptic-tor-95332.herokuapp.com/reviews', {}, 'myreviews');
 
     return (
-        <div className='mb-8 container p-3 flex flex-wrap gap-5'>
+        <div className='mb-8 container p-3 flex flex-wrap gap-5 justify-center'>
             <h1 className='text-center text-2xl font-medium basis-full'>ALL reviews </h1>
             {
                 reviews?.map((review) => {
