@@ -1,8 +1,9 @@
 import React from "react";
 
 const ViewProfile = ({ profile }) => {
-  const img =
-    profile?.img || "https://i.ibb.co/pvmWXsv/male-placeholder-image.jpg";
+  const img = profile?.img || "https://i.ibb.co/pvmWXsv/male-placeholder-image.jpg";
+
+
   return (
     <div className="w-full max-w-sm fromLeft">
       <div className="border-8 shadow-2xl text-center rounded-xl min-h-0 h-full">
