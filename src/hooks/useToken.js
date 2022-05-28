@@ -8,7 +8,7 @@ const useToken = (user) => {
         // console.log(user?.user?.email);
         const email = user?.user?.email;
         const name = user?.user?.displayName || '';
-        const currentUser = { email: email, name: name, phone: '', address: '', linkedIn: '' };
+        const currentUser = { email: email, name: name};
         if (email) {
             axios
                 .put(`https://cryptic-tor-95332.herokuapp.com/user/${email}`, currentUser)
