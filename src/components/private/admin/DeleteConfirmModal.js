@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 const DeleteConfirmModel = ({ deleteTool, setDeleteTool, refetch }) => {
   const { _id, name } = deleteTool;
   const handleDelete = (id) => {
-    const url = `https://cryptic-tor-95332.herokuapp.com/sensor/${id}`;
+    const url = `https://mna-sensors-server.onrender.com/sensor/${id}`;
     const header = {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

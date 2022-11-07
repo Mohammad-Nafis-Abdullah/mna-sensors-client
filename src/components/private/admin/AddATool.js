@@ -25,7 +25,7 @@ const AddATool = () => {
     };
     console.log(sensor);
 
-    const url = "https://cryptic-tor-95332.herokuapp.com/sensor";
+    const url = "https://mna-sensors-server.onrender.com/sensor";
     axios
       .post(url, sensor, {
         headers: {

@@ -4,7 +4,7 @@ import BlogCard from './BlogCard';
 
 
 const Blog = () => {
-    const blogs = useFetching('https://cryptic-tor-95332.herokuapp.com/blogs')
+    const blogs = useFetching('https://mna-sensors-server.onrender.com/blogs')
 
 
     return (

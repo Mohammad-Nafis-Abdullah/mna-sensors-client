@@ -10,7 +10,7 @@ import Extra from './Extra';
 const Home = () => {
 
 
-    const { data: tools, refetch } = useFetch('https://cryptic-tor-95332.herokuapp.com/sensors');
+    const { data: tools, refetch } = useFetch('https://mna-sensors-server.onrender.com/sensors');
 
     return (
         <div className='container'>

@@ -2,7 +2,7 @@ import React from 'react';
 import useFetch from '../../../hooks/useFetch';
 
 const Reviews = () => {
-    const { data: allreviews } = useFetch('https://cryptic-tor-95332.herokuapp.com/reviews', {}, 'reviews');
+    const { data: allreviews } = useFetch('https://mna-sensors-server.onrender.com/reviews', {}, 'reviews');
     const reviews = allreviews?.slice(0, 3);
 
     return (

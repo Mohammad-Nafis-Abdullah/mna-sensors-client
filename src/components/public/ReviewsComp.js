@@ -2,7 +2,7 @@ import React from 'react';
 import useFetch from '../../hooks/useFetch';
 
 const ReviewsComp = () => {
-    const { data: reviews } = useFetch('https://cryptic-tor-95332.herokuapp.com/reviews', {}, 'myreviews');
+    const { data: reviews } = useFetch('https://mna-sensors-server.onrender.com/reviews', {}, 'myreviews');
 
     return (
         <div className='mb-8 container p-3 flex flex-wrap gap-5 justify-center'>

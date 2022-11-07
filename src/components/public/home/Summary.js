@@ -2,9 +2,9 @@ import React from 'react';
 import useFetch from '../../../hooks/useFetch';
 
 const Summary = () => {
-    const { data: items } = useFetch('https://cryptic-tor-95332.herokuapp.com/sensors', {}, 'itemsCount');
-    const { data: users } = useFetch('https://cryptic-tor-95332.herokuapp.com/users/count', {}, 'usersCount');
-    const { data: orders } = useFetch('https://cryptic-tor-95332.herokuapp.com/orders/count', {}, 'ordersCount');
+    const { data: items } = useFetch('https://mna-sensors-server.onrender.com/sensors', {}, 'itemsCount');
+    const { data: users } = useFetch('https://mna-sensors-server.onrender.com/users/count', {}, 'usersCount');
+    const { data: orders } = useFetch('https://mna-sensors-server.onrender.com/orders/count', {}, 'ordersCount');
 
 
     return (

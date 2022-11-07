@@ -13,7 +13,7 @@ const stripePromise = loadStripe(
 );
 const Payment = () => {
   const { id } = useParams();
-  const url = `https://cryptic-tor-95332.herokuapp.com/order/${id}`;
+  const url = `https://mna-sensors-server.onrender.com/order/${id}`;
 
   const { data: order, isLoading } = useQuery(["order", id], () =>
     axios

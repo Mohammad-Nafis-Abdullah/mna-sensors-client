@@ -13,7 +13,7 @@ const Purchase = () => {
     const params = useParams();
     const { id: serviceId } = params;
     let selected = [];
-    const { data: select, refetch } = useFetch(`https://cryptic-tor-95332.herokuapp.com/sensor/${serviceId}`);
+    const { data: select, refetch } = useFetch(`https://mna-sensors-server.onrender.com/sensor/${serviceId}`);
     if (select) {
         selected = select[0];
     }
@@ -34,13 +34,13 @@ const Purchase = () => {
 
         const order = { name, email, phone, address, productId, productName, orderQuantity, orderCost };
 
-        await axios.post('https://cryptic-tor-95332.herokuapp.com/order', order).then(res => {
+        await axios.post('https://mna-sensors-server.onrender.com/order', order).then(res => {
             toast.success(`${orderQuantity} pieces of ${productName} ordered successfully`, { theme: 'colored' });
         });
 
         const remaniningQuantity = selected.availableQuantity - orderQuantity;
         const updateQuantity = { remaniningQuantity };
-        await axios.put(`https://cryptic-tor-95332.herokuapp.com/sensor/${selected._id}`, updateQuantity).then((res) => {
+        await axios.put(`https://mna-sensors-server.onrender.com/sensor/${selected._id}`, updateQuantity).then((res) => {
             if (res) {
                 refetch();
             }

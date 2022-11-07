@@ -8,7 +8,7 @@ import axios from "axios";
 
 const ManageAllOrders = () => {
   const [order, setOrder] = useState(null);
-  const url = "https://cryptic-tor-95332.herokuapp.com/get/orders";
+  const url = "https://mna-sensors-server.onrender.com/get/orders";
   const header = {
     headers: {
       authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -18,7 +18,7 @@ const ManageAllOrders = () => {
   const { data: orders, refetch } = useFetch(url, header, 'manageOrders');
 
   const handelShift = (id) => {
-    axios.put(`https://cryptic-tor-95332.herokuapp.com/shift/order/${id}`, { shift: true },
+    axios.put(`https://mna-sensors-server.onrender.com/shift/order/${id}`, { shift: true },
       {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -36,7 +36,7 @@ const ManageAllOrders = () => {
 
   const cancelOrder = (id) => {
     fetch(
-      `https://cryptic-tor-95332.herokuapp.com/cancel/order/${id}`,
+      `https://mna-sensors-server.onrender.com/cancel/order/${id}`,
       {
         method: "DELETE",
         headers: {

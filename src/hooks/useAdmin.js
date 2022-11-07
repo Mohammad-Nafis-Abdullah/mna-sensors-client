@@ -8,7 +8,7 @@ const useAdmin = (user) => {
         const email = user?.email;
         if (email) {
             axios
-                .get(`https://cryptic-tor-95332.herokuapp.com/admin/${email}`, {
+                .get(`https://mna-sensors-server.onrender.com/admin/${email}`, {
                     headers: {
                         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
                     },

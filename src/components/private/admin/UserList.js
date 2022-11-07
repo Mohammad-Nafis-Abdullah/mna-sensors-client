@@ -5,7 +5,7 @@ const UserList = ({ user, index, refetch }) => {
   const { email, role } = user;
 
   const makeAdmin = () => {
-    const url = `https://cryptic-tor-95332.herokuapp.com/user/${email}`;
+    const url = `https://mna-sensors-server.onrender.com/user/${email}`;
     fetch(url, {
       method: "PATCH",
       headers: {
