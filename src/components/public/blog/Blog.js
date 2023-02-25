@@ -4,7 +4,7 @@ import BlogCard from './BlogCard';
 
 
 const Blog = () => {
-    const blogs = useFetching('https://mna-sensors-server.onrender.com/blogs')
+    const blogs = useFetching('http://localhost:5000/blogs')
 
 
     return (

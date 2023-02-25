@@ -6,7 +6,7 @@ import UserList from "./UserList";
 
 
 const MakeAdmin = () => {
-  const url = "https://mna-sensors-server.onrender.com/users";
+  const url = "http://localhost:5000/users";
   const header = {
     headers: {
       authorization: `Bearer ${localStorage.getItem("accessToken")}`,

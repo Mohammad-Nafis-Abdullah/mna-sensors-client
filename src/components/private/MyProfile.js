@@ -10,7 +10,7 @@ const MyProfile = () => {
     const [user] = useAuthState(auth);
 
     // console.log(user?.email);
-    const { data: profile, refetch } = useFetch(`https://mna-sensors-server.onrender.com/user/${user?.email}`, {
+    const { data: profile, refetch } = useFetch(`http://localhost:5000/user/${user?.email}`, {
         headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -29,7 +29,7 @@ const MyProfile = () => {
 
         const profile = { name, email, phone, address, linkedIn };
 
-        await axios.put(`https://mna-sensors-server.onrender.com/user/${email}`, profile).then((data) => {
+        await axios.put(`http://localhost:5000/user/${email}`, profile).then((data) => {
             if (data) {
                 toast.success('Information Updated', { theme: 'colored' })
             }

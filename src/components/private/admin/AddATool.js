@@ -25,7 +25,7 @@ const AddATool = () => {
     };
     console.log(sensor);
 
-    const url = "https://mna-sensors-server.onrender.com/sensor";
+    const url = "http://localhost:5000/sensor";
     axios
       .post(url, sensor, {
         headers: {

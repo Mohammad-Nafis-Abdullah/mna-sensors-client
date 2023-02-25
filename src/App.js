@@ -2,7 +2,7 @@ import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 import NotFound from "./components/public/NotFound";
 import Header from "./components/public/Header";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import Login from "./components/public/Login";
 import SignUp from "./components/public/SignUp";
 import Home from "./components/public/home/Home";
@@ -24,7 +24,8 @@ import ManageTools from "./components/private/admin/ManageTools"
 import ReviewsComp from "./components/public/ReviewsComp";
 import ManageAllOrders from "./components/private/admin/ManageAllOrders";
 
-
+const StateContext = React.createContext();
+export { StateContext }
 
 function App() {
   const { pathname } = useLocation();

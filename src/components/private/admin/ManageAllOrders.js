@@ -8,7 +8,7 @@ import axios from "axios";
 
 const ManageAllOrders = () => {
   const [order, setOrder] = useState(null);
-  const url = "https://mna-sensors-server.onrender.com/get/orders";
+  const url = "http://localhost:5000/get/orders";
   const header = {
     headers: {
       authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -18,7 +18,7 @@ const ManageAllOrders = () => {
   const { data: orders, refetch } = useFetch(url, header, 'manageOrders');
 
   const handelShift = (id) => {
-    axios.put(`https://mna-sensors-server.onrender.com/shift/order/${id}`, { shift: true },
+    axios.put(`http://localhost:5000/shift/order/${id}`, { shift: true },
       {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -36,7 +36,7 @@ const ManageAllOrders = () => {
 
   const cancelOrder = (id) => {
     fetch(
-      `https://mna-sensors-server.onrender.com/cancel/order/${id}`,
+      `http://localhost:5000/cancel/order/${id}`,
       {
         method: "DELETE",
         headers: {

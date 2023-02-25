@@ -8,7 +8,7 @@ const useAdmin = (user) => {
         const email = user?.email;
         if (email) {
             axios
-                .get(`https://mna-sensors-server.onrender.com/admin/${email}`, {
+                .get(`http://localhost:5000/admin/${email}`, {
                     headers: {
                         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
                     },

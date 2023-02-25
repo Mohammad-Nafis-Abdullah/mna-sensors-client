@@ -5,7 +5,7 @@ const UserList = ({ user, index, refetch }) => {
   const { email, role } = user;
 
   const makeAdmin = () => {
-    const url = `https://mna-sensors-server.onrender.com/user/${email}`;
+    const url = `http://localhost:5000/user/${email}`;
     fetch(url, {
       method: "PATCH",
       headers: {

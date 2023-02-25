@@ -2,23 +2,23 @@
 import React from 'react';
 import Banner from './Banner';
 import useFetch from '../../../hooks/useFetch'
-import Card from './Card';
 import Summary from './Summary';
 import Reviews from './Reviews';
 import Extra from './Extra';
+import CustomCard from './CustomCard';
 
 const Home = () => {
 
 
-    const { data: tools, refetch } = useFetch('https://mna-sensors-server.onrender.com/sensors');
+    const { data: tools, refetch } = useFetch('http://localhost:5000/sensors');
 
     return (
         <div className='container'>
             <Banner />
             <h2 className='font-semibold text-3xl mb-3 mt-5 text-center'>Sensors</h2>
-            <div className='flex flex-wrap justify-center gap-5 mb-16'>
+            <div className='flex flex-wrap justify-center gap-5 mb-16 max-w-5xl mx-auto'>
                 {
-                    tools?.map((tool) => <Card key={tool._id} tool={tool} />)
+                    tools?.map((tool) => <CustomCard key={tool._id} product={tool} />)
                 }
             </div>
             <Summary />

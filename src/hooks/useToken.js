@@ -11,7 +11,7 @@ const useToken = (user) => {
         const currentUser = { email: email, name: name };
         if (email) {
             axios
-                .put(`https://mna-sensors-server.onrender.com/user/${email}`, currentUser)
+                .put(`http://localhost:5000/user/${email}`, currentUser)
                 .then((data) => {
                     const accessToken = data?.data?.accessToken;
                     localStorage.setItem("accessToken", accessToken);

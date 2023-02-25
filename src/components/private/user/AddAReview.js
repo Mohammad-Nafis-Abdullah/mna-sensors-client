@@ -10,7 +10,7 @@ const AddAReview = () => {
     const [userReview, setUserReview] = useState({});
 
     const { refetch } = useQuery("review", () => {
-        axios.get(`https://mna-sensors-server.onrender.com/review/${user?.email}`).then(data => setUserReview(data.data));
+        axios.get(`http://localhost:5000/review/${user?.email}`).then(data => setUserReview(data.data));
     });
 
 
@@ -37,7 +37,7 @@ const AddAReview = () => {
 
         const review = { email, comment, rating };
 
-        await axios.put(`https://mna-sensors-server.onrender.com/review/${email}`, review).then(data => {
+        await axios.put(`http://localhost:5000/review/${email}`, review).then(data => {
             if (data?.data?.success) {
                 toast.success('Review submitted successfully', { theme: 'colored' })
             }

@@ -8,7 +8,7 @@ import ManageTool from "./ManageTool";
 
 const ManageTools = () => {
   const [deleteTool, setDeleteTool] = useState(null);
-  const url = "https://mna-sensors-server.onrender.com/sensors";
+  const url = "http://localhost:5000/sensors";
   const header = {
     headers: {
       authorization: `Bearer ${localStorage.getItem("accessToken")}`,

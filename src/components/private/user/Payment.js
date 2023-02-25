@@ -13,7 +13,7 @@ const stripePromise = loadStripe(
 );
 const Payment = () => {
   const { id } = useParams();
-  const url = `https://mna-sensors-server.onrender.com/order/${id}`;
+  const url = `http://localhost:5000/order/${id}`;
 
   const { data: order, isLoading } = useQuery(["order", id], () =>
     axios

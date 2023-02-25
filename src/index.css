@@ -135,6 +135,46 @@
   .input-label{
     @apply absolute text-base font-medium text-gray-900/70 duration-300 -translate-y-8 top-3 -z-10 origin-[0];
   }
+  
+  .slided-card{
+    @apply h-80 max-w-xs w-full overflow-hidden relative cursor-pointer bg-white;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #ff9900;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.slided-card .card-child{
+  @apply absolute bottom-0 left-0 right-0 h-4/5 translate-y-[75%] transition-transform duration-500 overflow-y-auto;
+}
+.slided-card .card-child .title{
+  @apply h-1/4 ;
+}
+.slided-card .body{
+  @apply h-3/4 overflow-y-auto;
+}
+
+.slided-card .btn-div{
+  @apply absolute top-0 left-0 right-0 h-1/5 translate-y-[-100%] transition-transform duration-500 flex justify-center items-center;
+}
+.slided-card .btn-div .my-btn{
+  @apply py-0.5 px-1.5 bg-[#87ceeb] cursor-pointer;
+}
+
+.slided-card:hover .btn-div, .slided-card:active .btn-div{
+  @apply translate-y-0;
+}
+
+.slided-card:hover .card-child, .slided-card:active .card-child{
+  @apply translate-y-0;
 }
 
 

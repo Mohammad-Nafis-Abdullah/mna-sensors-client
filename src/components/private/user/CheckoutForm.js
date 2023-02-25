@@ -21,7 +21,7 @@ const CheckoutForm = ({ order }) => {
   // console.log(order);
 
   useEffect(() => {
-    const url = "https://mna-sensors-server.onrender.com/create-payment-intent";
+    const url = "http://localhost:5000/create-payment-intent";
     axios
       .post(
         url,
@@ -85,7 +85,7 @@ const CheckoutForm = ({ order }) => {
         transactionId: paymentIntent.id,
       };
       axios
-        .patch(`https://mna-sensors-server.onrender.com/order/${_id}`, payment, {
+        .patch(`http://localhost:5000/order/${_id}`, payment, {
           headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },
