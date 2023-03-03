@@ -1,54 +1,54 @@
 import { signOut } from "firebase/auth";
-import React from "react";
+import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
+import { FaUserCircle } from 'react-icons/fa';
+
 
 const Navbar = () => {
     const [user] = useAuthState(auth);
     const navigate = useNavigate();
+    const location = useLocation();
+    const [dropDown,setDropDown] = useState(false);
 
     const logout = () => {
+        setDropDown(false);
         signOut(auth);
         navigate('/');
         localStorage.removeItem("accessToken");
     };
     const menuItems = (
-        <>
-            <li>
-                <Link to="/" className="btn-xs font-medium text-sm">Home</Link>
-            </li>
+        <div className="flex flex-col lg:flex-row lg:items-center gap-x-5 gap-y-2">
+                <Link to="/" className="font-medium text-sm">Home</Link>
             {user &&
-                <>
-                    <li>
-                        <Link to="/dashboard" className="btn-xs font-medium text-sm">Dashboard</Link>
-                    </li>
-                </>
+            <Link to="/dashboard" className="font-medium text-sm">Dashboard</Link>
             }
-            <li>
-                <Link to="/reviews" className="btn-xs font-medium text-sm">Reviews</Link>
-            </li>
-
-            <li>
-                <Link to="/myportfolio" className="btn-xs font-medium text-sm">My Portfolio</Link>
-            </li>
-            <li>
-                <Link to="/blogs" className="btn-xs font-medium text-sm">Blogs</Link>
-            </li>
-            <li>
+            <Link to="/reviews" className="font-medium text-sm">Reviews</Link>
+            <div className="self-center">
                 {user ? (
-                    <button className="link text-xs" onClick={logout}>Logout <br />{user?.displayName}</button>
+                    <div className="text-xs relative">
+                        <FaUserCircle className="w-10 h-10 cursor-pointer" onClick={() => setDropDown(prev => !prev)} />
+                        <div className={`w-56 h-40 absolute left-12 top-[50%] lg:left-auto lg:top-12 lg:right-0 rounded-xl overflow-hidden flex flex-col ${!dropDown && 'hidden'} bg-gray-300 border-4 p-3 justify-between z-50`}>
+                            <FaUserCircle className="w-10 h-10 cursor-pointer self-center" onClick={() => setDropDown(prev => !prev)} />
+                            <button className="btn btn-sm" onClick={()=> {
+                                setDropDown(false);
+                                navigate('dashboard/my-profile')
+                            }}>My profile</button>
+                            <button className="btn btn-sm" onClick={logout}>Logout</button>
+                        </div>
+                    </div>
                 ) : (
                     <Link className="link" to="/login">Login</Link>
                 )}
-            </li>
-        </>
+            </div>
+        </div>
     );
 
     // console.log(user);
     return (
-        <div className="shadow-md">
-            <div className="navbar bg-base-100 container">
+        <div className="shadow-md sticky top-0 z-[999]">
+            <div className="navbar bg-base-100 max-w-7xl mx-auto">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex="0" className="btn btn-ghost lg:hidden">
@@ -69,7 +69,7 @@ const Navbar = () => {
                         </label>
                         <ul
                             tabIndex="0"
-                            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+                            className="menu menu-compact dropdown-content mt-3 p-5 shadow bg-amber-400 rounded-box w-52 lg:hidden"
                         >
                             {menuItems}
                         </ul>
@@ -81,7 +81,7 @@ const Navbar = () => {
                 <div className="navbar-end hidden lg:flex mx-auto">
                     <ul className="menu menu-horizontal p-0">{menuItems}</ul>
                 </div>
-                <div className="navbar-end lg:hidden">
+                <div className={`navbar-end lg:hidden ${location.pathname.includes('/dashboard') || 'hidden'}`} >
                     <label
                         htmlFor="dashboard-drawer"
                         className="btn btn-circle swap swap-rotate lg:hidden"

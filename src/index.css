@@ -106,15 +106,10 @@
   }
 } 
 
-
-@layer utilities{
-  .border-4{
-    @apply border-black;
-  }
-
-}
-
 @layer components{
+  .bdr{
+    @apply border-4 border-black
+  }
   .link{
     @apply font-medium bg-gray-800/90 px-1.5 py-0.5 hover:bg-gray-800 active:scale-95 duration-150 no-underline text-white
     ;
@@ -163,7 +158,7 @@
 }
 
 .slided-card .btn-div{
-  @apply absolute top-0 left-0 right-0 h-1/5 translate-y-[-100%] transition-transform duration-500 flex justify-center items-center;
+  @apply absolute top-0 left-0 right-0 h-1/5 translate-y-[-100%] transition-transform duration-500;
 }
 .slided-card .btn-div .my-btn{
   @apply py-0.5 px-1.5 bg-[#87ceeb] cursor-pointer;
@@ -186,21 +181,6 @@
 }
 
 
-.blog-card{
-  @apply text-lg font-bold text-gray-800 basis-[27rem] grow shrink p-3 space-y-3 rounded-xl;
-  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.343);
-}
-.Q-A{
-  @apply underline decoration-4 underline-offset-4 mr-2 text-lg text-gray-800;
-}
-.blog-card h6{
-  @apply text-left text-sm sm:text-base sm:h-[60px] ;
-}
-.blog-card p{
-  @apply h-[13.1rem] rounded overflow-auto text-sm font-medium text-gray-800/70;
-}
-
-
 .dashboard-btn{
   @apply text-gray-800 font-bold btn-ghost;
 }
@@ -208,21 +188,5 @@
 
 .my-shadow{
   @apply shadow-[0_0_15px_1px_rgba(0,0,0,0.343)];
-}
-
-.portfolio h3{
-  @apply text-lg font-medium;
-}
-.portfolio input{
-  @apply text-base font-medium text-neutral-focus;
-}
-.portfolio td , .portfolio h5{
-  @apply text-sm font-medium;
-}
-.portfolio div{
-  @apply flex justify-start sm:justify-center gap-2 items-center;
-}
-.portfolio div>input{
-  @apply text-center max-w-[15rem];
 }
 

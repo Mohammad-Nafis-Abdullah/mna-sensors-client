@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App, { StateContext } from "./App";
+import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -13,9 +13,7 @@ root.render(
   <QueryClientProvider client={queryClient}>
     <BrowserRouter>
       <React.StrictMode>
-        <StateContext.Provider>
           <App />
-        </StateContext.Provider>
       </React.StrictMode>
     </BrowserRouter>
   </QueryClientProvider>
