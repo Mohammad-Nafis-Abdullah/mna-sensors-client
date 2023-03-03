@@ -45,8 +45,8 @@ function App() {
 
             <Route path="/dashboard" element={<Private> <Dashboard /> </Private>} >
 
-              <Route index element={<MyProfile />} />
-              <Route path="my-profile" element={<Navigate to={'/dashboard'}/>}/>
+              <Route index element={<Navigate to={'/dashboard/my-profile'}/>} />
+              <Route path="my-profile" element={<MyProfile />}/>
               <Route path="addReview" element={<AddAReview />} />
               <Route path="myOrders" element={<MyOrders />} />
               <Route path="payment/:id" element={<Payment />} />

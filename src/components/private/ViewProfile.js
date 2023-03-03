@@ -40,14 +40,11 @@ const ViewProfile = ({ profile }) => {
             <p className="text-white">
               {" "}
               LinkedIn Profile :
-              <a
-                href="https://www.linkedin.com/in/s-m-bahauddin-fahad-33a773229"
-                target="_blank"
-                rel="noreferrer"
-                className="underline"
-              >
-                <span className=""> {profile?.linkedIn}</span>
-              </a>
+              <small onClick={()=> {
+                  window.open(`https://${profile?.linkedIn}`);
+              }} className="underline block cursor-pointer">
+                <span className="">{profile?.linkedIn}</span>
+              </small>
             </p>
           </div>
         </div>

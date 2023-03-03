@@ -45,7 +45,7 @@ const Navbar = () => {
                         </div>
                     </div>
                 ) : (
-                    <Link className="link" to="/login">Login</Link>
+                    <Link className="btn btn-sm" to="/login">Login</Link>
                 )}
             </div>
         </div>
@@ -53,7 +53,7 @@ const Navbar = () => {
 
     // console.log(user);
     return (
-        <div className="shadow-md sticky top-0 z-[999]">
+        <div className="shadow-md sticky top-0 z-[999] bg-white">
             <div className="navbar bg-base-100 max-w-7xl mx-auto">
                 <div className="navbar-start">
                     <div className="dropdown">
