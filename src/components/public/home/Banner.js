@@ -1,33 +1,34 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
+import Slider from 'react-slick';
+import useRefetch from '../../../hooks/useRefetch';
 
 const Banner = () => {
+    const [banner,loading,refetch] = useRefetch('banner-bg.json');
+
+    const settings = {
+        dots: false,
+        fade: true,
+        infinite: true,
+        autoplay:true,
+        swipeToSlide:false,
+        pauseOnHover:false,
+        speed: 1000,
+        autoplaySpeed:4000,
+        arrows:false,
+        className:'max-w-5xl mx-auto py-5',
+    };
 
     return (
-        <>
-            <div className="carousel w-full h-[26rem] container mt-1">
-                <div id="slide1" className="carousel-item relative w-full">
-                    <img src="https://admin.techshopbd.com/uploads/product/Grove-AlcoholSensor.jpg" className="h-full mx-auto object-cover" alt='' />
-                    <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                        <a href="#slide3" className="btn btn-circle">❮</a>
-                        <a href="#slide2" className="btn btn-circle">❯</a>
-                    </div>
-                </div>
-                <div id="slide2" className="carousel-item relative w-full">
-                    <img src="https://admin.techshopbd.com/uploads/product/IRObstacleSensor_1.jpg" className="h-full mx-auto object-cover" alt='' />
-                    <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                        <a href="#slide1" className="btn btn-circle">❮</a>
-                        <a href="#slide3" className="btn btn-circle">❯</a>
-                    </div>
-                </div>
-                <div id="slide3" className="carousel-item relative w-full">
-                    <img src="https://admin.techshopbd.com/uploads/product/LaserSensor.jpg" className="h-full mx-auto object-cover" alt='' />
-                    <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                        <a href="#slide2" className="btn btn-circle">❮</a>
-                        <a href="#slide1" className="btn btn-circle">❯</a>
-                    </div>
-                </div>
-            </div>
-        </>
+        <div>
+            <Slider {...settings}>
+                {
+                    banner.map(banner=>{
+                        return <img className='h-[calc(100vh-6.25rem)] object-cover' key={banner._id} src={banner.img} alt='' />
+                    })
+                }
+            </Slider>
+        </div>
     );
 };
 

@@ -45,7 +45,7 @@ const MyProfile = () => {
     return (
         <div className='flex justify-center my-5 gap-5 flex-wrap'>
             <ViewProfile key={profile?._id} profile={profile} />
-            <form onSubmit={profileUpdating} className='fromRight max-w-sm w-full flex flex-col justify-center items-center p-3 rounded-xl gap-0 bg-white'>
+            <form onSubmit={profileUpdating} className=' max-w-sm w-full flex flex-col justify-center items-center p-3 rounded-xl gap-0 bg-white'>
                 <h2 className='mb-5 text-2xl font-medium underline'>My Profile</h2>
                 <div className="input-container">
                     <input type="text" name="name" className="input-field" placeholder={user.displayName} required="" disabled />

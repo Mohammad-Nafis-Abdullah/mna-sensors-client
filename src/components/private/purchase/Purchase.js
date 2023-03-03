@@ -68,7 +68,7 @@ const Purchase = () => {
         <div className='container min-h-[calc(100vh-166.5px)] flex flex-wrap justify-center items-center px-3 py-1 gap-8'>
             <form onSubmit={ordering} className='p-5 rounded-xl my-shadow flex flex-wrap justify-center items-center gap-x-16 gap-y-5 bg-gray-700'>
                 <h3 className='text-center text-white font-medium text-3xl basis-full'>Purchase Form</h3>
-                <section className='fromLeft max-w-sm w-full flex flex-col justify-center items-center p-3 rounded-xl gap-3 bg-white pt-10'>
+                <section className=' max-w-sm w-full flex flex-col justify-center items-center p-3 rounded-xl gap-3 bg-white pt-10'>
                     <div className="input-container">
                         <input type="text" name="name" className="input-field" placeholder={user.displayName} required="" disabled />
                         <label className="input-label">Name</label>
@@ -88,7 +88,7 @@ const Purchase = () => {
                 </section>
                 {
                     selected &&
-                    <div className='max-w-sm w-full flex flex-col justify-center items-center p-3 my-shadow rounded-xl fromRight bg-white'>
+                    <div className='max-w-sm w-full flex flex-col justify-center items-center p-3 my-shadow rounded-xl  bg-white'>
                         <img className='h-[6.8rem] w-36 object-cover rounded-md' src={selected.img} alt="" />
                         <div className='text-center font-medium space-y-3 grow'>
                             <h5 className='text-gray-800 text-left text-xl'>{selected.name}</h5>

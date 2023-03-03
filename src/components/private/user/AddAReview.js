@@ -53,7 +53,7 @@ const AddAReview = () => {
 
 
     return (
-        <div className='flex flex-wrap justify-center gap-5 fromRight'>
+        <div className='flex flex-wrap justify-center gap-5 '>
             <form onSubmit={reviewing} className="form-control ring-4 rounded ring-white p-2 space-y-2 max-w-sm">
                 <h2 className='text-white font-medium text-2xl underline text-center mb-5'>Add a Review</h2>
                 <label className="input-group max-w-sm w-full">
@@ -77,7 +77,7 @@ const AddAReview = () => {
                     submit review
                 </button>
             </form>
-            <section className='max-w-sm w-full p-2 ring-4 ring-white rounded fromBottom max-h-[334px]'>
+            <section className='max-w-sm w-full p-2 ring-4 ring-white rounded  max-h-[334px]'>
                 <div className='bg-white font-medium text-neutral-focus p-3 rounded h-full flex flex-col justify-between'>
                     <p className='text-lg underline'>Submitted Review : </p>
                     <small className='text-red-600'>{userReview?.comment ? '' : 'No review is submitted'}</small>

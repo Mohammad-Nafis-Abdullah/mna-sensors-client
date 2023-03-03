@@ -48,7 +48,7 @@ const AddATool = () => {
     <div className="fadeIn">
       <div className="flex justify-center">
         <form
-          className="form card w-full max-w-md sm:max-w-lg lg:max-w-lg bg-white mx-3 fromRight"
+          className="form card w-full max-w-md sm:max-w-lg lg:max-w-lg bg-white mx-3 "
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="p-5">

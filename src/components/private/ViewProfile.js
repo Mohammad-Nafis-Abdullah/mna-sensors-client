@@ -5,7 +5,7 @@ const ViewProfile = ({ profile }) => {
 
 
   return (
-    <div className="w-full max-w-sm fromLeft">
+    <div className="w-full max-w-sm ">
       <div className="border-8 shadow-2xl text-center rounded-xl min-h-0 h-full">
         <h2 className="text-2xl font-bold  underline text-white mt-8">
           My Profile
