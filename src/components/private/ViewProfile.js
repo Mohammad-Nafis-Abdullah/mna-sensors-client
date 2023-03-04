@@ -1,25 +1,32 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
+import React, { useContext, useEffect } from "react";
 import { toast } from "react-toastify";
 import { FaEdit } from 'react-icons/fa';
 import { instantModal } from "../../utilities/Modal";
 import EditProfile from "./EditProfile";
+import { StateContext } from "../../App";
 
 
 const ViewProfile = ({ profile,refetch }) => {
-  const img = profile?.img || "https://i.ibb.co/pvmWXsv/male-placeholder-image.jpg";
+  const [state,dispatch] = useContext(StateContext);
+  const img = profile?.img?`https://firebasestorage.googleapis.com/v0/b/mna-sensors.appspot.com/o/${profile?.img}?alt=media`:"https://i.ibb.co/pvmWXsv/male-placeholder-image.jpg";
 
+  useEffect(()=> {
+    dispatch({type:'userImg',value:profile.img});
+},[profile]);
 
   return (
     <div className="text-center min-h- h-full w-full max-w-sm rounded-lg relative">
       <FaEdit onClick={()=> {
-          instantModal(<EditProfile refetch={refetch}/>);
+          instantModal(<EditProfile userProfile={profile} refetch={refetch}/>);
       }} className="text-amber-400 w-8 h-8 absolute top-0 right-0 cursor-pointer"/>
       <h2 className="text-2xl font-bold underline text-white">
         My Profile
       </h2>
       <div className="flex justify-center mt-8">
         <div className="flex justify-center items-center w-36 h-36 bg-neutral-focus rounded-full ring-amber-400 ring-4 shadow-xl">
-          <img className="rounded-full w-32 h-32 object-cover" src={img} alt="" />
+          <img className="rounded-full w-32 h-32 object-scale-down" src={img} alt="" />
         </div>
       </div>
       <div className="flex flex-col justify-center p-3 gap-y-6">

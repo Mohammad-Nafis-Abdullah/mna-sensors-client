@@ -1,5 +1,5 @@
 const trimError = (error='')=> {
-    const errorMssg = error?.code?.slice(5)?.split('-')?.join(' ')?.toUpperCase();
+    const errorMssg = error?.code?.split('/')[1]?.split('-')?.join(' ')?.toUpperCase();
     return errorMssg;
 }
 

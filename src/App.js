@@ -23,17 +23,20 @@ import ManageTools from "./components/private/admin/ManageTools"
 import ReviewsComp from "./components/public/ReviewsComp";
 import ManageAllOrders from "./components/private/admin/ManageAllOrders";
 import Modal from "./utilities/Modal";
+import useStateReducer from "./hooks/useStateReducer";
 
-// const StateContext = createContext();
-// export { StateContext }
+const StateContext = createContext();
+export { StateContext }
 
 function App() {
+  const [state,dispatch] = useStateReducer();
   const { pathname } = useLocation();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
   return (
+    <StateContext.Provider value={[state,dispatch]}>
       <div className={``}>
 
         <Header />
@@ -46,8 +49,8 @@ function App() {
 
             <Route path="/dashboard" element={<Private> <Dashboard /> </Private>} >
 
-              <Route index element={<Navigate to={'/dashboard/my-profile'}/>} />
-              <Route path="my-profile" element={<MyProfile />}/>
+              <Route index element={<Navigate to={'/dashboard/my-profile'} />} />
+              <Route path="my-profile" element={<MyProfile />} />
               <Route path="add-review" element={<AddAReview />} />
               <Route path="my-orders" element={<MyOrders />} />
               <Route path="payment/:id" element={<Payment />} />
@@ -70,8 +73,9 @@ function App() {
         <Footer />
 
         <ToastContainer />
-        <Modal/>
+        <Modal />
       </div>
+    </StateContext.Provider>
   );
 }
 

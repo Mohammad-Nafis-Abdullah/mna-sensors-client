@@ -1,15 +1,17 @@
 import { signOut } from "firebase/auth";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
-import { FaUserCircle } from 'react-icons/fa';
 import { toast } from "react-toastify";
 import Loading from "./Loading";
+import { StateContext } from "../../App";
 
 
 const Navbar = () => {
     const [user,loading,error] = useAuthState(auth);
+    const [state] = useContext(StateContext);
+    const img = state?.userImg?`https://firebasestorage.googleapis.com/v0/b/mna-sensors.appspot.com/o/${state?.userImg}?alt=media`:"https://i.ibb.co/pvmWXsv/male-placeholder-image.jpg";
     const navigate = useNavigate();
     const [dropDown,setDropDown] = useState(false);
 
@@ -29,9 +31,9 @@ const Navbar = () => {
             <div className="self-center">
                 {user ? (
                     <div className="text-xs relative z-20">
-                        <FaUserCircle className={`w-10 h-10 cursor-pointer ${dropDown && 'text-amber-400'}`} onClick={() => setDropDown(prev => !prev)} />
+                        <img src={img} alt="" className={`w-10 h-10 cursor-pointer rounded-full object-scale-down`} onClick={() => setDropDown(prev => !prev)} />
                         <div className={`w-56 h-44 absolute left-12 top-[50%] lg:left-auto lg:top-12 lg:-right-3 rounded-xl overflow-hidden flex flex-col ${!dropDown && 'hidden'} bg-gray-300 border-4 p-3 justify-between z-50`}>
-                            <FaUserCircle className="w-10 h-10 cursor-pointer self-center" />
+                            <img src={img} alt="" className="w-14 h-14 cursor-pointer self-center rounded-full object-scale-down" />
                             <small className="font-bold self-center select-none underline underline-offset-2 cursor-pointer" title="Click to copy email" onClick={(e)=> {
                                 navigator.clipboard.writeText(e.target.innerText).then(()=> {
                                     toast.success('Email Coppied to Clipboard',{theme:'dark'});
