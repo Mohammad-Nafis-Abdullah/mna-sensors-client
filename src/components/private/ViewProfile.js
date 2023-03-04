@@ -1,53 +1,62 @@
 import React from "react";
+import { toast } from "react-toastify";
+import { FaEdit } from 'react-icons/fa';
+import { instantModal } from "../../utilities/Modal";
+import EditProfile from "./EditProfile";
 
-const ViewProfile = ({ profile }) => {
+
+const ViewProfile = ({ profile,refetch }) => {
   const img = profile?.img || "https://i.ibb.co/pvmWXsv/male-placeholder-image.jpg";
 
 
   return (
-    <div className="w-full max-w-sm ">
-      <div className="border-8 shadow-2xl text-center rounded-xl min-h-0 h-full">
-        <h2 className="text-2xl font-bold  underline text-white mt-8">
-          My Profile
-        </h2>
-        <div className="flex justify-center mt-8">
-          <div className="flex justify-center items-center w-36 h-36 bg-neutral-focus rounded-full ring-white ring-4 shadow-xl">
-            <img className="rounded-full w-32 h-32 object-cover" src={img} alt="" />
-          </div>
+    <div className="text-center min-h- h-full w-full max-w-sm rounded-lg relative">
+      <FaEdit onClick={()=> {
+          instantModal(<EditProfile refetch={refetch}/>);
+      }} className="text-amber-400 w-8 h-8 absolute top-0 right-0 cursor-pointer"/>
+      <h2 className="text-2xl font-bold underline text-white">
+        My Profile
+      </h2>
+      <div className="flex justify-center mt-8">
+        <div className="flex justify-center items-center w-36 h-36 bg-neutral-focus rounded-full ring-amber-400 ring-4 shadow-xl">
+          <img className="rounded-full w-32 h-32 object-cover" src={img} alt="" />
         </div>
-        <div className="flex flex-col justify-center gap-3 ml-3 mt-8">
-          <div className=" text-secondary font-semibold w-full text-left rounded-sm">
-            <p className="text-white">
-              Name :<span className=""> {profile?.name}</span>
-            </p>
+      </div>
+      <div className="flex flex-col justify-center p-3 gap-y-6">
+        <article className="text-amber-400">
+          <h3 className="text-xl font-bold"> {profile?.name}</h3>
+          <h4 className=""> <span onClick={() => {
+            navigator.clipboard.writeText(profile?.email).then(() => {
+              toast.success('Email Coppied to Clipboard', { theme: 'dark' });
+            });
+          }} className="underline underline-offset-4 decoration-2 cursor-pointer" title="Click to copy email">{profile?.email}</span></h4>
+        </article>
+        <article className="text-white text-left space-y-3">
+          
+          <div className="form-control">
+            <label className="input-group input-group-md">
+              <span className="text-gray-800 font-bold max-w-[5rem] w-full">Address</span>
+              <input type="text" placeholder="Type here" value={profile?.address} className="input input-bordered input-md bg-transparent border-2 border-white whitespace-pre-wrap min-w-0 max-w-none w-full" readOnly/>
+            </label>
           </div>
-          <div className=" text-secondary font-semibold w-full text-left rounded-sm">
-            <p className="text-white">
-              Email :<span className=""> {profile?.email}</span>
-            </p>
+
+          <div className="form-control">
+            <label className="input-group input-group-md">
+              <span className="text-gray-800 font-bold max-w-[5rem] w-full">Phone</span>
+              <input type="text" placeholder="Type here" value={profile?.phone} className="input input-bordered input-md bg-transparent border-2 border-white whitespace-pre-wrap min-w-0 max-w-none w-full" readOnly/>
+            </label>
           </div>
-          <div className=" text-secondary font-semibold w-full text-left rounded-sm">
-            <p className="text-white">
-              Address :<span className=""> {profile?.address}</span>
-            </p>
+          
+          <div className="form-control">
+            <label className="input-group input-group-md">
+              <span className="text-gray-800 font-bold max-w-[5rem] w-full">Linkedin</span>
+              <input type="text" placeholder="Type here" value={profile?.linkedIn} className="input input-bordered input-md bg-transparent border-2 border-white whitespace-pre-wrap min-w-0 max-w-none w-full underline cursor-pointer font-bold text-amber-400" onClick={() => {
+              window.open(`https://${profile?.linkedIn}`);
+            }} readOnly/>
+            </label>
           </div>
-          <div className=" text-secondary font-semibold w-full text-left rounded-sm">
-            <p className="text-white">
-              Phone :<span className=""> {profile?.phone}</span>
-            </p>
-          </div>
-          <div className=" text-secondary font-semibold w-full text-left rounded-sm">
-            <p className="text-white">
-              {" "}
-              LinkedIn Profile :
-              <small onClick={()=> {
-                  window.open(`https://${profile?.linkedIn}`);
-              }} className="underline block cursor-pointer">
-                <span className="">{profile?.linkedIn}</span>
-              </small>
-            </p>
-          </div>
-        </div>
+
+        </article>
       </div>
     </div>
   );

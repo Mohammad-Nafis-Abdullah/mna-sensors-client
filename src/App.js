@@ -22,6 +22,7 @@ import AddATool from "./components/private/admin/AddATool"
 import ManageTools from "./components/private/admin/ManageTools"
 import ReviewsComp from "./components/public/ReviewsComp";
 import ManageAllOrders from "./components/private/admin/ManageAllOrders";
+import Modal from "./utilities/Modal";
 
 // const StateContext = createContext();
 // export { StateContext }
@@ -69,6 +70,7 @@ function App() {
         <Footer />
 
         <ToastContainer />
+        <Modal/>
       </div>
   );
 }

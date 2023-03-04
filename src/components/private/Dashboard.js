@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import auth from "../../firebase.init";
 import useAdmin from "../../hooks/useAdmin";
+import { BsFillArrowRightSquareFill } from 'react-icons/bs';
+
 
 const Dashboard = () => {
     const [user] = useAuthState(auth);
     const [admin] = useAdmin(user);
     const {pathname} = useLocation();
-
+    const [open,setOpen] = useState(false);
 
     const navStyling = ({isActive})=> {
         return `btn-ghost ${isActive?'text-amber-400':'text-white'} font-bold`
@@ -19,22 +21,22 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="drawer drawer-mobile bg-neutral-focus min-h-[calc(100vh-144px)] h-auto">
-            <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content flex justify-between flex-wrap items-center content-start gap-3">
+        <div className="drawer drawer-mobile bg-neutral-focus min-h-[calc(100vh-144px)] max-w-8xl h-auto">
+            <div className="drawer-content lg:ml-64 lg:mr-0 lg:min-w-[calc(100vw-16rem)]">
                 <h2 className="font-bold btn-ghost text-white text-2xl text-center inline-flex items-baseline gap-x-1 px-2">
                     dashboard
                     <small className="font-medium text-base">{showPath()}</small>
                 </h2>
-                <div className="basis-full overflow-auto">
+                <div className="overflow-auto h-auto">
                     <Outlet />
                 </div>
+
+                <BsFillArrowRightSquareFill onClick={()=>setOpen(prev=>!prev)} className={`lg:hidden text-amber-400 w-10 h-10 fixed top-32 cursor-pointer ${open?'left-64 rotate-180':'left-0'} transition-all duration-300`}/>
             </div>
-            <div className="drawer-side relative lg:w-64 lg:bg-neutral" style={{
-                maxHeight:'none'
-            }}>
-                <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-                <ul className="menu p-3 overflow-y-auto w-64 bg-neutral text-base-content lg:fixed lg:top-[72px] lg:bottom-[72px]">
+
+            <div className="">
+                <label className="drawer-overlay"></label>
+                <ul className={`menu p-3 overflow-y-auto w-64 bg-neutral text-base-content fixed top-[72px] bottom-[0] transition-transform duration-300 ${open?'translate-x-0':'-translate-x-64'} lg:translate-x-0`}>
                     {/* <!-- Sidebar content here --> */}
 
                     <li>
