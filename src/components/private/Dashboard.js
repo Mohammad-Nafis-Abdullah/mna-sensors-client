@@ -15,24 +15,26 @@ const Dashboard = () => {
     };
 
     const showPath = ()=> {
-        return `${pathname.split('dashboard')[1]}`
+        return `${pathname.split('dashboard')[1]}`;
     }
 
     return (
-        <div className="drawer drawer-mobile bg-neutral-focus">
+        <div className="drawer drawer-mobile bg-neutral-focus min-h-[calc(100vh-144px)] h-auto">
             <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content mt-2 px-2 flex justify-between flex-wrap items-center content-start gap-3">
-                <h2 className="font-bold btn-ghost text-white text-2xl text-center inline-flex items-baseline gap-x-1">
+            <div className="drawer-content flex justify-between flex-wrap items-center content-start gap-3">
+                <h2 className="font-bold btn-ghost text-white text-2xl text-center inline-flex items-baseline gap-x-1 px-2">
                     dashboard
                     <small className="font-medium text-base">{showPath()}</small>
                 </h2>
-                <div className="basis-full overflow-auto py-2">
+                <div className="basis-full overflow-auto">
                     <Outlet />
                 </div>
             </div>
-            <div className="drawer-side ">
+            <div className="drawer-side relative lg:w-64 lg:bg-neutral" style={{
+                maxHeight:'none'
+            }}>
                 <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-                <ul className="menu p-4 overflow-y-auto w-64 bg-neutral text-base-content">
+                <ul className="menu p-3 overflow-y-auto w-64 bg-neutral text-base-content lg:fixed lg:top-[72px] lg:bottom-[72px]">
                     {/* <!-- Sidebar content here --> */}
 
                     <li>
@@ -48,7 +50,7 @@ const Dashboard = () => {
                             <li>
                                 <NavLink
                                     className={navStyling}
-                                    to="/dashboard/myOrders"
+                                    to="/dashboard/my-orders"
                                 >
                                     My Orders
                                 </NavLink>
@@ -56,7 +58,7 @@ const Dashboard = () => {
                             <li>
                                 <NavLink
                                     className={navStyling}
-                                    to="/dashboard/addReview"
+                                    to="/dashboard/add-review"
                                 >
                                     Add A Review
                                 </NavLink>
@@ -69,7 +71,7 @@ const Dashboard = () => {
                             <li>
                                 <NavLink
                                     className={navStyling}
-                                    to="/dashboard/makeAdmin"
+                                    to="/dashboard/make-admin"
                                 >
                                     Make Admin
                                 </NavLink>
@@ -77,7 +79,7 @@ const Dashboard = () => {
                             <li>
                                 <NavLink
                                     className={navStyling}
-                                    to="/dashboard/addSensor"
+                                    to="/dashboard/add-sensor"
                                 >
                                     Add A Sensor
                                 </NavLink>
@@ -85,7 +87,7 @@ const Dashboard = () => {
                             <li>
                                 <NavLink
                                     className={navStyling}
-                                    to="/dashboard/manageSensors"
+                                    to="/dashboard/manage-sensors"
                                 >
                                     Manage Sensors
                                 </NavLink>
@@ -93,7 +95,7 @@ const Dashboard = () => {
                             <li>
                                 <NavLink
                                     className={navStyling}
-                                    to="/dashboard/manageAllOrders"
+                                    to="/dashboard/manage-all-orders"
                                 >
                                     Manage All Orders
                                 </NavLink>

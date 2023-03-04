@@ -47,14 +47,14 @@ function App() {
 
               <Route index element={<Navigate to={'/dashboard/my-profile'}/>} />
               <Route path="my-profile" element={<MyProfile />}/>
-              <Route path="addReview" element={<AddAReview />} />
-              <Route path="myOrders" element={<MyOrders />} />
+              <Route path="add-review" element={<AddAReview />} />
+              <Route path="my-orders" element={<MyOrders />} />
               <Route path="payment/:id" element={<Payment />} />
 
-              <Route path="makeAdmin" element={<RequireAdmin> <MakeAdmin /> </RequireAdmin>} />
-              <Route path="addSensor" element={<RequireAdmin> <AddATool /> </RequireAdmin>} />
-              <Route path="manageSensors" element={<RequireAdmin> <ManageTools /> </RequireAdmin>} />
-              <Route path="manageAllOrders" element={<RequireAdmin> <ManageAllOrders /> </RequireAdmin>} />
+              <Route path="make-admin" element={<RequireAdmin> <MakeAdmin /> </RequireAdmin>} />
+              <Route path="add-sensor" element={<RequireAdmin> <AddATool /> </RequireAdmin>} />
+              <Route path="manage-sensors" element={<RequireAdmin> <ManageTools /> </RequireAdmin>} />
+              <Route path="manage-all-orders" element={<RequireAdmin> <ManageAllOrders /> </RequireAdmin>} />
 
             </Route>
 

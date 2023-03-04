@@ -5,10 +5,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import { FaUserCircle } from 'react-icons/fa';
 import { toast } from "react-toastify";
+import Loading from "./Loading";
 
 
 const Navbar = () => {
-    const [user] = useAuthState(auth);
+    const [user,loading,error] = useAuthState(auth);
     const navigate = useNavigate();
     const location = useLocation();
     const [dropDown,setDropDown] = useState(false);
@@ -22,7 +23,7 @@ const Navbar = () => {
     const menuItems = (
         <div className="flex flex-col lg:flex-row lg:items-center gap-x-5 gap-y-2 px-5">
                 <Link to="/" className="font-medium text-sm">Home</Link>
-            {user &&
+            {user && !loading &&
             <Link to="/dashboard" className="font-medium text-sm">Dashboard</Link>
             }
             <Link to="/reviews" className="font-medium text-sm">Reviews</Link>
@@ -44,9 +45,9 @@ const Navbar = () => {
                             <button className="btn btn-sm" onClick={logout}>Logout</button>
                         </div>
                     </div>
-                ) : (
-                    <Link className="btn btn-sm" to="/login">Login</Link>
-                )}
+                ) : 
+                    (!loading && <Link className="btn btn-sm" to="/login">Login</Link>)
+                }
             </div>
         </div>
     );
@@ -54,6 +55,8 @@ const Navbar = () => {
     // console.log(user);
     return (
         <div className="shadow-md sticky top-0 z-[999] bg-white">
+            {loading && <Loading/>}
+            {error && toast.error('There was an error',{theme:'colored'})}
             <div className="navbar bg-base-100 max-w-7xl mx-auto">
                 <div className="navbar-start">
                     <div className="dropdown">
