@@ -6,12 +6,13 @@ import auth from "../../firebase.init";
 import { toast } from "react-toastify";
 import Loading from "./Loading";
 import { StateContext } from "../../App";
+import { imgUrl } from "../../hooks/useMyStorage";
 
 
 const Navbar = () => {
     const [user,loading,error] = useAuthState(auth);
     const [state] = useContext(StateContext);
-    const img = state?.userImg?`https://firebasestorage.googleapis.com/v0/b/mna-sensors.appspot.com/o/${state?.userImg}?alt=media`:"https://i.ibb.co/pvmWXsv/male-placeholder-image.jpg";
+    const img = imgUrl(state?.userImg) || "https://i.ibb.co/pvmWXsv/male-placeholder-image.jpg";
     const navigate = useNavigate();
     const [dropDown,setDropDown] = useState(false);
 

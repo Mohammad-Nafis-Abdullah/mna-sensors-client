@@ -5,6 +5,14 @@ import { useUploadFile } from "react-firebase-hooks/storage";
 import { storage } from "../firebase.init";
 
 
+const imgUrl = (imgName)=> {
+    if (!imgName) {
+        return false;
+    }
+    const storeName = process.env.REACT_APP_STORAGE_BUCKET.split('//')[1];
+    return `https://firebasestorage.googleapis.com/v0/b/${storeName}/o/${imgName}?alt=media`;
+}
+export {imgUrl};
 
 
 const imageNaming = (name='')=> {

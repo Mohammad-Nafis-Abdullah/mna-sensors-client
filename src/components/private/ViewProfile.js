@@ -6,14 +6,15 @@ import { FaEdit } from 'react-icons/fa';
 import { instantModal } from "../../utilities/Modal";
 import EditProfile from "./EditProfile";
 import { StateContext } from "../../App";
+import { imgUrl } from "../../hooks/useMyStorage";
 
 
 const ViewProfile = ({ profile,refetch }) => {
   const [state,dispatch] = useContext(StateContext);
-  const img = profile?.img?`https://firebasestorage.googleapis.com/v0/b/mna-sensors.appspot.com/o/${profile?.img}?alt=media`:"https://i.ibb.co/pvmWXsv/male-placeholder-image.jpg";
+  const img = imgUrl(profile?.img) || "https://i.ibb.co/pvmWXsv/male-placeholder-image.jpg";
 
   useEffect(()=> {
-    dispatch({type:'userImg',value:profile.img});
+      dispatch({type:'userImg',value:profile?.img});
 },[profile]);
 
   return (
