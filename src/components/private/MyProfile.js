@@ -13,7 +13,7 @@ const MyProfile = () => {
         headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
-    })
+    });
 
 
     return (

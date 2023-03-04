@@ -1,15 +1,17 @@
 import React from 'react';
 import useFetch from '../../../hooks/useFetch';
+import Loading from '../Loading';
 
 const Reviews = () => {
-    const { data: allreviews } = useFetch('http://localhost:5000/reviews', {}, 'reviews');
-    const reviews = allreviews?.slice(0, 3);
+    const { data: allreviews,loading } = useFetch('http://localhost:5000/reviews',[]);
+    const reviews = [...allreviews]?.slice(0, 3);
 
     return (
         <div className='mb-8 container p-3 flex flex-wrap justify-center gap-5'>
+            {loading && <Loading/>}
             {
                 allreviews?.length &&
-                reviews?.map((review) => {
+                [...reviews]?.map((review) => {
                     const showRating = () => {
                         const rate = review?.rating;
                         let star = '';

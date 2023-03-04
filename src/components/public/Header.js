@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { signOut } from "firebase/auth";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
@@ -7,15 +9,20 @@ import { toast } from "react-toastify";
 import Loading from "./Loading";
 import { StateContext } from "../../App";
 import { imgUrl } from "../../hooks/useMyStorage";
+import useFetch from "../../hooks/useFetch";
 
 
 const Navbar = () => {
     const [user,loading,error] = useAuthState(auth);
-    const [state] = useContext(StateContext);
+    const [state,dispatch] = useContext(StateContext);
     const img = imgUrl(state?.userImg) || "https://i.ibb.co/pvmWXsv/male-placeholder-image.jpg";
     const navigate = useNavigate();
     const [dropDown,setDropDown] = useState(false);
+    const { data:profile, loading:ldng } = useFetch(`http://localhost:5000/user/${user?.email}`,{}, (data)=> {
+        dispatch({ type: 'userImg', value: data?.img });
+    });
 
+    
     const logout = () => {
         setDropDown(false);
         signOut(auth);
@@ -57,7 +64,7 @@ const Navbar = () => {
     // console.log(user);
     return (
         <div className="shadow-md sticky top-0 z-[999] bg-white">
-            {loading && <Loading/>}
+            {(loading || ldng) && <Loading/>}
             {error && toast.error('There was an error',{theme:'colored'})}
             <div className="navbar bg-base-100 max-w-7xl mx-auto">
                 <div className="navbar-start">

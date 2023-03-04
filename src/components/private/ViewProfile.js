@@ -13,9 +13,11 @@ const ViewProfile = ({ profile,refetch }) => {
   const [state,dispatch] = useContext(StateContext);
   const img = imgUrl(profile?.img) || "https://i.ibb.co/pvmWXsv/male-placeholder-image.jpg";
 
-  useEffect(()=> {
-      dispatch({type:'userImg',value:profile?.img});
-},[profile]);
+  useEffect(() => {
+    if (profile?.img !== state?.userImg) {
+      dispatch({ type: 'userImg', value: profile?.img });
+    }
+  }, [profile]);
 
   return (
     <div className="text-center min-h- h-full w-full max-w-sm rounded-lg relative">
