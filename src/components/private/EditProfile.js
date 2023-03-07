@@ -8,18 +8,19 @@ import auth from '../../firebase.init';
 import useMyStorage from '../../hooks/useMyStorage';
 import trimError from '../../hooks/trimError';
 import { closeModal } from '../../utilities/Modal';
+import { StateContext } from '../../App';
+import Loading from '../public/Loading';
 
-const EditProfile = ({ refetch, userProfile }) => {
+const EditProfile = () => {
+    const [state,dispatch] = useContext(StateContext);
     const [user] = useAuthState(auth);
     const [image,setImage] = useState(undefined);
     const {uploadImage,deleteImage} = useMyStorage();
+    const [loading,setLoading] = useState(false);
 
     const profileUpdating = async (e) => {
+        setLoading(true);
         e.preventDefault();
-
-        if (!image) {
-            return ;
-        }
 
         const name = user.displayName;
         const email = user.email;
@@ -29,27 +30,41 @@ const EditProfile = ({ refetch, userProfile }) => {
 
         const profile = { name, email, phone, address, linkedIn };
         
+        if (!image) {
+            profile.img = state?.user?.img;
+        }else{
+            try {
+                await deleteImage(state?.user?.img)
+                const {name} = await uploadImage(image);
+                profile.img = name;
+            } catch (err) {
+                toast.error(trimError(err),{theme:'colored'})
+            }
+        }
         
         try {
-            if (userProfile.img) {
-                await deleteImage(userProfile.img);
-            }
-            const result = await uploadImage(image);
-            profile.img = result.name;
-
-            const {data:infoUpdateResponse} = await axios.put(`http://localhost:5000/user/${email}`, profile)
-            infoUpdateResponse && toast.success('Information Updated', { theme: 'colored' })
+            const {data} = await axios.put(`http://localhost:5000/user/${email}`, profile)
+            dispatch({
+                type:'user',
+                value:profile
+            });
+            data && toast.success('Information Updated', { theme: 'colored' })
             closeModal();
+            state.userRefetch();
         } catch (err) {
             toast.error(trimError(err),{theme:'colored'})
         }
+
+        setLoading(false);
         e.target.reset();
-        refetch();
     };
 
+    console.log(state);
+
     return (
-        <form onSubmit={profileUpdating} className=' max-w-sm w-full flex flex-col justify-center items-center p-3 rounded-xl gap-0 bg-white mx-auto'>
-            <h2 className='mb-5 text-2xl font-medium underline'>My Profile</h2>
+        <form onSubmit={profileUpdating} className=' max-w-sm w-full flex flex-col justify-center items-center p-3 rounded-xl gap-0 bg-white mx-auto overflow-y-auto h-full'>
+            {loading && <Loading/>}
+            <h2 className='mb-5 mt-12 text-2xl font-medium underline'>My Profile</h2>
             <div className="input-container">
                 <input type="text" name="name" className="input-field" placeholder={user.displayName} required="" disabled />
                 <label className="input-label">Name</label>

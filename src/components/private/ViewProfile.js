@@ -9,20 +9,15 @@ import { StateContext } from "../../App";
 import { imgUrl } from "../../hooks/useMyStorage";
 
 
-const ViewProfile = ({ profile,refetch }) => {
+const ViewProfile = () => {
   const [state,dispatch] = useContext(StateContext);
-  const img = imgUrl(profile?.img) || "https://i.ibb.co/pvmWXsv/male-placeholder-image.jpg";
-
-  useEffect(() => {
-    if (profile?.img !== state?.userImg) {
-      dispatch({ type: 'userImg', value: profile?.img });
-    }
-  }, [profile]);
+  const img = imgUrl(state?.user?.img) || "https://i.ibb.co/pvmWXsv/male-placeholder-image.jpg";
+  console.log(img);
 
   return (
     <div className="text-center min-h- h-full w-full max-w-sm rounded-lg relative">
       <FaEdit onClick={()=> {
-          instantModal(<EditProfile userProfile={profile} refetch={refetch}/>);
+          instantModal(<EditProfile state={state} refetch={state.userRefetch}/>);
       }} className="text-amber-400 w-8 h-8 absolute top-0 right-0 cursor-pointer"/>
       <h2 className="text-2xl font-bold underline text-white">
         My Profile
@@ -34,34 +29,34 @@ const ViewProfile = ({ profile,refetch }) => {
       </div>
       <div className="flex flex-col justify-center p-3 gap-y-6">
         <article className="text-amber-400">
-          <h3 className="text-xl font-bold"> {profile?.name}</h3>
+          <h3 className="text-xl font-bold"> {state?.user?.name}</h3>
           <h4 className=""> <span onClick={() => {
-            navigator.clipboard.writeText(profile?.email).then(() => {
+            navigator.clipboard.writeText(state?.user?.email).then(() => {
               toast.success('Email Coppied to Clipboard', { theme: 'dark' });
             });
-          }} className="underline underline-offset-4 decoration-2 cursor-pointer" title="Click to copy email">{profile?.email}</span></h4>
+          }} className="underline underline-offset-4 decoration-2 cursor-pointer" title="Click to copy email">{state?.user?.email}</span></h4>
         </article>
         <article className="text-white text-left space-y-3">
           
           <div className="form-control">
             <label className="input-group input-group-md">
               <span className="text-gray-800 font-bold max-w-[5rem] w-full">Address</span>
-              <input type="text" placeholder="Type here" value={profile?.address} className="input input-bordered input-md bg-transparent border-2 border-white whitespace-pre-wrap min-w-0 max-w-none w-full" readOnly/>
+              <input type="text" placeholder="Type here" value={state?.user?.address} className="input input-bordered input-md bg-transparent border-2 border-white whitespace-pre-wrap min-w-0 max-w-none w-full" readOnly/>
             </label>
           </div>
 
           <div className="form-control">
             <label className="input-group input-group-md">
               <span className="text-gray-800 font-bold max-w-[5rem] w-full">Phone</span>
-              <input type="text" placeholder="Type here" value={profile?.phone} className="input input-bordered input-md bg-transparent border-2 border-white whitespace-pre-wrap min-w-0 max-w-none w-full" readOnly/>
+              <input type="text" placeholder="Type here" value={state?.user?.phone} className="input input-bordered input-md bg-transparent border-2 border-white whitespace-pre-wrap min-w-0 max-w-none w-full" readOnly/>
             </label>
           </div>
           
           <div className="form-control">
             <label className="input-group input-group-md">
               <span className="text-gray-800 font-bold max-w-[5rem] w-full">Linkedin</span>
-              <input type="text" placeholder="Type here" value={profile?.linkedIn} className="input input-bordered input-md bg-transparent border-2 border-white whitespace-pre-wrap min-w-0 max-w-none w-full underline cursor-pointer font-bold text-amber-400" onClick={() => {
-              window.open(`https://${profile?.linkedIn}`);
+              <input type="text" placeholder="Type here" value={state?.user?.linkedIn} className="input input-bordered input-md bg-transparent border-2 border-white whitespace-pre-wrap min-w-0 max-w-none w-full underline cursor-pointer font-bold text-amber-400" onClick={() => {
+              window.open(`https://${state?.user?.linkedIn}`);
             }} readOnly/>
             </label>
           </div>

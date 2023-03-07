@@ -13,7 +13,7 @@ const Purchase = () => {
     const params = useParams();
     const { id: serviceId } = params;
     let selected = [];
-    const { data: select, refetch } = useFetch(`http://localhost:5000/sensor/${serviceId}`);
+    const { data: select, refetch } = useFetch(`http://localhost:5000/sensor/${serviceId}`,{});
     if (select) {
         selected = select[0];
     }

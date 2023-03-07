@@ -7,30 +7,7 @@ import UserList from "./UserList";
 
 const MakeAdmin = () => {
   const url = "http://localhost:5000/users";
-  const header = {
-    headers: {
-      authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-    },
-  };
-  //   const {
-  //     data: users,
-  //     isLoading,
-  //     refetch,
-  //   } = useQuery("users", () =>
-  //     axios
-  //       .get(url, {
-  //         headers: {
-  //           authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-  //         },
-  //       })
-  //       .then((data) => {
-  //         return data.data;
-  //       })
-  //   );
-  //   if (isLoading) {
-  //     return <Loading />;
-  //   }
-  const { data: users, refetch } = useFetch(url, header);
+  const { data: users, refetch } = useFetch(url, []);
   return (
     <div className="fadeIn">
       <h2 className="text-left ml-3 text-lg text-white font-bold">

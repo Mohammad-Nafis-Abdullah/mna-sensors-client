@@ -2,9 +2,9 @@ import React from 'react';
 import useFetch from '../../../hooks/useFetch';
 
 const Summary = () => {
-    const { data: items } = useFetch('http://localhost:5000/sensors', {}, 'itemsCount');
-    const { data: users } = useFetch('http://localhost:5000/users/count', {}, 'usersCount');
-    const { data: orders } = useFetch('http://localhost:5000/orders/count', {}, 'ordersCount');
+    const { data: items } = useFetch('http://localhost:5000/sensors', {});
+    const { data: users } = useFetch('http://localhost:5000/users/count', {});
+    const { data: orders } = useFetch('http://localhost:5000/orders/count', {});
 
 
     return (

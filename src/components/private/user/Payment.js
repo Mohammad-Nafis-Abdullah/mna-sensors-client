@@ -1,11 +1,10 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { useParams } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-
 import CheckoutForm from "./CheckoutForm";
-import axios from "axios";
-import { useQuery } from "react-query";
+import useFetch from "../../../hooks/useFetch";
 import Loading from "../../public/Loading";
 
 const stripePromise = loadStripe(
@@ -15,25 +14,11 @@ const Payment = () => {
   const { id } = useParams();
   const url = `http://localhost:5000/order/${id}`;
 
-  const { data: order, isLoading } = useQuery(["order", id], () =>
-    axios
-      .get(url, {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
-      .then((data) => {
-        return data.data;
-      })
-  );
-  if (isLoading) {
-    return <Loading />;
-  }
+  const {data:order,loading,refetch} = useFetch(url,{})
 
-
-  // console.log(order);
   return (
     <div>
+      {loading && <Loading/>}
       <h2 className="text-xl text-white font-bold text-left ml-3">
         Payment for {order?.productName}
       </h2>

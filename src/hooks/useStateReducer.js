@@ -1,7 +1,7 @@
 import { useReducer } from "react";
 
 const initialState = { // declare initial state here as {key : value} pair
-    userImg:'',
+    user:'',
 };
 
 const reducer = (state,action)=> { // declare logic of reducer function that handle the changing of state
@@ -9,8 +9,11 @@ const reducer = (state,action)=> { // declare logic of reducer function that han
         /* case '':
             return {...state, key: new_value}; */
     
-        case 'userImg': // user profile picture url state
-            return {...state,userImg:action.value};
+        case 'user': // user profile picture url state
+            return {...state,user:action.value};
+
+        case 'userRefetch':
+            return {...state,userRefetch:action.value};
 
         default:
             return {...state};

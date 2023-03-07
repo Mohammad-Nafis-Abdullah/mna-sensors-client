@@ -9,7 +9,7 @@ const imgUrl = (imgName)=> {
     if (!imgName) {
         return false;
     }
-    const storeName = process.env.REACT_APP_STORAGE_BUCKET.split('//')[1];
+    const storeName = process.env.REACT_APP_STORAGE_BUCKET;
     return `https://firebasestorage.googleapis.com/v0/b/${storeName}/o/${imgName}?alt=media`;
 }
 export {imgUrl};

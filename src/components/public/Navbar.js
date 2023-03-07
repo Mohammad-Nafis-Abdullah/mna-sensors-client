@@ -15,13 +15,11 @@ import useFetch from "../../hooks/useFetch";
 const Navbar = () => {
     const [user,loading,error] = useAuthState(auth);
     const [state,dispatch] = useContext(StateContext);
-    const img = imgUrl(state?.userImg) || "https://i.ibb.co/pvmWXsv/male-placeholder-image.jpg";
     const navigate = useNavigate();
     const [dropDown,setDropDown] = useState(false);
-    const { data:profile, loading:ldng } = useFetch(`http://localhost:5000/user/${user?.email}`,{}, (data)=> {
-        dispatch({ type: 'userImg', value: data?.img });
-    });
+    console.log(state);
 
+    const img = imgUrl(state?.user?.img) || "https://i.ibb.co/pvmWXsv/male-placeholder-image.jpg";
     
     const logout = () => {
         setDropDown(false);
@@ -64,7 +62,7 @@ const Navbar = () => {
     // console.log(user);
     return (
         <div className="shadow-md sticky top-0 z-[999] bg-white">
-            {(loading || ldng) && <Loading/>}
+            {loading && <Loading/>}
             {error && toast.error('There was an error',{theme:'colored'})}
             <div className="navbar bg-base-100 max-w-7xl mx-auto">
                 <div className="navbar-start">

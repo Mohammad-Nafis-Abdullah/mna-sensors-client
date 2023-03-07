@@ -1,17 +1,14 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useQuery } from 'react-query';
 import { toast } from 'react-toastify';
 import auth from '../../../firebase.init';
+import useFetch from '../../../hooks/useFetch';
 
 const AddAReview = () => {
     const [user] = useAuthState(auth);
-    const [userReview, setUserReview] = useState({});
-
-    const { refetch } = useQuery("review", () => {
-        axios.get(`http://localhost:5000/review/${user?.email}`).then(data => setUserReview(data.data));
-    });
+    
+    const {data:userReview, refetch} = useFetch(`http://localhost:5000/review/${user?.email}`,{})
 
 
     const showRating = () => {

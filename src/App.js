@@ -1,9 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 import NotFound from "./components/public/NotFound";
-import Header from "./components/public/Header";
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect } from "react";
 import Login from "./components/public/Login";
 import SignUp from "./components/public/SignUp";
 import Home from "./components/public/home/Home";
@@ -24,22 +24,40 @@ import ReviewsComp from "./components/public/ReviewsComp";
 import ManageAllOrders from "./components/private/admin/ManageAllOrders";
 import Modal from "./utilities/Modal";
 import useStateReducer from "./hooks/useStateReducer";
+import useFetch from "./hooks/useFetch";
+import Loading from "./components/public/Loading";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "./firebase.init";
+import Navbar from "./components/public/Navbar";
 
 const StateContext = createContext();
 export { StateContext }
 
 function App() {
   const [state,dispatch] = useStateReducer();
+  const [user] = useAuthState(auth);
   const { pathname } = useLocation();
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+
+  const { data:profile, loading, refetch } = useFetch(`http://localhost:5000/user/${user?.email}`,null,(profile)=> {
+    dispatch({
+      type:'user',
+      value:profile
+    });
+  });
+
+  useEffect(()=> {
+      window.scrollTo(0, 0);
+      if (user && !profile) {
+        refetch();
+      };
+  },[user,pathname]);
 
   return (
     <StateContext.Provider value={[state,dispatch]}>
+      {loading && <Loading/>}
       <div className={``}>
 
-        <Header />
+        <Navbar />
 
         <div className={`min-h-[calc(100vh-144px)] fadeIn`}>
           <Routes>

@@ -3,22 +3,22 @@ import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
-const CustomCard = ({product}) => {
+const CustomCard = ({ product }) => {
     const navigate = useNavigate();
 
     return (
         <div className="slided-card mx-auto rounded-lg">
-            {/* {adminLoading && <Loading />} */}
+            {/* {adminLoading && <Loading/>} */}
             <img className="h-full w-full object-cover" src={product.img} alt={product.name} />
             <div className="btn-div bg-black/70 flex items-center justify-evenly">
                 <button
-                    onClick={()=> {
-                        
+                    onClick={() => {
+
                     }}
                     className="btn btn-sm font-bold border border-highlight bg-amber-400 text-[#161b1d] hover:bg-amber-400 hover:text-[#161b1d]">
                     Book Now
                 </button>
-                <button className="btn btn-ghost btn-sm font-bold border border-highlight text-amber-400 underline decoration-2 underline-offset-4" onClick={()=> {
+                <button className="btn btn-ghost btn-sm font-bold border border-highlight text-amber-400 underline decoration-2 underline-offset-4" onClick={() => {
                     navigate(`/purchase/${product._id}`)
                 }}>
                     Detials

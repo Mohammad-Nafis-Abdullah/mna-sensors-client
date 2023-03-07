@@ -66,7 +66,7 @@ const Login = () => {
         // console.log(email);
         if (email) {
             await sendPasswordResetEmail(email);
-            toast.success(`Email has been sent to ${ email }`, { theme: "colored" });
+            toast.success(`Email has been sent to ${email}`, { theme: "colored" });
         } else {
             toast.error("Opps!!! Enter your Email First", { theme: "colored" });
         }

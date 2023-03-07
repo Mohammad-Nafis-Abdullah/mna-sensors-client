@@ -9,13 +9,8 @@ import axios from "axios";
 const ManageAllOrders = () => {
   const [order, setOrder] = useState(null);
   const url = "http://localhost:5000/get/orders";
-  const header = {
-    headers: {
-      authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-    },
-  };
 
-  const { data: orders, refetch } = useFetch(url, header, 'manageOrders');
+  const { data: orders, refetch } = useFetch(url, []);
 
   const handelShift = (id) => {
     axios.put(`http://localhost:5000/shift/order/${id}`, { shift: true },

@@ -9,11 +9,7 @@ import ViewProfile from './ViewProfile'
 const MyProfile = () => {
     const [user] = useAuthState(auth);
 
-    const { data: profile, refetch } = useFetch(`http://localhost:5000/user/${user?.email}`, {
-        headers: {
-            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-    });
+    const { data: profile, refetch } = useFetch(`http://localhost:5000/user/${user?.email}`,{});
 
 
     return (

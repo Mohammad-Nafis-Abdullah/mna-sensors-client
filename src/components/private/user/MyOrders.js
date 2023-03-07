@@ -17,11 +17,7 @@ const MyOrders = () => {
 
 
   const url = `http://localhost:5000/orders?email=${user.email}`;
-  const { data: orders, refetch } = useFetch(url, {
-    headers: {
-      authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-    },
-  }, 'userOrders');
+  const { data: orders, refetch } = useFetch(url,[]);
 
 
   const cancelling = async (id, productId, quantity) => {

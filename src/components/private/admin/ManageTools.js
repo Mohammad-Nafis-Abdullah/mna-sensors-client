@@ -1,20 +1,14 @@
 // import axios from "axios";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-// import { toast } from "react-toastify";
-import useReactQuery from "../../../hooks/useFetch";
+import useFetch from "../../../hooks/useFetch";
 import DeleteConfirmModel from "./DeleteConfirmModal";
 import ManageTool from "./ManageTool";
 
 const ManageTools = () => {
   const [deleteTool, setDeleteTool] = useState(null);
   const url = "http://localhost:5000/sensors";
-  const header = {
-    headers: {
-      authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-    },
-  };
-  const { data: tools, refetch } = useReactQuery(url, header);
+  const { data: tools, refetch } = useFetch(url,[]);
   return (
     <div className="">
       <h2 className="text-left ml-3 text-lg text-white font-bold">

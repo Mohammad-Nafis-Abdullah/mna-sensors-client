@@ -2,30 +2,33 @@
 /* eslint-disable no-unused-vars */
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useQuery } from "react-query";
-import Loading from "../components/public/Loading";
+
 
 const useFetch = (url,initValue=[],callback=()=>0)=> {
     const [data,setData] = useState(initValue);
     const [loading,setLoading] = useState(false);
     const [fetch,setFetch] = useState(false);
+    const [link,setLink] = useState(url);
 
     useEffect(()=> {
-        const fn = async () => {
             setLoading(true);
-            const { data } = await axios.get(url, {
+            axios.get(link, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem("accessToken")}`,
                 },
+            }).then(({data})=> {
+                callback(data);
+                setData(data);
+                setLoading(false);
+            }).finally(()=> {
+                setLoading(false);
             });
-            callback(data);
-            setData(data);
-            setLoading(false);
-        };
-        fn();
     },[fetch])
 
-    return {data, loading, refetch:()=> {
+    return {data, loading, refetch:(URL)=> {
+        if (URL) {
+            setLink(URL)
+        }
         setFetch(false);
     }};
 }
