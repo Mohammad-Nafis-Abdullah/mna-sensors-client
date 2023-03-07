@@ -1,7 +1,7 @@
 import React from "react";
 
 const ManageAllOrder = ({ order, index, handelShift, setOrder }) => {
-  const {_id,name,productName,orderQuantity,transactionId,orderCost,shift,paid} = order;
+  const { _id, name, productName, orderQuantity, transactionId, orderCost, shift, paid } = order;
   // console.log(paid , shift);
   return (
     <tr>
@@ -9,10 +9,10 @@ const ManageAllOrder = ({ order, index, handelShift, setOrder }) => {
       <td>{name}</td>
       <td>{productName.slice(0, 26)}</td>
       <td>{orderQuantity}</td>
-      <td>$ {orderCost}</td>
+      <td>BDT {orderCost}</td>
       <td>
         {" "}
-        {paid?"Paid":"Not Paid"};{" "}
+        {paid ? "Paid" : "Not Paid"};{" "}
         {shift && "Shifted"}
         {paid && !shift && "Pending"}
       </td>

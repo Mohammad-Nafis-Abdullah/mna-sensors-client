@@ -13,7 +13,7 @@ const Purchase = () => {
     const params = useParams();
     const { id: serviceId } = params;
     let selected = [];
-    const { data: select, refetch } = useFetch(`http://localhost:5000/sensor/${serviceId}`,{});
+    const { data: select, refetch } = useFetch(`http://localhost:5000/sensor/${serviceId}`, {});
     if (select) {
         selected = select[0];
     }
@@ -93,7 +93,7 @@ const Purchase = () => {
                         <div className='text-center font-medium space-y-3 grow'>
                             <h5 className='text-gray-800 text-left text-xl'>{selected.name}</h5>
                             <div className="input-container">
-                                <label htmlFor="" className='flex justify-between items-center gap-2 text-sm text-gray-900/70 sm:text-lg'>Price per unit :<input type="number" className="input-field px-0 py-0 basis-1/2 text-center" placeholder={`$ ${selected.unitPrice}`} disabled /></label>
+                                <label htmlFor="" className='flex justify-between items-center gap-2 text-sm text-gray-900/70 sm:text-lg'>Price per unit :<input type="number" className="input-field px-0 py-0 basis-1/2 text-center" placeholder={`BDT ${selected.unitPrice}`} disabled /></label>
                             </div>
                             <div className="input-container">
                                 <label htmlFor="" className='flex justify-between items-center gap-2 text-sm text-gray-900/70 sm:text-lg'>Minimum Order :<input type="number" className="input-field px-0 py-0  basis-1/2 text-center" placeholder={selected.minQuantity} disabled /></label>
@@ -115,7 +115,7 @@ const Purchase = () => {
                                 }
                             </div>
                             <div className="input-container">
-                                <label htmlFor="" className='flex justify-between items-center gap-2 text-sm text-gray-900/70 sm:text-lg'>Total Cost :<input type="number" className="input-field px-0 py-0  basis-1/2 text-center" placeholder={`$ ${quantity ? (quantity * selected.unitPrice).toFixed(2) : (selected.minQuantity * selected.unitPrice).toFixed(2)}`} disabled /></label>
+                                <label htmlFor="" className='flex justify-between items-center gap-2 text-sm text-gray-900/70 sm:text-lg'>Total Cost :<input type="number" className="input-field px-0 py-0  basis-1/2 text-center" placeholder={`BDT ${quantity ? (quantity * selected.unitPrice).toFixed(2) : (selected.minQuantity * selected.unitPrice).toFixed(2)}`} disabled /></label>
                             </div>
                             <div className="input-container">
                                 <label htmlFor="" className='flex justify-between items-center gap-2 text-sm text-gray-900/70 sm:text-lg'>Total Available :<input type="number" className="input-field px-0 py-0  basis-1/2 text-center" placeholder={selected.availableQuantity} disabled /></label>

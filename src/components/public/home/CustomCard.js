@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { imgUrl } from '../../../hooks/useMyStorage';
 
 
 const CustomCard = ({ product }) => {
@@ -9,7 +10,7 @@ const CustomCard = ({ product }) => {
     return (
         <div className="slided-card mx-auto rounded-lg">
             {/* {adminLoading && <Loading/>} */}
-            <img className="h-full w-full object-cover" src={product.img} alt={product.name} />
+            <img className="h-full w-full object-cover" src={imgUrl(product.img)} alt={product.name} />
             <div className="btn-div bg-black/70 flex items-center justify-evenly">
                 <button
                     onClick={() => {
@@ -42,7 +43,7 @@ const CustomCard = ({ product }) => {
             <div className="card-child bg-black/70">
                 <div className="title flex flex-col justify-center items-center">
                     <h2 className="text-xl font-bold text-amber-400">{product.name}</h2>
-                    <p className="font-bold text-white text-sm">Price per Unit : ${product.unitPrice}</p>
+                    <p className="font-bold text-white text-sm">Price per Unit : {product.unitPrice} BDT</p>
                 </div>
                 <div className="body p-3 space-y-3 text-white ">
                     <p className='h-20 text-xs font-medium my-1 overflow-auto shadow'>{product.details}</p>

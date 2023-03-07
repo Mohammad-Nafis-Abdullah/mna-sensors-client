@@ -1,15 +1,21 @@
+/* eslint-disable no-unused-vars */
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import useMyStorage from "../../../hooks/useMyStorage";
+import Loading from "../../public/Loading";
 
 const AddATool = () => {
   const { register, handleSubmit, reset } = useForm();
+  const { uploadImage, deleteImage } = useMyStorage();
+  const [loading, setLoading] = useState(false);
 
 
   const onSubmit = async (data) => {
+    setLoading(true);
     const name = data.name;
-    const img = data.img;
+    const img = data.img?.[0];
     const details = data.details;
     const unitPrice = parseInt(data.unitPrice);
     const minQuantity = parseInt(data.minQuantity);
@@ -17,7 +23,7 @@ const AddATool = () => {
     // data.unitPrice = unitPrice;
     const sensor = {
       name: name,
-      img: img,
+      // img: img,
       details: details,
       unitPrice: unitPrice,
       minQuantity: minQuantity,
@@ -25,27 +31,31 @@ const AddATool = () => {
     };
     console.log(sensor);
 
-    const url = "http://localhost:5000/sensor";
-    axios
-      .post(url, sensor, {
+    try {
+      const { name } = await uploadImage(img);
+      sensor.img = name;
+      const { data } = await axios.post('http://localhost:5000/sensor', sensor, {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
-      })
-      .then((inserted) => {
-        if (inserted.data.insertedId) {
-          toast.success(`${name} is added Successfully`, {
-            theme: "colored",
-          });
-          reset();
-        } else {
-          toast.error("Failed to Add sensor", { theme: "colored" });
-        }
-        // console.log(inserted.data);
       });
+      data.insertedId && toast.success(`Sensor successfully added.`, {
+        theme: "dark",
+      });
+      reset();
+
+    } catch (err) {
+      toast.error("Failed to Add sensor", { theme: "colored" });
+      console.log(err);
+    }
+    setLoading(false);
   };
+
+
+
   return (
     <div className="fadeIn">
+      {loading && <Loading />}
       <div className="flex justify-center">
         <form
           className="form card w-full max-w-md sm:max-w-lg lg:max-w-lg bg-white mx-3 "
@@ -69,9 +79,9 @@ const AddATool = () => {
                 <span className="label-text text-neutral-focus">Image URL</span>
               </label>
               <input
-                className="input input-bordered text-neutral-focus font-semibold"
-                type="text"
-                placeholder="Image URL"
+                type="file"
+                className="border-2 min-w-0"
+                accept=".jpg,.png,.jpeg"
                 {...register("img", { required: true })}
               />
             </div>
@@ -80,7 +90,7 @@ const AddATool = () => {
                 <span className="label-text text-neutral-focus">Details</span>
               </label>
               <textarea
-                className="input input-bordered text-neutral-focus font-semibold h-20"
+                className="input input-bordered text-neutral-focus font-semibold h-40 resize-none overflow-y-auto"
                 placeholder="Details"
                 {...register("details", { required: true })}
               />
@@ -89,7 +99,7 @@ const AddATool = () => {
               <div className="form-control">
                 <label className="label font-semibold">
                   <span className="label-text text-xs text-neutral-focus">
-                    Sensor Price <small>(USD)</small>
+                    Sensor Price <small>(BDT)</small>
                   </span>
                 </label>
                 <input
