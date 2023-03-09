@@ -37,8 +37,9 @@ function App() {
   const [state,dispatch] = useStateReducer();
   const [user] = useAuthState(auth);
   const { pathname } = useLocation();
-
-  const { data:profile, loading, refetch } = useFetch(`http://localhost:5000/user/${user?.email}`,null,(profile)=> {
+  // console.log(user);
+  const { data:profile, loading, refetch } = useFetch(`http://localhost:5000/user/${user?.uid}`,null,(profile)=> {
+    // console.log(user?.uid);
     dispatch({
       type:'user',
       value:profile

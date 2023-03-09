@@ -17,7 +17,7 @@ const Navbar = () => {
     const [state,dispatch] = useContext(StateContext);
     const navigate = useNavigate();
     const [dropDown,setDropDown] = useState(false);
-    console.log(state);
+    // console.log(state);
 
     const img = imgUrl(state?.user?.img) || "https://i.ibb.co/pvmWXsv/male-placeholder-image.jpg";
     

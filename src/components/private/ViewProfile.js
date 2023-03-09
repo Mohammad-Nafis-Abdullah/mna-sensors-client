@@ -12,12 +12,12 @@ import { imgUrl } from "../../hooks/useMyStorage";
 const ViewProfile = () => {
   const [state,dispatch] = useContext(StateContext);
   const img = imgUrl(state?.user?.img) || "https://i.ibb.co/pvmWXsv/male-placeholder-image.jpg";
-  console.log(img);
+  // console.log(state);
 
   return (
     <div className="text-center min-h- h-full w-full max-w-sm rounded-lg relative">
       <FaEdit onClick={()=> {
-          instantModal(<EditProfile state={state} refetch={state.userRefetch}/>);
+          instantModal(<EditProfile/>);
       }} className="text-amber-400 w-8 h-8 absolute top-0 right-0 cursor-pointer"/>
       <h2 className="text-2xl font-bold underline text-white">
         My Profile
