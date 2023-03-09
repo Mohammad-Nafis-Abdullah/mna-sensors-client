@@ -1,30 +1,48 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
+import auth from "../../../firebase.init";
+import useMyStorage from "../../../hooks/useMyStorage";
+import Loading from "../../public/Loading";
 
 
 const DeleteConfirmModel = ({ deleteTool, setDeleteTool, refetch }) => {
-  const { _id, name } = deleteTool;
-  const handleDelete = (id) => {
+  const [user] = useAuthState(auth);
+  const [loading,setLoading] = useState(false);
+  const { deleteImage } = useMyStorage();
+  const { _id, name, img } = deleteTool;
+  // console.log(_id, name, img);
+
+  const handleDelete = async(id) => {
+    setLoading(true);
     const url = `http://localhost:5000/sensor/${id}`;
     const header = {
       headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        uid: user?.uid,
       },
     };
-    axios.delete(url, header).then((data) => {
-      console.log(data);
-      if (data.data.acknowledged) {
-        toast.success(`${name} is Deleted Successfully`, { theme: "dark" });
-        refetch();
-        setDeleteTool(null);
+    try {
+      await deleteImage(img);
+      const {data} = await axios.delete(url, header);
+      if (data.acknowledged) {
+        toast.error(`${name} is Deleted Successfully`, { theme: "dark" });
       } else {
         toast.error(`Can't Delete ${name}`, { theme: "colored" });
       }
-    });
+
+    } catch (err) {
+      toast.error(err, { theme: "colored" });
+    }
+    refetch();
+    setDeleteTool(null);
+    setLoading(false);
   };
+
+
   return (
     <div className="">
+      {loading && <Loading/>}
       <input
         type="checkbox"
         id="delete-confirm-modal"

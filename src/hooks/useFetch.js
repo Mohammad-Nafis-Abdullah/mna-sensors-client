@@ -6,7 +6,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../firebase.init";
 
 
-const useFetch = (url,initValue=[],callback=()=>0)=> {
+const useFetch = (url,initValue=[],callback=()=>{return})=> {
     const [user] = useAuthState(auth);
     const [data,setData] = useState(initValue);
     const [loading,setLoading] = useState(false);
@@ -31,8 +31,8 @@ const useFetch = (url,initValue=[],callback=()=>0)=> {
     return {data, loading, refetch:(URL)=> {
         if (URL) {
             setLink(URL)
-        }
-        setFetch(false);
+        };
+        setFetch(prev=>!prev);
     }};
 }
 

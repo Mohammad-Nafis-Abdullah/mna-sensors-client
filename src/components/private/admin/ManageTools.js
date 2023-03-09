@@ -10,12 +10,12 @@ const ManageTools = () => {
   const url = "http://localhost:5000/sensors";
   const { data: tools, refetch } = useFetch(url,[]);
   return (
-    <div className="">
+    <div className="py-5">
       <h2 className="text-left ml-3 text-lg text-white font-bold">
         Manage Tools : {tools?.length}
       </h2>
       <div className="my-3">
-        <div className="flex flex-wrap justify-center gap-2 items-center">
+        <div className="flex flex-wrap gap-2 justify-center">
           {tools?.map((tool) => (
             <ManageTool
               key={tool._id}
@@ -28,9 +28,9 @@ const ManageTools = () => {
         <div className="flex justify-center">
           <Link
             className="no-underline inline-block bg-white border-none text-neutral-focus font-bold py-2 px-3 mt-4 rounded-md mx-auto w-2/5 text-center "
-            to="/dashboard/addSensor"
+            to="/dashboard/add-sensor"
           >
-            Add New Tool
+            Add New Sensor
           </Link>
         </div>
         {deleteTool && (

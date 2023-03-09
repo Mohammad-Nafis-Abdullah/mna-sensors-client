@@ -56,7 +56,7 @@ function App() {
   return (
     <StateContext.Provider value={[state,dispatch]}>
       {loading && <Loading/>}
-      <div className={``}>
+      <div className={` max-w-[86rem] mx-auto`}>
 
         <Navbar />
 

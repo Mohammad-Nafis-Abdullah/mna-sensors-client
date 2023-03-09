@@ -21,17 +21,17 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="drawer drawer-mobile bg-neutral-focus min-h-[calc(100vh-144px)] max-w-8xl h-auto">
-            <div className="drawer-content lg:ml-64 lg:mr-0 lg:min-w-[calc(100vw-16rem)]">
+        <div className="bg-neutral-focus min-h-[calc(100vh-144px)] h-auto">
+            <div className="lg:pl-[16.5rem] lg:pr-0">
                 <h2 className="font-bold btn-ghost text-white text-2xl text-center inline-flex items-baseline gap-x-1 px-2">
                     dashboard
                     <small className="font-medium text-base">{showPath()}</small>
                 </h2>
-                <div className="overflow-auto h-auto">
+                <div className="h-auto lg:w-[calc(100%-1rem)]">
                     <Outlet />
                 </div>
 
-                <BsFillArrowRightSquareFill onClick={()=>setOpen(prev=>!prev)} className={`lg:hidden text-amber-400 w-10 h-10 fixed top-32 cursor-pointer ${open?'left-64 rotate-180':'left-0'} transition-all duration-300`}/>
+                <BsFillArrowRightSquareFill onClick={()=>setOpen(prev=>!prev)} className={`lg:hidden text-amber-400 w-10 h-10 fixed top-32 cursor-pointer ${open?'left-64 rotate-180':'left-0'} transition-all duration-300 bg-black rounded-lg`}/>
             </div>
 
             <div className="">

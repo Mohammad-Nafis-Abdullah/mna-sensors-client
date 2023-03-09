@@ -1,12 +1,15 @@
 /* eslint-disable no-unused-vars */
 import axios from "axios";
 import React, { useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import auth from "../../../firebase.init";
 import useMyStorage from "../../../hooks/useMyStorage";
 import Loading from "../../public/Loading";
 
 const AddATool = () => {
+  const [user] = useAuthState(auth);
   const { register, handleSubmit, reset } = useForm();
   const { uploadImage, deleteImage } = useMyStorage();
   const [loading, setLoading] = useState(false);
@@ -21,22 +24,26 @@ const AddATool = () => {
     const minQuantity = parseInt(data.minQuantity);
     const availableQuantity = parseInt(data.availableQuantity);
     // data.unitPrice = unitPrice;
+    if (unitPrice<=0 || minQuantity<=0 || availableQuantity<=0) {
+      toast.error('Negative value of number input is not accepted',{theme:'colored'});
+      setLoading(false);
+      return;
+    }
     const sensor = {
       name: name,
-      // img: img,
       details: details,
       unitPrice: unitPrice,
       minQuantity: minQuantity,
       availableQuantity: availableQuantity,
     };
-    console.log(sensor);
+    // console.log(sensor);
 
     try {
       const { name } = await uploadImage(img);
       sensor.img = name;
       const { data } = await axios.post('http://localhost:5000/sensor', sensor, {
         headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          uid: user?.uid,
         },
       });
       data.insertedId && toast.success(`Sensor successfully added.`, {
@@ -106,6 +113,9 @@ const AddATool = () => {
                   className="input input-bordered text-neutral-focus font-semibold"
                   placeholder="Sensor Price"
                   type="number"
+                  onWheel={function (e) {
+                    e.target.blur();
+                  }}
                   {...register("unitPrice", { required: true })}
                 />
               </div>
@@ -119,6 +129,9 @@ const AddATool = () => {
                   className="input input-bordered text-neutral-focus font-semibold"
                   placeholder="Minimum Quantity"
                   type="number"
+                  onWheel={function (e) {
+                    e.target.blur();
+                  }}
                   {...register("minQuantity", { required: true })}
                 />
               </div>
@@ -132,6 +145,9 @@ const AddATool = () => {
                   className="input input-bordered text-neutral-focus font-semibold"
                   placeholder="Available Quantity"
                   type="number"
+                  onWheel={function (e) {
+                    e.target.blur();
+                  }}
                   {...register("availableQuantity", { required: true })}
                 />
               </div>

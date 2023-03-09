@@ -58,7 +58,7 @@ const useMyStorage = () => {
                 await deleteObject(deleteRef);
                 resolve({deleted:true});
             } catch (err) {
-                resolve({deleted:false});
+                reject('Image not deleted');
             }
         });
     }
