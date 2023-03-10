@@ -13,11 +13,7 @@ const Purchase = () => {
     // console.log(user);
     const params = useParams();
     const { id: serviceId } = params;
-    let selected = [];
-    const { data: select, refetch } = useFetch(`http://localhost:5000/sensor/${serviceId}`, {});
-    if (select) {
-        selected = select[0];
-    }
+    const { data: selected, refetch } = useFetch(`http://localhost:5000/sensor/${serviceId}`, {});
 
 
     const ordering = async (e) => {

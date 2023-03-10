@@ -14,13 +14,13 @@ const CustomCard = ({ product }) => {
             <div className="btn-div bg-black/70 flex items-center justify-evenly">
                 <button
                     onClick={() => {
-                        navigate(`/purchase/${product._id}`)
+                        navigate(`/purchase/${product._id}`);
                     }}
                     className="btn btn-sm font-bold border border-highlight bg-amber-400 text-[#161b1d] hover:bg-amber-400 hover:text-[#161b1d]">
                     Book Now
                 </button>
                 <button className="btn btn-ghost btn-sm font-bold border border-highlight text-amber-400 underline decoration-2 underline-offset-4" onClick={() => {
-                    
+                    navigate(`/sensor/${product._id}`);
                 }}>
                     Detials
                 </button>

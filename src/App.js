@@ -26,6 +26,7 @@ import Modal from "./utilities/Modal";
 import useStateReducer from "./hooks/useStateReducer";
 import useFetch from "./hooks/useFetch";
 import Loading from "./components/public/Loading";
+import SensorDetails from "./components/public/SensorDetails";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "./firebase.init";
 import Navbar from "./components/public/Navbar";
@@ -65,6 +66,7 @@ function App() {
             <Route path="/home" element={<Navigate to={"/"} />} />
             <Route path="/" element={<Home />} />
             <Route path="/purchase/:id" element={<Private> <Purchase /> </Private>} />
+            <Route path="/sensor/:id" element={<SensorDetails/>} />
 
             <Route path="/dashboard" element={<Private> <Dashboard /> </Private>} >
 
