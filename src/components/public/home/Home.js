@@ -18,7 +18,7 @@ const Home = () => {
             <h2 className='font-semibold text-3xl mb-3 mt-5 text-center'>Sensors</h2>
             <div className='flex flex-wrap justify-center gap-5 mb-16 max-w-5xl mx-auto'>
                 {
-                    tools?.map((tool) => <CustomCard key={tool._id} product={tool} />)
+                    tools?.map((tool) => <CustomCard key={tool._id} product={tool} refetch={refetch} />)
                 }
             </div>
             <Summary />

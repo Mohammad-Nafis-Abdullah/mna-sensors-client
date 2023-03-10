@@ -7,8 +7,7 @@ import ViewProfile from './ViewProfile'
 
 const MyProfile = () => {
     const [user] = useAuthState(auth);
-
-    const { data: profile, refetch } = useFetch(`http://localhost:5000/user/${user?.email}`,{});
+    const { data: profile, refetch } = useFetch(`http://localhost:5000/user/${user?.uid}`,{});
 
 
     return (

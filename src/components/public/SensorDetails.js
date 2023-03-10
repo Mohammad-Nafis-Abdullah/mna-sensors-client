@@ -14,7 +14,7 @@ const SensorDetails = () => {
         <div className='h-full min-h-[calc(100vh-144px)] flex justify-center items-center'>
             {loading && <Loading />}
             <section className='flex flex-wrap justify-center items-center gap-x-10 gap-y-5 p-3'>
-                <img src={imgUrl(sensor?.img)} alt="" className='h-auto w-full basis-80 shrink'/>
+                <img src={imgUrl(sensor?.img)} alt="" className='h-auto max-w-sm basis-80 shrink'/>
 
                 <article className='p-1 space-y-5 basis-[32rem] shrink'>
                     <h3 className='text-xl font-bold text-gray-900 text-center lg:text-left'>{sensor?.name}</h3>

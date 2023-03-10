@@ -1,43 +1,57 @@
 /* eslint-disable no-unused-vars */
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
+import { StateContext } from '../../../App';
+import auth from '../../../firebase.init';
+import useFetch from '../../../hooks/useFetch';
 import { imgUrl } from '../../../hooks/useMyStorage';
+import { instantModal } from '../../../utilities/Modal';
+import ConfigureModal from '../adminComponent/ConfigureModal';
+import Loading from '../Loading';
 
 
-const CustomCard = ({ product }) => {
+const CustomCard = ({ product,refetch }) => {
+    const [state,dispatch] = useContext(StateContext);
     const navigate = useNavigate();
+    const childRef = useRef();
+    const [user] = useAuthState(auth);
+    const { data: { role },loading } = useFetch(`http://localhost:5000/user/${user?.uid}`, {});
+    // console.log(role);
 
     return (
         <div className="slided-card mx-auto rounded-lg">
-            {/* {adminLoading && <Loading/>} */}
+            {loading && <Loading/>}
             <img className="h-full w-full object-cover" src={imgUrl(product.img)} alt={product.name} />
             <div className="btn-div bg-black/70 flex items-center justify-evenly">
-                <button
-                    onClick={() => {
-                        navigate(`/purchase/${product._id}`);
-                    }}
-                    className="btn btn-sm font-bold border border-highlight bg-amber-400 text-[#161b1d] hover:bg-amber-400 hover:text-[#161b1d]">
-                    Book Now
-                </button>
+                {
+                    role === 'admin' ?
+                        <button
+                            onClick={() => {
+                                dispatch({
+                                    type:'configSensor',
+                                    value:product,
+                                });
+                                instantModal(<ConfigureModal ref={childRef} refetch={refetch}/>);
+                                childRef?.current?.gotoTop();
+                            }}
+                            className="btn btn-sm font-bold border border-highlight bg-green-400 text-gray-900 hover:bg-green-400 hover:text-gray-900">
+                            Configure
+                        </button>
+                        :
+                        <button
+                            onClick={() => {
+                                navigate(`/purchase/${product._id}`);
+                            }}
+                            className="btn btn-sm font-bold border border-highlight bg-amber-400 text-[#161b1d] hover:bg-amber-400 hover:text-[#161b1d]">
+                            Book Now
+                        </button>
+                }
                 <button className="btn btn-ghost btn-sm font-bold border border-highlight text-amber-400 underline decoration-2 underline-offset-4" onClick={() => {
                     navigate(`/sensor/${product._id}`);
                 }}>
                     Detials
                 </button>
-                {/* {
-                    admin ?
-                        <button className={'btn btn-error flex justify-center items-center'} onClick={() => {
-                        }}>
-                            Configure
-                        </button> :
-                        <button
-                            onClick={() => {
-                            }}
-                            className="btn btn-wide font-bold border border-highlight bg-[#161b1d] text-highlight hover:bg-highlight hover:text-[#161b1d]"
-                        >
-                            Book Now
-                        </button>
-                } */}
             </div>
 
             <div className="card-child bg-black/70">
