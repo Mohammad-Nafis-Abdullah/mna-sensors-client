@@ -56,7 +56,8 @@ const ViewProfile = () => {
             <label className="input-group input-group-md">
               <span className="text-gray-800 font-bold max-w-[5rem] w-full">Linkedin</span>
               <input type="text" placeholder="Type here" value={state?.user?.linkedIn} className="input input-bordered input-md bg-transparent border-2 border-white whitespace-pre-wrap min-w-0 max-w-none w-full underline cursor-pointer font-bold text-amber-400" onClick={() => {
-              window.open(`https://${state?.user?.linkedIn}`);
+                state?.user?.linkedIn &&
+                window.open(`https://${state?.user?.linkedIn}`);
             }} readOnly/>
             </label>
           </div>

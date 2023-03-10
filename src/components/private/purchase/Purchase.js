@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../../firebase.init';
 import useFetch from '../../../hooks/useFetch';
+import { imgUrl } from '../../../hooks/useMyStorage';
 
 const Purchase = () => {
     const [user] = useAuthState(auth);
@@ -89,7 +90,7 @@ const Purchase = () => {
                 {
                     selected &&
                     <div className='max-w-sm w-full flex flex-col justify-center items-center p-3 my-shadow rounded-xl  bg-white'>
-                        <img className='h-[6.8rem] w-36 object-cover rounded-md' src={selected.img} alt="" />
+                        <img className='h-[6.8rem] w-36 object-cover rounded-md' src={imgUrl(selected.img)} alt="" />
                         <div className='text-center font-medium space-y-3 grow'>
                             <h5 className='text-gray-800 text-left text-xl'>{selected.name}</h5>
                             <div className="input-container">

@@ -1,63 +1,81 @@
-import React, { useEffect, useRef } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
-    useSignInWithEmailAndPassword,
     useSendPasswordResetEmail,
+    useAuthState,
 } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import { useForm } from "react-hook-form";
 import Loading from "../public/Loading";
 import SocialLogin from "./SocialLogin";
-import useToken from "../../hooks/useToken";
 import trimError from "../../hooks/trimError";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import axios from "axios";
 
 
 
 const Login = () => {
+    const [currentUser] = useAuthState(auth);
     const emailRef = useRef("");
     const navigate = useNavigate();
     const location = useLocation();
+    const [loading,setLoading] = useState(false);
     let from = location?.state?.from?.pathname || "/home";
     const {
         register,
         formState: { errors },
         handleSubmit,
+        reset,
     } = useForm();
 
-    //Sign In with Email and Password
-    const [signInWithEmailAndPassword, user, loading, error] =
-        useSignInWithEmailAndPassword(auth);
+    // //Sign In with Email and Password
+    // const [signInWithEmailAndPassword, user, loading, error] =
+    //     useSignInWithEmailAndPassword(auth);
 
     // Password Reset
     const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
 
-    const [token] = useToken(user);
     useEffect(() => {
-        if (token) {
+        if (currentUser) {
             navigate(from, { replace: true });
         }
-    }, [token, navigate, from]);
+    }, [currentUser]);
 
     if (loading || sending) {
         return <Loading />;
     }
 
-    let signInError;
+    /* let signInError;
     if (error) {
         signInError = (
             <p className="text-[red]">
                 <span>{trimError(error)}</span>
             </p>
         );
-    }
+    } */
 
     // Login Form Submit Function
-    const onSubmit = (data) => {
+    const onSubmit = async(data) => {
+        setLoading(true);
         // console.log(data);
         const email = data.email;
         const password = data.password;
-        signInWithEmailAndPassword(email, password);
+        // signInWithEmailAndPassword(email, password);
+        try {
+            const {user} = await signInWithEmailAndPassword(auth,email,password);
+            const newUser = {
+                uid: user?.uid,
+                email: user?.email,
+                name: user?.displayName,
+            }
+            await axios.put(`http://localhost:5000/user/${user.uid}`, newUser);
+        } catch (err) {
+            toast.error(trimError(err),{theme:'colored'});
+        }
+        reset();
+        setLoading(false);
     };
 
     // Password Reset Function
@@ -142,7 +160,6 @@ const Login = () => {
                                 )}
                             </label>
                         </div>
-                        {signInError}
                         <div className="form-control mt-6">
                             <input type="submit" className="btn" value="Login" />
                         </div>
@@ -156,7 +173,7 @@ const Login = () => {
                         </label>
                     </form>
                     <p className="text-sm text-center">
-                        New to Doctors Portal?
+                        New to the Web site?
                         <Link className="text-primary ml-2" to="/signup">
                             Create New Account
                         </Link>

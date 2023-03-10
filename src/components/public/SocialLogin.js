@@ -1,12 +1,15 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import axios from "axios";
 import React, { useEffect } from "react";
-import { useSignInWithGoogle } from "react-firebase-hooks/auth";
+import { useAuthState, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 import trimError from "../../hooks/trimError";
-import useToken from "../../hooks/useToken";
 import Loading from "../public/Loading";
 
 const SocialLogin = () => {
+    const [currentUser] = useAuthState(auth);
     const navigate = useNavigate();
     const location = useLocation();
     let from = location.state?.from?.pathname || "/";
@@ -15,29 +18,35 @@ const SocialLogin = () => {
     const [signInWithGoogle, googleUser, googleLoading, googleError] =
         useSignInWithGoogle(auth);
 
-    const [token] = useToken(googleUser);
-
     useEffect(() => {
-        if (token) {
+        if (currentUser) {
             navigate(from, { replace: true });
         }
-    }, [token, navigate, from]);
+    }, [currentUser]);
 
     if (googleLoading) {
         return <Loading />;
     }
 
-    let signInError;
+    const sendUserToDb = async ()=> {
+        const newUser = {
+            uid:googleUser?.user?.uid,
+            email: googleUser?.user?.email,
+            name: googleUser?.user?.displayName,
+        }
+        await axios.put(`http://localhost:5000/user/${googleUser?.user?.uid}`, newUser);
+        toast.success(`Welcome to the web site`,{theme:'colored'});
+    }
+
+    if (googleUser && !googleLoading) {
+        sendUserToDb();
+    }
+
     if (googleError) {
-        signInError = (
-            <p className="text-[red] mb-4">
-                <span className="text-sm">{trimError(googleError)}</span>
-            </p>
-        );
+        toast.error(trimError(googleError),{theme:'colored'});
     }
     return (
         <div>
-            {signInError}
             <button
                 onClick={() => signInWithGoogle()}
                 className="btn btn-outline w-full"

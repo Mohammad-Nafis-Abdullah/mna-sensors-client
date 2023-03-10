@@ -12,7 +12,7 @@ const MyProfile = () => {
 
 
     return (
-        <div className='flex justify-center my-5 gap-5 flex-wrap'>
+        <div className='flex justify-center py-5 gap-5 flex-wrap'>
             <ViewProfile key={profile?._id} profile={profile} refetch={refetch}/>
         </div>
     );

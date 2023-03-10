@@ -15,14 +15,14 @@ const EditProfile = () => {
     const [state,dispatch] = useContext(StateContext);
     const [user] = useAuthState(auth);
     const [image,setImage] = useState(undefined);
-    const [num,setNum] = useState();
     const {uploadImage,deleteImage} = useMyStorage();
     const [loading,setLoading] = useState(false);
 
     const profileUpdating = async (e) => {
         setLoading(true);
         e.preventDefault();
-        if (num && !num?.match(/^(?:\+88|88)?(01[3-9]\d{8})$/)) {
+        const phoneInput = e.target.phone.value;
+        if (phoneInput && !phoneInput?.match(/^(?:\+88|88)?(01[3-9]\d{8})$/)) {
             toast.error('Phone number is not valid',{theme:'colored'});
             setLoading(false);
             return;
@@ -30,7 +30,7 @@ const EditProfile = () => {
 
         const name = user.displayName;
         const email = user.email;
-        const phone = num || state.user.phone;
+        const phone = phoneInput || state.user.phone;
         const address = e.target.address.value || state.user.address;
         const linkedIn = e.target.linkedIn.value || state.user.linkedIn;
 
@@ -90,12 +90,7 @@ const EditProfile = () => {
                 <label className="input-label">Profile photo</label>
             </div>
             <div className="input-container">
-                <input type="text" onChange={(e)=> {
-                    if (e.nativeEvent.data>=0 && e.nativeEvent.data<=9) {
-                        setNum(e.target.value);
-                    }
-                    return;
-                }} name="phone" value={num} className="input-field placeholder:text-gray-500" placeholder={state.user.phone} />
+                <input type="number" name="phone" className="input-field placeholder:text-gray-500 num" placeholder={state.user.phone} />
                 <label className="input-label">Phone number</label>
             </div>
             <div className="input-container">
