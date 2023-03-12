@@ -16,7 +16,6 @@ const DeleteConfirmModel = ({ deleteTool, setDeleteTool, refetch }) => {
 
   const handleDelete = async(id) => {
     setLoading(true);
-    const url = `http://localhost:5000/sensor/${id}`;
     const header = {
       headers: {
         uid: user?.uid,
@@ -24,7 +23,7 @@ const DeleteConfirmModel = ({ deleteTool, setDeleteTool, refetch }) => {
     };
     try {
       await deleteImage(img);
-      const {data} = await axios.delete(url, header);
+      const {data} = await axios.delete(`http://localhost:5000/sensor/${id}`, header);
       if (data.acknowledged) {
         toast.error(`${name} is Deleted Successfully`, { theme: "dark" });
       } else {

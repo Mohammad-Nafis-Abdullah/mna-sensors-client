@@ -88,6 +88,31 @@ const ConfigureModal = forwardRef(({refetch},ref) => {
         setLoading(false);
     }
 
+    const handleDelete = async (id) => {
+        setLoading(true);
+        const header = {
+            headers: {
+                uid: user?.uid,
+            },
+        };
+        try {
+            await deleteImage(img);
+            const { data } = await axios.delete(`http://localhost:5000/sensor/${id}`, header);
+            
+            if (data.acknowledged) {
+                toast.error(`${name} is Deleted Successfully`, { theme: "dark" });
+            } else {
+                toast.error(`Can't Delete ${name}`, { theme: "colored" });
+            }
+
+        } catch (err) {
+            toast.error(err, { theme: "colored" });
+        }
+        closeModal();
+        refetch();
+        setLoading(false);
+    };
+
     return (
         <div className='max-w-sm h-[95%] bg-white mx-auto rounded-lg overflow-y-auto px-3 py-5 relative'>
             <div ref={topRef} className='w-full absolute top-0'/>
@@ -131,7 +156,10 @@ const ConfigureModal = forwardRef(({refetch},ref) => {
                     <input onChange={(e)=>setMinOrderField(e.target.value)} id="orderQuantity" type="number" className='border-2 border-gray-900/50 rounded-md py-1 px-2 w-full text-lg text-gray-600 font-bold min-w-0 num' value={minOrderField} />
                 </label>
 
-                <input type="submit" value='Update' className='border-2 border-gray-900 w-full mt-5 py-2 rounded-lg bg-amber-400 text-gray-900 font-bold cursor-pointer active:scale-95' />
+                <div className='flex gap-x-2'>
+                <input type="submit" value='Update' className='border-2 w-full mt-5 py-2 rounded-lg bg-green-600 text-white font-bold cursor-pointer active:scale-95' />
+                <input onClick={()=>handleDelete(_id)} type="button" value='Delete' className='border-2 w-full mt-5 py-2 rounded-lg bg-red-500 text-white font-bold cursor-pointer active:scale-95' />
+                </div>
             </form>
 
         </div>

@@ -86,14 +86,14 @@ const Dashboard = () => {
                                     Add A Sensor
                                 </NavLink>
                             </li>
-                            <li>
+                            {/* <li>
                                 <NavLink
                                     className={navStyling}
                                     to="/dashboard/manage-sensors"
                                 >
                                     Manage Sensors
                                 </NavLink>
-                            </li>
+                            </li> */}
                             <li>
                                 <NavLink
                                     className={navStyling}

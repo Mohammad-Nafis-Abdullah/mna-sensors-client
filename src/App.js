@@ -78,7 +78,7 @@ function App() {
 
               <Route path="make-admin" element={<RequireAdmin> <MakeAdmin /> </RequireAdmin>} />
               <Route path="add-sensor" element={<RequireAdmin> <AddATool /> </RequireAdmin>} />
-              <Route path="manage-sensors" element={<RequireAdmin> <ManageTools /> </RequireAdmin>} />
+              {/* <Route path="manage-sensors" element={<RequireAdmin> <ManageTools /> </RequireAdmin>} /> */}
               <Route path="manage-all-orders" element={<RequireAdmin> <ManageAllOrders /> </RequireAdmin>} />
 
             </Route>
