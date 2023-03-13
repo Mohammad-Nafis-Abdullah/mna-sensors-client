@@ -78,11 +78,11 @@ const EditProfile = () => {
             {loading && <Loading/>}
             <h2 className='mb-5 mt-12 text-2xl font-medium underline'>My Profile</h2>
             <div className="input-container">
-                <input type="text" name="name" className="input-field" placeholder={user.displayName} required="" disabled />
+                <input type="text" name="name" className="input-field" placeholder={user?.displayName} required="" disabled />
                 <label className="input-label">Name</label>
             </div>
             <div className="input-container">
-                <input type="email" name="email" className="input-field" placeholder={user.email} required="" disabled />
+                <input type="email" name="email" className="input-field" placeholder={user?.email} required="" disabled />
                 <label className="input-label">Email address</label>
             </div>
             <div className='input-container'>

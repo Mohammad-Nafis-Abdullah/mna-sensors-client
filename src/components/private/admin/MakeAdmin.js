@@ -17,11 +17,11 @@ const MakeAdmin = () => {
         <table className="table w-full">
           {/* <!-- head --> */}
           <thead>
-            <tr>
+            <tr className="text-center">
               <th>Sl No.</th>
               <th>Email</th>
               <th>Make Admin</th>
-              <th>Remove User</th>
+              {/* <th>Remove User</th> */}
             </tr>
           </thead>
           <tbody>

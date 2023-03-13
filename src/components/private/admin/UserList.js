@@ -1,15 +1,24 @@
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
+import auth from "../../../firebase.init";
+import { FaCheck } from 'react-icons/fa';
+
 
 const UserList = ({ user, index, refetch }) => {
-  const { email, role } = user;
+  const [currentUser] = useAuthState(auth);
+  const { uid, email, role } = user;
 
   const makeAdmin = () => {
-    const url = `http://localhost:5000/user/${email}`;
+    const confirmation = window.confirm(`Are you sure to make ${email} as an admin ?`);
+    if (!confirmation) {
+      return;
+    }
+    const url = `http://localhost:5000/user/${uid}`;
     fetch(url, {
       method: "PATCH",
       headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        uid:currentUser?.uid,
       },
     })
       .then((res) => {
@@ -27,20 +36,23 @@ const UserList = ({ user, index, refetch }) => {
         }
       });
   };
+
+
   return (
-    <tr>
-      <th>{index + 1}</th>
-      <td>{email}</td>
-      <td>
-        {role !== "admin" && (
+    <tr className="text-center">
+      <th className={`${currentUser?.uid === uid && 'bg-green-500'}`}>{index + 1}</th>
+      <td className={`${currentUser?.uid === uid && 'bg-green-500'}`}>{email}</td>
+      <td className={`${currentUser?.uid === uid && 'bg-green-500'}`}>
+        {role !== "admin"? 
           <button onClick={makeAdmin} className="btn btn-xs text-white">
             Make Admin
-          </button>
-        )}
+          </button>:
+          <FaCheck className="w-5 h-5 mx-auto"/>
+        }
       </td>
-      <td>
-        <button className="btn btn-error btn-xs text-white">Remove User</button>
-      </td>
+      {/* <td className={`${currentUser?.uid === uid && 'bg-green-500'}`}>
+        <button className={`btn btn-error btn-xs text-white`} disabled={currentUser?.uid === uid}>Remove User</button>
+      </td> */}
     </tr>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
+import Loading from "../public/Loading";
 import auth from "../../firebase.init";
 import useAdmin from "../../hooks/useAdmin";
 import { BsFillArrowRightSquareFill } from 'react-icons/bs';
@@ -8,7 +9,7 @@ import { BsFillArrowRightSquareFill } from 'react-icons/bs';
 
 const Dashboard = () => {
     const [user] = useAuthState(auth);
-    const [admin] = useAdmin(user);
+    const [admin,loading] = useAdmin(user);
     const {pathname} = useLocation();
     const [open,setOpen] = useState(false);
 
@@ -22,6 +23,7 @@ const Dashboard = () => {
 
     return (
         <div className="bg-neutral-focus min-h-[calc(100vh-144px)] h-auto">
+            {loading && <Loading/>}
             <div className="lg:pl-[16.5rem] lg:pr-0">
                 <h2 className="font-bold btn-ghost text-white text-2xl text-center inline-flex items-baseline gap-x-1 px-2">
                     dashboard
