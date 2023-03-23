@@ -14,11 +14,11 @@ const UserList = ({ user, index, refetch }) => {
     if (!confirmation) {
       return;
     }
-    const url = `http://localhost:5000/user/${uid}`;
+    const url = `https://mna-sensors-server.onrender.com/user/${uid}`;
     fetch(url, {
       method: "PATCH",
       headers: {
-        uid:currentUser?.uid,
+        uid: currentUser?.uid,
       },
     })
       .then((res) => {
@@ -43,11 +43,11 @@ const UserList = ({ user, index, refetch }) => {
       <th className={`${currentUser?.uid === uid && 'bg-green-500'}`}>{index + 1}</th>
       <td className={`${currentUser?.uid === uid && 'bg-green-500'}`}>{email}</td>
       <td className={`${currentUser?.uid === uid && 'bg-green-500'}`}>
-        {role !== "admin"? 
+        {role !== "admin" ?
           <button onClick={makeAdmin} className="btn btn-xs text-white">
             Make Admin
-          </button>:
-          <FaCheck className="w-5 h-5 mx-auto"/>
+          </button> :
+          <FaCheck className="w-5 h-5 mx-auto" />
         }
       </td>
       {/* <td className={`${currentUser?.uid === uid && 'bg-green-500'}`}>

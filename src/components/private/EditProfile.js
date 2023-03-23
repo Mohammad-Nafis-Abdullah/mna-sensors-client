@@ -12,18 +12,18 @@ import { StateContext } from '../../App';
 import Loading from '../public/Loading';
 
 const EditProfile = () => {
-    const [state,dispatch] = useContext(StateContext);
+    const [state, dispatch] = useContext(StateContext);
     const [user] = useAuthState(auth);
-    const [image,setImage] = useState(undefined);
-    const {uploadImage,deleteImage} = useMyStorage();
-    const [loading,setLoading] = useState(false);
+    const [image, setImage] = useState(undefined);
+    const { uploadImage, deleteImage } = useMyStorage();
+    const [loading, setLoading] = useState(false);
 
     const profileUpdating = async (e) => {
         setLoading(true);
         e.preventDefault();
         const phoneInput = e.target.phone.value;
         if (phoneInput && !phoneInput?.match(/^(?:\+88|88)?(01[3-9]\d{8})$/)) {
-            toast.error('Phone number is not valid',{theme:'colored'});
+            toast.error('Phone number is not valid', { theme: 'colored' });
             setLoading(false);
             return;
         }
@@ -35,32 +35,32 @@ const EditProfile = () => {
         const linkedIn = e.target.linkedIn.value || state.user.linkedIn;
 
         const profile = { name, email, phone, address, linkedIn };
-        
+
         if (!image) {
             // console.log('image not exist');
             profile.img = state?.user?.img || '';
-        }else{
+        } else {
             // console.log('image exist');
             try {
                 await deleteImage(state?.user?.img)
-                const {name} = await uploadImage(image);
+                const { name } = await uploadImage(image);
                 profile.img = name;
             } catch (err) {
-                toast.error(trimError(err),{theme:'colored'})
+                toast.error(trimError(err), { theme: 'colored' })
             }
         }
 
-        
+
         try {
-            const {data} = await axios.put(`http://localhost:5000/user/${user?.uid}`, profile)
+            const { data } = await axios.put(`https://mna-sensors-server.onrender.com/user/${user?.uid}`, profile)
             dispatch({
-                type:'user',
-                value:profile
+                type: 'user',
+                value: profile
             });
             data && toast.success('Information Updated', { theme: 'colored' })
             closeModal();
         } catch (err) {
-            toast.error(trimError(err),{theme:'colored'})
+            toast.error(trimError(err), { theme: 'colored' })
         }
 
         setLoading(false);
@@ -75,7 +75,7 @@ const EditProfile = () => {
 
     return (
         <form onSubmit={profileUpdating} className=' max-w-sm w-full flex flex-col justify-center items-center p-3 rounded-xl gap-0 bg-white mx-auto overflow-y-auto h-full'>
-            {loading && <Loading/>}
+            {loading && <Loading />}
             <h2 className='mb-5 mt-12 text-2xl font-medium underline'>My Profile</h2>
             <div className="input-container">
                 <input type="text" name="name" className="input-field" placeholder={user?.displayName} required="" disabled />
@@ -86,7 +86,7 @@ const EditProfile = () => {
                 <label className="input-label">Email address</label>
             </div>
             <div className='input-container'>
-                <input onChange={(e)=>setImage(e.target.files ? e.target.files[0] : undefined)} type="file" className="input-field" accept='.png, .jpg, .jpeg'/>
+                <input onChange={(e) => setImage(e.target.files ? e.target.files[0] : undefined)} type="file" className="input-field" accept='.png, .jpg, .jpeg' />
                 <label className="input-label">Profile photo</label>
             </div>
             <div className="input-container">

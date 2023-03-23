@@ -12,13 +12,13 @@ const stripePromise = loadStripe(
 );
 const Payment = () => {
   const { id } = useParams();
-  const url = `http://localhost:5000/order/${id}`;
+  const url = `https://mna-sensors-server.onrender.com/order/${id}`;
 
-  const {data:order,loading,refetch} = useFetch(url,{})
+  const { data: order, loading, refetch } = useFetch(url, {})
 
   return (
     <div>
-      {loading && <Loading/>}
+      {loading && <Loading />}
       <h2 className="text-xl text-white font-bold text-left ml-3">
         Payment for {order?.productName}
       </h2>

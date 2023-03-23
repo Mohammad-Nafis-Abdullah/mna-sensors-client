@@ -21,7 +21,7 @@ const Login = () => {
     const emailRef = useRef("");
     const navigate = useNavigate();
     const location = useLocation();
-    const [loading,setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
     let from = location?.state?.from?.pathname || "/home";
     const {
         register,
@@ -57,22 +57,22 @@ const Login = () => {
     } */
 
     // Login Form Submit Function
-    const onSubmit = async(data) => {
+    const onSubmit = async (data) => {
         setLoading(true);
         // console.log(data);
         const email = data.email;
         const password = data.password;
         // signInWithEmailAndPassword(email, password);
         try {
-            const {user} = await signInWithEmailAndPassword(auth,email,password);
+            const { user } = await signInWithEmailAndPassword(auth, email, password);
             const newUser = {
                 uid: user?.uid,
                 email: user?.email,
                 name: user?.displayName,
             }
-            await axios.put(`http://localhost:5000/user/${user.uid}`, newUser);
+            await axios.put(`https://mna-sensors-server.onrender.com/user/${user.uid}`, newUser);
         } catch (err) {
-            toast.error(trimError(err),{theme:'colored'});
+            toast.error(trimError(err), { theme: 'colored' });
         }
         reset();
         setLoading(false);

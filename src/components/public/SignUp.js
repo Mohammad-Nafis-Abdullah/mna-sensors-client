@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
-import { useAuthState} from "react-firebase-hooks/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
@@ -16,9 +16,9 @@ const Signup = () => {
     const [user] = useAuthState(auth);
     const navigate = useNavigate();
     const location = useLocation();
-    const [loading,setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
     let from = location.state?.from?.pathname || "/";
-    const {register,formState: { errors },handleSubmit} = useForm();
+    const { register, formState: { errors }, handleSubmit } = useForm();
 
 
     // sing up function
@@ -34,22 +34,22 @@ const Signup = () => {
         // check password with repeatPassword
         if (password === repeatPassword) {
             try {
-                const {user} = await createUserWithEmailAndPassword(auth,email,password);
-                await updateProfile(auth.currentUser,{displayName:name});
+                const { user } = await createUserWithEmailAndPassword(auth, email, password);
+                await updateProfile(auth.currentUser, { displayName: name });
                 const currentUser = {
-                    uid:user.uid,
-                    name:name,
-                    email:user.email,
-                    phone:'',
-                    address:'',
-                    linkedIn:''
+                    uid: user.uid,
+                    name: name,
+                    email: user.email,
+                    phone: '',
+                    address: '',
+                    linkedIn: ''
                 }
-                await axios.put(`http://localhost:5000/user/${user.uid}`, currentUser);
+                await axios.put(`https://mna-sensors-server.onrender.com/user/${user.uid}`, currentUser);
                 console.log(currentUser);
                 navigate(from, { replace: true });
                 setLoading(false);
             } catch (err) {
-                toast.error(trimError(err),{theme:'colored'});
+                toast.error(trimError(err), { theme: 'colored' });
             }
         } else {
             setLoading(false);
@@ -65,7 +65,7 @@ const Signup = () => {
 
     return (
         <div className="fadeIn min-h-screen flex justify-center items-center py-5">
-            {loading &&  <Loading/>}
+            {loading && <Loading />}
             <div className="card w-96 bg-white border-2 shadow-md">
                 <div className="card-body">
                     <h2 className="text-center text-xl font-bold">Sign Up</h2>

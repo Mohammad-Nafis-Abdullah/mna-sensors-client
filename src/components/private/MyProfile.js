@@ -7,12 +7,12 @@ import ViewProfile from './ViewProfile'
 
 const MyProfile = () => {
     const [user] = useAuthState(auth);
-    const { data: profile, refetch } = useFetch(`http://localhost:5000/user/${user?.uid}`,{});
+    const { data: profile, refetch } = useFetch(`https://mna-sensors-server.onrender.com/user/${user?.uid}`, {});
 
 
     return (
         <div className='flex justify-center py-5 gap-5 flex-wrap'>
-            <ViewProfile key={profile?._id} profile={profile} refetch={refetch}/>
+            <ViewProfile key={profile?._id} profile={profile} refetch={refetch} />
         </div>
     );
 };

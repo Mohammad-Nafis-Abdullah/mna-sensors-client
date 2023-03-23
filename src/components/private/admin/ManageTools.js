@@ -7,8 +7,8 @@ import ManageTool from "./ManageTool";
 
 const ManageTools = () => {
   const [deleteTool, setDeleteTool] = useState(null);
-  const url = "http://localhost:5000/sensors";
-  const { data: tools, refetch } = useFetch(url,[]);
+  const url = "https://mna-sensors-server.onrender.com/sensors";
+  const { data: tools, refetch } = useFetch(url, []);
   return (
     <div className="py-5">
       <h2 className="text-left ml-3 text-lg text-white font-bold">

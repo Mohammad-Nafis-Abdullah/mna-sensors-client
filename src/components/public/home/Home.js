@@ -10,7 +10,7 @@ import CustomCard from './CustomCard';
 const Home = () => {
 
 
-    const { data: tools, refetch } = useFetch('http://localhost:5000/sensors');
+    const { data: tools, refetch } = useFetch('https://mna-sensors-server.onrender.com/sensors');
 
     return (
         <div className='container'>

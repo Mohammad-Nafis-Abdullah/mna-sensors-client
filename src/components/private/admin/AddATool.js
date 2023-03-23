@@ -24,8 +24,8 @@ const AddATool = () => {
     const minQuantity = parseInt(data.minQuantity);
     const availableQuantity = parseInt(data.availableQuantity);
     // data.unitPrice = unitPrice;
-    if (unitPrice<=0 || minQuantity<=0 || availableQuantity<=0) {
-      toast.error('Negative value of number input is not accepted',{theme:'colored'});
+    if (unitPrice <= 0 || minQuantity <= 0 || availableQuantity <= 0) {
+      toast.error('Negative value of number input is not accepted', { theme: 'colored' });
       setLoading(false);
       return;
     }
@@ -41,7 +41,7 @@ const AddATool = () => {
     try {
       const { name } = await uploadImage(img);
       sensor.img = name;
-      const { data } = await axios.post('http://localhost:5000/sensor', sensor, {
+      const { data } = await axios.post('https://mna-sensors-server.onrender.com/sensor', sensor, {
         headers: {
           uid: user?.uid,
         },

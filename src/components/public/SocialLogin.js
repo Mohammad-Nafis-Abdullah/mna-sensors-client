@@ -28,14 +28,14 @@ const SocialLogin = () => {
         return <Loading />;
     }
 
-    const sendUserToDb = async ()=> {
+    const sendUserToDb = async () => {
         const newUser = {
-            uid:googleUser?.user?.uid,
+            uid: googleUser?.user?.uid,
             email: googleUser?.user?.email,
             name: googleUser?.user?.displayName,
         }
-        await axios.put(`http://localhost:5000/user/${googleUser?.user?.uid}`, newUser);
-        toast.success(`Welcome to the web site`,{theme:'colored'});
+        await axios.put(`https://mna-sensors-server.onrender.com/user/${googleUser?.user?.uid}`, newUser);
+        toast.success(`Welcome to the web site`, { theme: 'colored' });
     }
 
     if (googleUser && !googleLoading) {
@@ -43,7 +43,7 @@ const SocialLogin = () => {
     }
 
     if (googleError) {
-        toast.error(trimError(googleError),{theme:'colored'});
+        toast.error(trimError(googleError), { theme: 'colored' });
     }
     return (
         <div>

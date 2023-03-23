@@ -16,12 +16,12 @@ const MyOrders = () => {
 
 
 
-  const url = `http://localhost:5000/orders?email=${user.email}`;
-  const { data: orders, refetch } = useFetch(url,[]);
+  const url = `https://mna-sensors-server.onrender.com/orders?email=${user.email}`;
+  const { data: orders, refetch } = useFetch(url, []);
 
 
   const cancelling = async (id, productId, quantity) => {
-    await axios.delete(`http://localhost:5000/cancel/order/${id}`, {
+    await axios.delete(`https://mna-sensors-server.onrender.com/cancel/order/${id}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },

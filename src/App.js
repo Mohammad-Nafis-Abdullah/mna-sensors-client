@@ -35,28 +35,28 @@ const StateContext = createContext();
 export { StateContext }
 
 function App() {
-  const [state,dispatch] = useStateReducer();
+  const [state, dispatch] = useStateReducer();
   const [user] = useAuthState(auth);
   const { pathname } = useLocation();
   // console.log(user);
-  const { data:profile, loading, refetch } = useFetch(`http://localhost:5000/user/${user?.uid}`,null,(profile)=> {
+  const { data: profile, loading, refetch } = useFetch(`https://mna-sensors-server.onrender.com/user/${user?.uid}`, null, (profile) => {
     // console.log(user?.uid);
     dispatch({
-      type:'user',
-      value:profile
+      type: 'user',
+      value: profile
     });
   });
 
-  useEffect(()=> {
-      window.scrollTo(0, 0);
-      if (user && !profile) {
-        refetch();
-      };
-  },[user,pathname]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (user && !profile) {
+      refetch();
+    };
+  }, [user, pathname]);
 
   return (
-    <StateContext.Provider value={[state,dispatch]}>
-      {loading && <Loading/>}
+    <StateContext.Provider value={[state, dispatch]}>
+      {loading && <Loading />}
       <div className={` max-w-[86rem] mx-auto`}>
 
         <Navbar />
@@ -66,7 +66,7 @@ function App() {
             <Route path="/home" element={<Navigate to={"/"} />} />
             <Route path="/" element={<Home />} />
             <Route path="/purchase/:id" element={<Private> <Purchase /> </Private>} />
-            <Route path="/sensor/:id" element={<SensorDetails/>} />
+            <Route path="/sensor/:id" element={<SensorDetails />} />
 
             <Route path="/dashboard" element={<Private> <Dashboard /> </Private>} >
 

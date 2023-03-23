@@ -3,12 +3,12 @@ import useFetch from '../../../hooks/useFetch';
 import Loading from '../Loading';
 
 const Reviews = () => {
-    const { data: allreviews,loading } = useFetch('http://localhost:5000/reviews',[]);
+    const { data: allreviews, loading } = useFetch('https://mna-sensors-server.onrender.com/reviews', []);
     const reviews = [...allreviews]?.slice(0, 3);
 
     return (
         <div className='mb-8 container p-3 flex flex-wrap justify-center gap-5'>
-            {loading && <Loading/>}
+            {loading && <Loading />}
             {
                 allreviews?.length &&
                 [...reviews]?.map((review) => {

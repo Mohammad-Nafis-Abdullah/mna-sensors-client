@@ -9,12 +9,12 @@ import Loading from "../../public/Loading";
 
 const DeleteConfirmModel = ({ deleteTool, setDeleteTool, refetch }) => {
   const [user] = useAuthState(auth);
-  const [loading,setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { deleteImage } = useMyStorage();
   const { _id, name, img } = deleteTool;
   // console.log(_id, name, img);
 
-  const handleDelete = async(id) => {
+  const handleDelete = async (id) => {
     setLoading(true);
     const header = {
       headers: {
@@ -23,7 +23,7 @@ const DeleteConfirmModel = ({ deleteTool, setDeleteTool, refetch }) => {
     };
     try {
       await deleteImage(img);
-      const {data} = await axios.delete(`http://localhost:5000/sensor/${id}`, header);
+      const { data } = await axios.delete(`https://mna-sensors-server.onrender.com/sensor/${id}`, header);
       if (data.acknowledged) {
         toast.error(`${name} is Deleted Successfully`, { theme: "dark" });
       } else {
@@ -41,7 +41,7 @@ const DeleteConfirmModel = ({ deleteTool, setDeleteTool, refetch }) => {
 
   return (
     <div className="">
-      {loading && <Loading/>}
+      {loading && <Loading />}
       <input
         type="checkbox"
         id="delete-confirm-modal"

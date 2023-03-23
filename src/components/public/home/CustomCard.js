@@ -11,17 +11,17 @@ import ConfigureModal from '../adminComponent/ConfigureModal';
 import Loading from '../Loading';
 
 
-const CustomCard = ({ product,refetch }) => {
-    const [state,dispatch] = useContext(StateContext);
+const CustomCard = ({ product, refetch }) => {
+    const [state, dispatch] = useContext(StateContext);
     const navigate = useNavigate();
     const childRef = useRef();
     const [user] = useAuthState(auth);
-    const { data: { role },loading } = useFetch(`http://localhost:5000/user/${user?.uid}`, {});
+    const { data: { role }, loading } = useFetch(`https://mna-sensors-server.onrender.com/user/${user?.uid}`, {});
     // console.log(role);
 
     return (
         <div className="slided-card mx-auto rounded-lg">
-            {loading && <Loading/>}
+            {loading && <Loading />}
             <img className="h-full w-full object-cover" src={imgUrl(product.img)} alt={product.name} />
             <div className="btn-div bg-black/70 flex items-center justify-evenly">
                 {
@@ -29,10 +29,10 @@ const CustomCard = ({ product,refetch }) => {
                         <button
                             onClick={() => {
                                 dispatch({
-                                    type:'configSensor',
-                                    value:product,
+                                    type: 'configSensor',
+                                    value: product,
                                 });
-                                instantModal(<ConfigureModal ref={childRef} refetch={refetch}/>);
+                                instantModal(<ConfigureModal ref={childRef} refetch={refetch} />);
                                 childRef?.current?.gotoTop();
                             }}
                             className="btn btn-sm font-bold border border-highlight bg-green-400 text-gray-900 hover:bg-green-400 hover:text-gray-900">
