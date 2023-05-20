@@ -1,15 +1,18 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useAuthState, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 import trimError from "../../hooks/trimError";
 import Loading from "../public/Loading";
+import { StateContext } from "../../App";
 
 const SocialLogin = () => {
     const [currentUser] = useAuthState(auth);
+    const [state,dispatch] = useContext(StateContext);
     const navigate = useNavigate();
     const location = useLocation();
     let from = location.state?.from?.pathname || "/";
@@ -34,7 +37,8 @@ const SocialLogin = () => {
             email: googleUser?.user?.email,
             name: googleUser?.user?.displayName,
         }
-        await axios.put(`${process.env.REACT_APP_Backend_url}/user/${googleUser?.user?.uid}`, newUser);
+        const returnUser = await axios.put(`${process.env.REACT_APP_Backend_url}/user/${googleUser?.user?.uid}`, newUser);
+        dispatch('user',returnUser);
         toast.success(`Welcome to the web site`, { theme: 'colored' });
     }
 

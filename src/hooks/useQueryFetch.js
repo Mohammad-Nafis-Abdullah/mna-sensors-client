@@ -8,7 +8,7 @@ import { queryClient } from "../index";
 export const useQueryFetch = (key, url, initialValue = []) => {
     const [fetchUrl, setFetchUrl] = useState(url);
     const [state] = useContext(StateContext);
-    console.log(state);
+    // console.log(state);
 
     const { isLoading, data, isFetching } = useQuery({
         queryKey: [key],
