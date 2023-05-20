@@ -2,9 +2,9 @@ import React from 'react';
 import useFetch from '../../../hooks/useFetch';
 
 const Summary = () => {
-    const { data: items } = useFetch('https://mna-sensors-server.onrender.com/sensors', {});
-    const { data: users } = useFetch('https://mna-sensors-server.onrender.com/users/count', {});
-    const { data: orders } = useFetch('https://mna-sensors-server.onrender.com/orders/count', {});
+    const { data: items } = useFetch(`${process.env.REACT_APP_Backend_url}/sensors`, {});
+    const { data: users } = useFetch(`${process.env.REACT_APP_Backend_url}/users/count`, {});
+    const { data: orders } = useFetch(`${process.env.REACT_APP_Backend_url}/orders/count`, {});
 
 
     return (

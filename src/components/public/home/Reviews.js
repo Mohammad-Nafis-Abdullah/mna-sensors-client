@@ -3,7 +3,7 @@ import useFetch from '../../../hooks/useFetch';
 import Loading from '../Loading';
 
 const Reviews = () => {
-    const { data: allreviews, loading } = useFetch('https://mna-sensors-server.onrender.com/reviews', []);
+    const { data: allreviews, loading } = useFetch(`${process.env.REACT_APP_Backend_url}/reviews`, []);
     const reviews = [...allreviews]?.slice(0, 3);
 
     return (

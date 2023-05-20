@@ -8,7 +8,7 @@ import useFetch from '../../../hooks/useFetch';
 const AddAReview = () => {
     const [user] = useAuthState(auth);
 
-    const { data: userReview, refetch } = useFetch(`https://mna-sensors-server.onrender.com/review/${user?.email}`, {})
+    const { data: userReview, refetch } = useFetch(`${process.env.REACT_APP_Backend_url}/review/${user?.email}`, {})
 
 
     const showRating = () => {
@@ -34,7 +34,7 @@ const AddAReview = () => {
 
         const review = { email, comment, rating };
 
-        await axios.put(`https://mna-sensors-server.onrender.com/review/${email}`, review).then(data => {
+        await axios.put(`${process.env.REACT_APP_Backend_url}/review/${email}`, review).then(data => {
             if (data?.data?.success) {
                 toast.success('Review submitted successfully', { theme: 'colored' })
             }

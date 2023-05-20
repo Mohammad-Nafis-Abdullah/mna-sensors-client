@@ -70,7 +70,7 @@ const Login = () => {
                 email: user?.email,
                 name: user?.displayName,
             }
-            await axios.put(`https://mna-sensors-server.onrender.com/user/${user.uid}`, newUser);
+            await axios.put(`${process.env.REACT_APP_Backend_url}/user/${user.uid}`, newUser);
         } catch (err) {
             toast.error(trimError(err), { theme: 'colored' });
         }

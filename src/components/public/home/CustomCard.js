@@ -16,7 +16,7 @@ const CustomCard = ({ product, refetch }) => {
     const navigate = useNavigate();
     const childRef = useRef();
     const [user] = useAuthState(auth);
-    const { data: { role }, loading } = useFetch(`https://mna-sensors-server.onrender.com/user/${user?.uid}`, {});
+    const { data: { role }, loading } = useFetch(`${process.env.REACT_APP_Backend_url}/user/${user?.uid}`, {});
     // console.log(role);
 
     return (

@@ -10,8 +10,8 @@ const SensorDetails = () => {
     const [user] = useAuthState(auth);
     const navigate = useNavigate();
     const { id } = useParams();
-    const { data: { role }, userLoading } = useFetch(`https://mna-sensors-server.onrender.com/user/${user?.uid}`, {});
-    const { data: sensor, loading } = useFetch(`https://mna-sensors-server.onrender.com/sensor/${id}`, {});
+    const { data: { role }, userLoading } = useFetch(`${process.env.REACT_APP_Backend_url}/user/${user?.uid}`, {});
+    const { data: sensor, loading } = useFetch(`${process.env.REACT_APP_Backend_url}/sensor/${id}`, {});
     // console.log(sensor);
 
     return (

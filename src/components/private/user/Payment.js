@@ -12,7 +12,7 @@ const stripePromise = loadStripe(
 );
 const Payment = () => {
   const { id } = useParams();
-  const url = `https://mna-sensors-server.onrender.com/order/${id}`;
+  const url = `${process.env.REACT_APP_Backend_url}/order/${id}`;
 
   const { data: order, loading, refetch } = useFetch(url, {})
 

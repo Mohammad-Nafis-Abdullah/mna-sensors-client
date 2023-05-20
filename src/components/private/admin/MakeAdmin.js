@@ -6,7 +6,7 @@ import UserList from "./UserList";
 
 
 const MakeAdmin = () => {
-  const url = "https://mna-sensors-server.onrender.com/users";
+  const url = `${process.env.REACT_APP_Backend_url}/users`;
   const { data: users, refetch } = useFetch(url, []);
   return (
     <div className="fadeIn">

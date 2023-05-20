@@ -7,7 +7,7 @@ import ViewProfile from './ViewProfile'
 
 const MyProfile = () => {
     const [user] = useAuthState(auth);
-    const { data: profile, refetch } = useFetch(`https://mna-sensors-server.onrender.com/user/${user?.uid}`, {});
+    const { data: profile, refetch } = useFetch(`${process.env.REACT_APP_Backend_url}/user/${user?.uid}`, {});
 
 
     return (

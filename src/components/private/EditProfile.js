@@ -52,7 +52,7 @@ const EditProfile = () => {
 
 
         try {
-            const { data } = await axios.put(`https://mna-sensors-server.onrender.com/user/${user?.uid}`, profile)
+            const { data } = await axios.put(`${process.env.REACT_APP_Backend_url}/user/${user?.uid}`, profile)
             dispatch({
                 type: 'user',
                 value: profile

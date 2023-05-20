@@ -2,7 +2,7 @@ import React from 'react';
 import useFetch from '../../hooks/useFetch';
 
 const ReviewsComp = () => {
-    const { data: reviews } = useFetch('https://mna-sensors-server.onrender.com/reviews', []);
+    const { data: reviews } = useFetch(`${process.env.REACT_APP_Backend_url}/reviews`, []);
 
     return (
         <div className='mb-8 container p-3 flex flex-wrap gap-5 justify-center'>

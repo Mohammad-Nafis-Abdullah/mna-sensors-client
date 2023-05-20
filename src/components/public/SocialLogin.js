@@ -34,7 +34,7 @@ const SocialLogin = () => {
             email: googleUser?.user?.email,
             name: googleUser?.user?.displayName,
         }
-        await axios.put(`https://mna-sensors-server.onrender.com/user/${googleUser?.user?.uid}`, newUser);
+        await axios.put(`${process.env.REACT_APP_Backend_url}/user/${googleUser?.user?.uid}`, newUser);
         toast.success(`Welcome to the web site`, { theme: 'colored' });
     }
 

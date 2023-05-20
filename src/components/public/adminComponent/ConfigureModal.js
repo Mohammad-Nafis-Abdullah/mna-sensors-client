@@ -73,7 +73,7 @@ const ConfigureModal = forwardRef(({ refetch }, ref) => {
                 const { name } = await uploadImage(image);
                 sensorInfo.img = name;
             }
-            const { data } = await axios.put(`https://mna-sensors-server.onrender.com/sensor/${_id}`, sensorInfo, {
+            const { data } = await axios.put(`${process.env.REACT_APP_Backend_url}/sensor/${_id}`, sensorInfo, {
                 headers: {
                     uid: user?.uid,
                 }
@@ -97,7 +97,7 @@ const ConfigureModal = forwardRef(({ refetch }, ref) => {
         };
         try {
             await deleteImage(img);
-            const { data } = await axios.delete(`https://mna-sensors-server.onrender.com/sensor/${id}`, header);
+            const { data } = await axios.delete(`${process.env.REACT_APP_Backend_url}/sensor/${id}`, header);
 
             if (data.acknowledged) {
                 toast.error(`${name} is Deleted Successfully`, { theme: "dark" });

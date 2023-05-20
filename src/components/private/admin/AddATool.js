@@ -41,7 +41,7 @@ const AddATool = () => {
     try {
       const { name } = await uploadImage(img);
       sensor.img = name;
-      const { data } = await axios.post('https://mna-sensors-server.onrender.com/sensor', sensor, {
+      const { data } = await axios.post(`${process.env.REACT_APP_Backend_url}/sensor`, sensor, {
         headers: {
           uid: user?.uid,
         },

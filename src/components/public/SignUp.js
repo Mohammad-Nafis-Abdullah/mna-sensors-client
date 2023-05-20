@@ -44,7 +44,7 @@ const Signup = () => {
                     address: '',
                     linkedIn: ''
                 }
-                await axios.put(`https://mna-sensors-server.onrender.com/user/${user.uid}`, currentUser);
+                await axios.put(`${process.env.REACT_APP_Backend_url}/user/${user.uid}`, currentUser);
                 console.log(currentUser);
                 navigate(from, { replace: true });
                 setLoading(false);

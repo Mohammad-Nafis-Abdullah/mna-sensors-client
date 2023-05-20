@@ -13,7 +13,7 @@ const Purchase = () => {
     // console.log(user);
     const params = useParams();
     const { id: serviceId } = params;
-    const { data: selected, refetch } = useFetch(`https://mna-sensors-server.onrender.com/sensor/${serviceId}`, {});
+    const { data: selected, refetch } = useFetch(`${process.env.REACT_APP_Backend_url}/sensor/${serviceId}`, {});
 
 
     const ordering = async (e) => {
@@ -31,13 +31,13 @@ const Purchase = () => {
 
         const order = { name, email, phone, address, productId, productName, orderQuantity, orderCost };
 
-        await axios.post('https://mna-sensors-server.onrender.com/order', order).then(res => {
+        await axios.post(`${process.env.REACT_APP_Backend_url}/order`, order).then(res => {
             toast.success(`${orderQuantity} pieces of ${productName} ordered successfully`, { theme: 'colored' });
         });
 
         const remaniningQuantity = selected.availableQuantity - orderQuantity;
         const updateQuantity = { remaniningQuantity };
-        await axios.put(`https://mna-sensors-server.onrender.com/sensor/${selected._id}`, updateQuantity).then((res) => {
+        await axios.put(`${process.env.REACT_APP_Backend_url}/sensor/${selected._id}`, updateQuantity).then((res) => {
             if (res) {
                 refetch();
             }

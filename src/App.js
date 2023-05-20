@@ -39,7 +39,7 @@ function App() {
   const [user] = useAuthState(auth);
   const { pathname } = useLocation();
   // console.log(user);
-  const { data: profile, loading, refetch } = useFetch(`https://mna-sensors-server.onrender.com/user/${user?.uid}`, null, (profile) => {
+  const { data: profile, loading, refetch } = useFetch(`${process.env.REACT_APP_Backend_url}/user/${user?.uid}`, null, (profile) => {
     // console.log(user?.uid);
     dispatch({
       type: 'user',

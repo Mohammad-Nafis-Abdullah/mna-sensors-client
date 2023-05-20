@@ -23,7 +23,7 @@ const DeleteConfirmModel = ({ deleteTool, setDeleteTool, refetch }) => {
     };
     try {
       await deleteImage(img);
-      const { data } = await axios.delete(`https://mna-sensors-server.onrender.com/sensor/${id}`, header);
+      const { data } = await axios.delete(`${process.env.REACT_APP_Backend_url}/sensor/${id}`, header);
       if (data.acknowledged) {
         toast.error(`${name} is Deleted Successfully`, { theme: "dark" });
       } else {

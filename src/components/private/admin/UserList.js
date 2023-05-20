@@ -14,7 +14,7 @@ const UserList = ({ user, index, refetch }) => {
     if (!confirmation) {
       return;
     }
-    const url = `https://mna-sensors-server.onrender.com/user/${uid}`;
+    const url = `${process.env.REACT_APP_Backend_url}/user/${uid}`;
     fetch(url, {
       method: "PATCH",
       headers: {

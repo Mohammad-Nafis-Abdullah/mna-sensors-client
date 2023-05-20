@@ -7,7 +7,7 @@ import ManageTool from "./ManageTool";
 
 const ManageTools = () => {
   const [deleteTool, setDeleteTool] = useState(null);
-  const url = "https://mna-sensors-server.onrender.com/sensors";
+  const url = `${process.env.REACT_APP_Backend_url}/sensors`;
   const { data: tools, refetch } = useFetch(url, []);
   return (
     <div className="py-5">
