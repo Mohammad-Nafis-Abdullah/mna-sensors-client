@@ -1,8 +1,8 @@
 import { useReducer } from "react";
 
 const initialState = { // declare initial state here as {key : value} pair
-    user:'',
-    configSensor:'',
+    user:null,
+    configSensor:null,
 };
 
 const reducer = (state,action)=> { // declare logic of reducer function that handle the changing of state
@@ -25,7 +25,11 @@ const reducer = (state,action)=> { // declare logic of reducer function that han
 }
 
 const useStateReducer = () => {
-    const [state,dispatch] = useReducer(reducer,initialState);
+    const [state,setState] = useReducer(reducer,initialState);
+
+    const dispatch = (type,value)=> {
+        setState({type:type,value:value});
+    }
 
     return [state,dispatch];
 };

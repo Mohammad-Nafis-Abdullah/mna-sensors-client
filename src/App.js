@@ -24,11 +24,7 @@ import ReviewsComp from "./components/public/ReviewsComp";
 import ManageAllOrders from "./components/private/admin/ManageAllOrders";
 import Modal from "./utilities/Modal";
 import useStateReducer from "./hooks/useStateReducer";
-import useFetch from "./hooks/useFetch";
-import Loading from "./components/public/Loading";
 import SensorDetails from "./components/public/SensorDetails";
-import { useAuthState } from "react-firebase-hooks/auth";
-import auth from "./firebase.init";
 import Navbar from "./components/public/Navbar";
 
 const StateContext = createContext();
@@ -36,27 +32,14 @@ export { StateContext }
 
 function App() {
   const [state, dispatch] = useStateReducer();
-  const [user] = useAuthState(auth);
   const { pathname } = useLocation();
-  // console.log(user);
-  const { data: profile, loading, refetch } = useFetch(`${process.env.REACT_APP_Backend_url}/user/${user?.uid}`, null, (profile) => {
-    // console.log(user?.uid);
-    dispatch({
-      type: 'user',
-      value: profile
-    });
-  });
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (user && !profile) {
-      refetch();
-    };
-  }, [user, pathname]);
+  }, [pathname]);
 
   return (
     <StateContext.Provider value={[state, dispatch]}>
-      {loading && <Loading />}
       <div className={` max-w-[86rem] mx-auto`}>
 
         <Navbar />

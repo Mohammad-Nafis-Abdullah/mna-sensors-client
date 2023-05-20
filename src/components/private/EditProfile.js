@@ -1,10 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import React, { useContext, useState } from 'react';
 import { toast } from 'react-toastify';
-import auth from '../../firebase.init';
 import useMyStorage from '../../hooks/useMyStorage';
 import trimError from '../../hooks/trimError';
 import { closeModal } from '../../utilities/Modal';
@@ -13,7 +11,6 @@ import Loading from '../public/Loading';
 
 const EditProfile = () => {
     const [state, dispatch] = useContext(StateContext);
-    const [user] = useAuthState(auth);
     const [image, setImage] = useState(undefined);
     const { uploadImage, deleteImage } = useMyStorage();
     const [loading, setLoading] = useState(false);
@@ -28,8 +25,8 @@ const EditProfile = () => {
             return;
         }
 
-        const name = user.displayName;
-        const email = user.email;
+        const name = state.user?.displayName;
+        const email = state.user?.email;
         const phone = phoneInput || state.user.phone;
         const address = e.target.address.value || state.user.address;
         const linkedIn = e.target.linkedIn.value || state.user.linkedIn;
@@ -52,11 +49,8 @@ const EditProfile = () => {
 
 
         try {
-            const { data } = await axios.put(`${process.env.REACT_APP_Backend_url}/user/${user?.uid}`, profile)
-            dispatch({
-                type: 'user',
-                value: profile
-            });
+            const { data } = await axios.put(`${process.env.REACT_APP_Backend_url}/user/${state.user?.uid}`, profile)
+            dispatch('user',profile);
             data && toast.success('Information Updated', { theme: 'colored' })
             closeModal();
         } catch (err) {
@@ -67,22 +61,16 @@ const EditProfile = () => {
         e.target.reset();
     };
 
-    // console.log(state);
-
-    /* useEffect(()=> {
-        num && console.log();;
-    },[num]) */
-
     return (
         <form onSubmit={profileUpdating} className=' max-w-sm w-full flex flex-col justify-center items-center p-3 rounded-xl gap-0 bg-white mx-auto overflow-y-auto h-full'>
             {loading && <Loading />}
             <h2 className='mb-5 mt-12 text-2xl font-medium underline'>My Profile</h2>
             <div className="input-container">
-                <input type="text" name="name" className="input-field" placeholder={user?.displayName} required="" disabled />
+                <input type="text" name="name" className="input-field" placeholder={state.user?.displayName} required="" disabled />
                 <label className="input-label">Name</label>
             </div>
             <div className="input-container">
-                <input type="email" name="email" className="input-field" placeholder={user?.email} required="" disabled />
+                <input type="email" name="email" className="input-field" placeholder={state.user?.email} required="" disabled />
                 <label className="input-label">Email address</label>
             </div>
             <div className='input-container'>

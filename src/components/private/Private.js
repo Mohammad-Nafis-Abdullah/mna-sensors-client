@@ -1,18 +1,12 @@
-import React from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import React, { useContext } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import auth from '../../firebase.init';
-import Loading from '../public/Loading';
+import { StateContext } from '../../App';
 
 const Private = ({children}) => {
-    // eslint-disable-next-line no-unused-vars
-    const [user, loading, error] = useAuthState(auth);
-    let location = useLocation();
+    const [state] = useContext(StateContext);
+    const location = useLocation();
 
-    if (loading) {
-        return <Loading/>
-    }
-    if (!user) {
+    if (!state.user) {
         // Redirect them to the /login page, but save the current location they were
         // trying to go to when they were redirected. This allows us to send them
         // along to that page after they login, which is a nicer user experience

@@ -1,22 +1,19 @@
-import React from "react";
-import auth from "../../../firebase.init";
-import { useAuthState } from "react-firebase-hooks/auth";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import useFetch from "../../../hooks/useFetch";
+import { StateContext } from "../../../App";
 
 
 
 const MyOrders = () => {
-  const [user] = useAuthState(auth);
-  // const navigate = useNavigate();
-  // const [orders, setOrders] = useState([]);
+  const [state] = useContext(StateContext);
 
 
 
 
-  const url = `${process.env.REACT_APP_Backend_url}/orders?email=${user.email}`;
+  const url = `${process.env.REACT_APP_Backend_url}/orders?email=${state.user?.email}`;
   const { data: orders, refetch } = useFetch(url, []);
 
 

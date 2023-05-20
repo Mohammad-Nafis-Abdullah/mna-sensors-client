@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ImCross } from 'react-icons/im';
+import { StateContext } from '../App';
 
 
 let child, setModalChild;
@@ -11,8 +12,17 @@ let checkStatus, setCheckStatus;
  * 
  */
 const Modal = () => {
+    const [state] = useContext(StateContext);
     [child, setModalChild] = useState(<div/>);
     [checkStatus,setCheckStatus] = useState(false)
+
+    useEffect(()=> {
+        if (state.configSensor) {
+            setCheckStatus(true);
+        } else {
+            setCheckStatus(false);
+        }
+    },[state.configSensor])
 
     const topDiv = document.getElementById('top');
     topDiv?.scrollIntoView();
@@ -32,24 +42,6 @@ const Modal = () => {
 
             </div>
         </>
-    );
-};
-
-/** Button component that show the modal by clicking on it
- * 
- * props of the button component are (className,showInModal)
-    [ for example: <ShowModalBtn className={className} showInModal={<PassingComponent/> ]
- * 
- * The Button component helps to show the modal by clicking on it;
- * 
- * Also it can be possibled to pass a component through it's showInModal prop that will show in the modal;
- * 
- * And also it can be possibled to style the button through it's className props
- * 
- */
-const ShowModalBtn = ({className, showInModal=null,children,callback=()=>null}) => {
-    return (
-        <div onClick={()=> {callback();setModalChild(showInModal);setCheckStatus(true)}} className={`${className} cursor-pointer select-none inline-block`} >{children}</div>
     );
 };
 
@@ -80,4 +72,4 @@ const closeModal = ()=> {
 
 export default Modal;
 
-export { setModalChild, ShowModalBtn, instantModal, closeModal};
+export { setModalChild, instantModal, closeModal};

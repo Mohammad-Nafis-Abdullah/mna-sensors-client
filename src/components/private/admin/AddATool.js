@@ -1,15 +1,14 @@
 /* eslint-disable no-unused-vars */
 import axios from "axios";
-import React, { useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import auth from "../../../firebase.init";
 import useMyStorage from "../../../hooks/useMyStorage";
 import Loading from "../../public/Loading";
+import { StateContext } from "../../../App";
 
 const AddATool = () => {
-  const [user] = useAuthState(auth);
+  const [state] = useContext(StateContext);
   const { register, handleSubmit, reset } = useForm();
   const { uploadImage, deleteImage } = useMyStorage();
   const [loading, setLoading] = useState(false);
@@ -43,7 +42,7 @@ const AddATool = () => {
       sensor.img = name;
       const { data } = await axios.post(`${process.env.REACT_APP_Backend_url}/sensor`, sensor, {
         headers: {
-          uid: user?.uid,
+          uid: state.user?.uid,
         },
       });
       data.insertedId && toast.success(`Sensor successfully added.`, {

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -11,9 +11,11 @@ import trimError from "../../hooks/trimError";
 import axios from "axios";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { toast } from "react-toastify";
+import { StateContext } from "../../App";
 
 const Signup = () => {
     const [user] = useAuthState(auth);
+    const [state,dispatch] = useContext(StateContext);
     const navigate = useNavigate();
     const location = useLocation();
     const [loading, setLoading] = useState(false);
@@ -45,7 +47,7 @@ const Signup = () => {
                     linkedIn: ''
                 }
                 await axios.put(`${process.env.REACT_APP_Backend_url}/user/${user.uid}`, currentUser);
-                console.log(currentUser);
+                dispatch('user',currentUser);
                 navigate(from, { replace: true });
                 setLoading(false);
             } catch (err) {

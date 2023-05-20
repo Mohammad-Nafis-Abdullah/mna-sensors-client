@@ -1,16 +1,14 @@
 /* eslint-disable no-unused-vars */
 import axios from 'axios';
-import React, { useState } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import React, { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import auth from '../../../firebase.init';
 import useFetch from '../../../hooks/useFetch';
 import { imgUrl } from '../../../hooks/useMyStorage';
+import { StateContext } from '../../../App';
 
 const Purchase = () => {
-    const [user] = useAuthState(auth);
-    // console.log(user);
+    const [state] = useContext(StateContext);
     const params = useParams();
     const { id: serviceId } = params;
     const { data: selected, refetch } = useFetch(`${process.env.REACT_APP_Backend_url}/sensor/${serviceId}`, {});
@@ -19,8 +17,8 @@ const Purchase = () => {
     const ordering = async (e) => {
         e.preventDefault();
 
-        const name = user.displayName;
-        const email = user.email;
+        const name = state.user?.displayName;
+        const email = state.user?.email;
         const phone = e.target.phone.value;
         const address = e.target.address.value;
         const productId = selected._id;
@@ -67,11 +65,11 @@ const Purchase = () => {
                 <h3 className='text-center text-white font-medium text-3xl basis-full'>Purchase Form</h3>
                 <section className=' max-w-sm w-full flex flex-col justify-center items-center p-3 rounded-xl gap-3 bg-white pt-10'>
                     <div className="input-container">
-                        <input type="text" name="name" className="input-field" placeholder={user.displayName} required="" disabled />
+                        <input type="text" name="name" className="input-field" placeholder={state.user?.displayName} required="" disabled />
                         <label className="input-label">Name</label>
                     </div>
                     <div className="input-container">
-                        <input type="email" name="email" className="input-field" placeholder={user.email} required="" disabled />
+                        <input type="email" name="email" className="input-field" placeholder={state.user?.email} required="" disabled />
                         <label className="input-label">Email address</label>
                     </div>
                     <div className="input-container">

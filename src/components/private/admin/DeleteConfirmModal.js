@@ -1,14 +1,13 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
+import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
-import auth from "../../../firebase.init";
 import useMyStorage from "../../../hooks/useMyStorage";
 import Loading from "../../public/Loading";
+import { StateContext } from "../../../App";
 
 
 const DeleteConfirmModel = ({ deleteTool, setDeleteTool, refetch }) => {
-  const [user] = useAuthState(auth);
+  const [state] = useContext(StateContext);
   const [loading, setLoading] = useState(false);
   const { deleteImage } = useMyStorage();
   const { _id, name, img } = deleteTool;
@@ -18,7 +17,7 @@ const DeleteConfirmModel = ({ deleteTool, setDeleteTool, refetch }) => {
     setLoading(true);
     const header = {
       headers: {
-        uid: user?.uid,
+        uid: state.user?.uid,
       },
     };
     try {

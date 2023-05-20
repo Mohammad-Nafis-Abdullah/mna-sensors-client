@@ -10,6 +10,7 @@ import Loading from "./Loading";
 import { StateContext } from "../../App";
 import { imgUrl } from "../../hooks/useMyStorage";
 import useFetch from "../../hooks/useFetch";
+import axios from "axios";
 
 
 const Navbar = () => {
@@ -17,13 +18,20 @@ const Navbar = () => {
     const [state,dispatch] = useContext(StateContext);
     const navigate = useNavigate();
     const [dropDown,setDropDown] = useState(false);
-    // console.log(state);
+    console.log(state);
+
+    useEffect(()=> {
+        axios.get(`${process.env.REACT_APP_Backend_url}/user/${user?.uid}`).then(({data})=> {
+            dispatch('user',data);
+        })
+    },[user])
 
     const img = imgUrl(state?.user?.img) || "https://i.ibb.co/pvmWXsv/male-placeholder-image.jpg";
     
     const logout = () => {
         setDropDown(false);
         signOut(auth);
+        dispatch('user',null);
         navigate('/');
         localStorage.removeItem("accessToken");
     };

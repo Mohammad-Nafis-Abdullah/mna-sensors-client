@@ -1,25 +1,25 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext} from "react";
+import { StateContext } from "../App";
 
-const useAdmin = (user) => {
-    const [admin, setAdmin] = useState(false);
-    const [adminLoading, setAdminLoading] = useState(true);
-    useEffect(() => {
-        const email = user?.email;
-        if (email) {
-            axios
-                .get(`${process.env.REACT_APP_Backend_url}/admin/${email}`, {
-                    headers: {
-                        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-                    },
-                })
-                .then((data) => {
-                    setAdmin(data.data.admin);
-                    setAdminLoading(false);
-                });
-        }
-    }, [user]);
-    return [admin, adminLoading];
+const useAdmin = () => {
+    let admin;
+    const [state] = useContext(StateContext);
+
+    switch(state.user?.role){
+        case "owner":
+            admin = true;
+            break;
+
+        case "admin":
+            admin = true;
+            break;
+        
+        default:
+            admin = false;
+            break;
+    }
+
+    return admin;
 };
 
 export default useAdmin;

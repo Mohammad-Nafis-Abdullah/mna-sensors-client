@@ -1,13 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../firebase.init";
+import { StateContext } from "../App";
 
 
 const useFetch = (url,initValue=[],callback=()=>{return})=> {
-    const [user] = useAuthState(auth);
+    const [state] = useContext(StateContext);
     const [data,setData] = useState(initValue);
     const [loading,setLoading] = useState(false);
     const [fetch,setFetch] = useState(false);
@@ -17,7 +18,7 @@ const useFetch = (url,initValue=[],callback=()=>{return})=> {
             setLoading(true);
             axios.get(link, {
                 headers: {
-                    uid: user?.uid,
+                    uid: state.user?.uid,
                 },
             }).then(({data})=> {
                 callback(data);
@@ -26,7 +27,7 @@ const useFetch = (url,initValue=[],callback=()=>{return})=> {
             }).finally(()=> {
                 setLoading(false);
             });
-    },[fetch,user])
+    },[fetch,state.user])
 
     return {data, loading, refetch:(URL)=> {
         if (URL) {

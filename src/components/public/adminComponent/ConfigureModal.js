@@ -11,7 +11,6 @@ import { closeModal } from '../../../utilities/Modal';
 import Loading from '../Loading';
 
 const ConfigureModal = forwardRef(({ refetch }, ref) => {
-    const [user] = useAuthState(auth);
     const topRef = useRef();
     const [state] = useContext(StateContext);
     const { _id, name, img, details, unitPrice, availableQuantity, minQuantity } = state?.configSensor;
@@ -75,7 +74,7 @@ const ConfigureModal = forwardRef(({ refetch }, ref) => {
             }
             const { data } = await axios.put(`${process.env.REACT_APP_Backend_url}/sensor/${_id}`, sensorInfo, {
                 headers: {
-                    uid: user?.uid,
+                    uid: state.user?.uid,
                 }
             })
             data?.acknowledged && data?.matchedCount && toast.success('Successfully updated', { theme: 'dark' });
@@ -92,7 +91,7 @@ const ConfigureModal = forwardRef(({ refetch }, ref) => {
         setLoading(true);
         const header = {
             headers: {
-                uid: user?.uid,
+                uid: state.user?.uid,
             },
         };
         try {

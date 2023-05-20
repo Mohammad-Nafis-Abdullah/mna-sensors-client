@@ -1,37 +1,28 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useRef } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import { StateContext } from '../../../App';
-import auth from '../../../firebase.init';
-import useFetch from '../../../hooks/useFetch';
 import { imgUrl } from '../../../hooks/useMyStorage';
 import { instantModal } from '../../../utilities/Modal';
 import ConfigureModal from '../adminComponent/ConfigureModal';
-import Loading from '../Loading';
+import useAdmin from '../../../hooks/useAdmin';
 
 
 const CustomCard = ({ product, refetch }) => {
     const [state, dispatch] = useContext(StateContext);
+    const admin = useAdmin();
     const navigate = useNavigate();
     const childRef = useRef();
-    const [user] = useAuthState(auth);
-    const { data: { role }, loading } = useFetch(`${process.env.REACT_APP_Backend_url}/user/${user?.uid}`, {});
-    // console.log(role);
 
     return (
         <div className="slided-card mx-auto rounded-lg">
-            {loading && <Loading />}
             <img className="h-full w-full object-cover" src={imgUrl(product.img)} alt={product.name} />
             <div className="btn-div bg-black/70 flex items-center justify-evenly">
                 {
-                    role === 'admin' ?
+                    admin ?
                         <button
                             onClick={() => {
-                                dispatch({
-                                    type: 'configSensor',
-                                    value: product,
-                                });
+                                dispatch('configSensor',product);
                                 instantModal(<ConfigureModal ref={childRef} refetch={refetch} />);
                                 childRef?.current?.gotoTop();
                             }}

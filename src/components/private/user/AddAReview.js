@@ -1,14 +1,13 @@
 import axios from 'axios';
-import React from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import React, { useContext } from 'react';
 import { toast } from 'react-toastify';
-import auth from '../../../firebase.init';
 import useFetch from '../../../hooks/useFetch';
+import { StateContext } from '../../../App';
 
 const AddAReview = () => {
-    const [user] = useAuthState(auth);
+    const [state] = useContext(StateContext);
 
-    const { data: userReview, refetch } = useFetch(`${process.env.REACT_APP_Backend_url}/review/${user?.email}`, {})
+    const { data: userReview, refetch } = useFetch(`${process.env.REACT_APP_Backend_url}/review/${state.user?.email}`, {})
 
 
     const showRating = () => {
@@ -26,7 +25,7 @@ const AddAReview = () => {
         e.preventDefault();
 
 
-        const email = user?.email;
+        const email = state.user?.email;
         const comment = e.target.comment.value;
         const activeRating = [...e.target.rating].reverse();
 
@@ -55,7 +54,7 @@ const AddAReview = () => {
                 <h2 className='text-white font-medium text-2xl underline text-center mb-5'>Add a Review</h2>
                 <label className="input-group max-w-sm w-full">
                     <span className='font-medium text-neutral-focus'>Email:</span>
-                    <input type="text" placeholder={user?.email} className="input input-bordered placeholder:text-neutral-focus font-medium text-lg w-auto min-w-0" readOnly />
+                    <input type="text" placeholder={state.user?.email} className="input input-bordered placeholder:text-neutral-focus font-medium text-lg w-auto min-w-0" readOnly />
                 </label>
                 <label htmlFor="">
                     <textarea className="textarea textarea-bordered max-w-sm w-full text-base placeholder:text-neutral-focus text-neutral-focus font-medium" name='comment' placeholder="Comment" required></textarea>

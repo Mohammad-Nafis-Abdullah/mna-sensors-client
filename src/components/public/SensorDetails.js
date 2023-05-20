@@ -1,16 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import useFetch from "../../hooks/useFetch";
 import Loading from "../public/Loading";
 import { imgUrl } from "../../hooks/useMyStorage";
-import { useAuthState } from 'react-firebase-hooks/auth';
-import auth from '../../firebase.init';
+import { StateContext } from '../../App';
 
 const SensorDetails = () => {
-    const [user] = useAuthState(auth);
+    const [state] = useContext(StateContext);
     const navigate = useNavigate();
     const { id } = useParams();
-    const { data: { role }, userLoading } = useFetch(`${process.env.REACT_APP_Backend_url}/user/${user?.uid}`, {});
+    const { data: { role }, userLoading } = useFetch(`${process.env.REACT_APP_Backend_url}/user/${state.user?.uid}`, {});
     const { data: sensor, loading } = useFetch(`${process.env.REACT_APP_Backend_url}/sensor/${id}`, {});
     // console.log(sensor);
 
