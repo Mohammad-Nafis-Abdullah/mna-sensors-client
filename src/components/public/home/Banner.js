@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import Slider from 'react-slick';
-import useRefetch from '../../../hooks/useRefetch';
+import { useQueryFetch } from '../../../hooks/useQueryFetch';
+import Loading from '../Loading';
 
 const Banner = () => {
-    const [banner,loading,refetch] = useRefetch('banner-bg.json');
+    const {data:banner,loading} = useQueryFetch('banner','banner-bg.json',[]);
 
     const settings = {
         dots: false,
@@ -21,6 +22,7 @@ const Banner = () => {
 
     return (
         <div>
+            {loading && <Loading/>}
             <Slider {...settings}>
                 {
                     banner.map(banner=>{

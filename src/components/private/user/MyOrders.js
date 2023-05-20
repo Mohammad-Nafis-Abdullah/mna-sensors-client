@@ -2,19 +2,15 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-import useFetch from "../../../hooks/useFetch";
 import { StateContext } from "../../../App";
+import { useQueryFetch } from "../../../hooks/useQueryFetch";
+import Loading from "../../public/Loading";
 
 
 
 const MyOrders = () => {
   const [state] = useContext(StateContext);
-
-
-
-
-  const url = `${process.env.REACT_APP_Backend_url}/orders?email=${state.user?.email}`;
-  const { data: orders, refetch } = useFetch(url, []);
+  const { data: orders, loading, refetch } = useQueryFetch('my-order',`${process.env.REACT_APP_Backend_url}/orders?email=${state.user?.email}`, []);
 
 
   const cancelling = async (id, productId, quantity) => {
@@ -30,6 +26,7 @@ const MyOrders = () => {
 
   return (
     <div>
+      {loading && <Loading/>}
       <h2 className="text-lg text-white font-bold text-left ml-3">
         My Orders : {orders?.length}
       </h2>

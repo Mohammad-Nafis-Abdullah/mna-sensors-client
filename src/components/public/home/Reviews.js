@@ -1,9 +1,9 @@
 import React from 'react';
-import useFetch from '../../../hooks/useFetch';
 import Loading from '../Loading';
+import { useQueryFetch } from '../../../hooks/useQueryFetch';
 
 const Reviews = () => {
-    const { data: allreviews, loading } = useFetch(`${process.env.REACT_APP_Backend_url}/reviews`, []);
+    const { data: allreviews, loading } = useQueryFetch('all-review',`${process.env.REACT_APP_Backend_url}/reviews`, []);
     const reviews = [...allreviews]?.slice(0, 3);
 
     return (

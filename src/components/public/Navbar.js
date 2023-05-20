@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 import Loading from "./Loading";
 import { StateContext } from "../../App";
 import { imgUrl } from "../../hooks/useMyStorage";
-import useFetch from "../../hooks/useFetch";
 import axios from "axios";
 
 
@@ -21,9 +20,11 @@ const Navbar = () => {
     console.log(state);
 
     useEffect(()=> {
-        axios.get(`${process.env.REACT_APP_Backend_url}/user/${user?.uid}`).then(({data})=> {
-            dispatch('user',data);
-        })
+        if (user) {
+            axios.get(`${process.env.REACT_APP_Backend_url}/user/${user?.uid}`).then(({data})=> {
+                dispatch('user',data);
+            })
+        }
     },[user])
 
     const img = imgUrl(state?.user?.img) || "https://i.ibb.co/pvmWXsv/male-placeholder-image.jpg";

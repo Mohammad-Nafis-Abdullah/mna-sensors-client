@@ -1,13 +1,14 @@
 import axios from 'axios';
 import React, { useContext } from 'react';
 import { toast } from 'react-toastify';
-import useFetch from '../../../hooks/useFetch';
 import { StateContext } from '../../../App';
+import { useQueryFetch } from '../../../hooks/useQueryFetch';
+import Loading from '../../public/Loading';
 
 const AddAReview = () => {
     const [state] = useContext(StateContext);
 
-    const { data: userReview, refetch } = useFetch(`${process.env.REACT_APP_Backend_url}/review/${state.user?.email}`, {})
+    const { data: userReview, loading, refetch } = useQueryFetch('add-review',`${process.env.REACT_APP_Backend_url}/review/${state.user?.email}`, {})
 
 
     const showRating = () => {
@@ -50,6 +51,7 @@ const AddAReview = () => {
 
     return (
         <div className='flex flex-wrap justify-center gap-5 '>
+            {loading && <Loading/>}
             <form onSubmit={reviewing} className="form-control ring-4 rounded ring-white p-2 space-y-2 max-w-sm">
                 <h2 className='text-white font-medium text-2xl underline text-center mb-5'>Add a Review</h2>
                 <label className="input-group max-w-sm w-full">

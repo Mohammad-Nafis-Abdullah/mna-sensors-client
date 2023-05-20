@@ -1,21 +1,20 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import useFetch from "../../hooks/useFetch";
 import Loading from "../public/Loading";
 import { imgUrl } from "../../hooks/useMyStorage";
-import { StateContext } from '../../App';
+import useAdmin from '../../hooks/useAdmin';
+import { useQueryFetch } from '../../hooks/useQueryFetch';
 
 const SensorDetails = () => {
-    const [state] = useContext(StateContext);
+    const admin = useAdmin();
     const navigate = useNavigate();
     const { id } = useParams();
-    const { data: { role }, userLoading } = useFetch(`${process.env.REACT_APP_Backend_url}/user/${state.user?.uid}`, {});
-    const { data: sensor, loading } = useFetch(`${process.env.REACT_APP_Backend_url}/sensor/${id}`, {});
+    const { data: sensor, loading } = useQueryFetch('single-sensor',`${process.env.REACT_APP_Backend_url}/sensor/${id}`, {});
     // console.log(sensor);
 
     return (
         <div className='h-full min-h-[calc(100vh-144px)] flex justify-center items-center'>
-            {(loading || userLoading) && <Loading />}
+            {loading  && <Loading />}
             <section className='flex flex-wrap justify-center items-center gap-x-10 gap-y-5 p-3'>
                 <img src={imgUrl(sensor?.img)} alt="" className='h-auto max-w-sm basis-80 shrink' />
 
@@ -28,7 +27,7 @@ const SensorDetails = () => {
                         <h5 className='font-bold'>Price per Unit : {sensor?.unitPrice} BDT</h5>
                     </div>
                     {
-                        role !== 'admin' &&
+                        !admin &&
                         <button
                             onClick={() => {
                                 navigate(`/purchase/${sensor?._id}`);

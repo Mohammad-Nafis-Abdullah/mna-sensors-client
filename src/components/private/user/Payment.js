@@ -4,17 +4,15 @@ import { useParams } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
-import useFetch from "../../../hooks/useFetch";
 import Loading from "../../public/Loading";
+import { useQueryFetch } from "../../../hooks/useQueryFetch";
 
 const stripePromise = loadStripe(
   'pk_test_51L3eYcIsG6t6EWnkOiJzzkmaaKd3tr3LcGjdbhkuKH1YYdZ1Qfvcf6IFMt1ChcJ7eJCXtpl7RZiPaj9HH3W3fk8M00rIbRpG9V'
 );
 const Payment = () => {
   const { id } = useParams();
-  const url = `${process.env.REACT_APP_Backend_url}/order/${id}`;
-
-  const { data: order, loading, refetch } = useFetch(url, {})
+  const { data: order, loading, refetch } = useQueryFetch('single-order',`${process.env.REACT_APP_Backend_url}/order/${id}`, {})
 
   return (
     <div>

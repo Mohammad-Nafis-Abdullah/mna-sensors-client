@@ -5,17 +5,17 @@ import { useContext, useEffect, useState } from "react";
 import { StateContext } from "../App";
 import { queryClient } from "../index";
 
-export const useQueryFetch = (key, url, initialValue = [], callBack = ()=>{}) => {
+export const useQueryFetch = (key, url, initialValue = []) => {
     const [fetchUrl, setFetchUrl] = useState(url);
     const [state] = useContext(StateContext);
-    // console.log(state);
+    console.log(state);
 
     const { isLoading, data, isFetching } = useQuery({
         queryKey: [key],
         queryFn: () => axios
             .get(fetchUrl,{
                 headers:{
-                    uid:state.user?.uid,
+                    uid:state.user?.uid || '',
                 },
                 withCredentials:true
             })
@@ -23,15 +23,16 @@ export const useQueryFetch = (key, url, initialValue = [], callBack = ()=>{}) =>
         initialData: initialValue,
     });
 
-    useEffect(()=> {
-        callBack(data);
-    },[data]);
-
     const refetch = (newUrl = url) => {
         setFetchUrl(newUrl);
         queryClient.invalidateQueries({ queryKey: [key] });
     };
 
+    useEffect(()=> {
+        if (state.user) {
+            refetch();
+        }
+    },[state.user])
 
     return { data: data, loading: isLoading || isFetching, refetch };
 }

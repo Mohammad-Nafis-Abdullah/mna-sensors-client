@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { StateContext } from "../../App";
+import useAdmin from "../../hooks/useAdmin";
 
 const RequireAdmin = ({ children }) => {
-  const [state] = useContext(StateContext);
+  const admin = useAdmin();
   const location = useLocation();
 
-  if (state.user!=='owner' || state.user!=='admin') {
+  if (!admin) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 

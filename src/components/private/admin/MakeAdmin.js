@@ -1,15 +1,16 @@
 // import axios from "axios";
 import React from "react";
-import useFetch from "../../../hooks/useFetch";
-// import Loading from "../../Shared/Loading";
 import UserList from "./UserList";
+import { useQueryFetch } from "../../../hooks/useQueryFetch";
+import Loading from "../../public/Loading";
 
 
 const MakeAdmin = () => {
-  const url = `${process.env.REACT_APP_Backend_url}/users`;
-  const { data: users, refetch } = useFetch(url, []);
+  const { data: users, loading, refetch } = useQueryFetch('all-user',`${process.env.REACT_APP_Backend_url}/users`, []);
+
   return (
     <div className="fadeIn">
+      {loading && <Loading/>}
       <h2 className="text-left ml-3 text-lg text-white font-bold">
         All Users: {users?.length}
       </h2>

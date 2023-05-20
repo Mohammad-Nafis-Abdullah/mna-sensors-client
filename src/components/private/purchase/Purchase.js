@@ -3,15 +3,16 @@ import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import useFetch from '../../../hooks/useFetch';
 import { imgUrl } from '../../../hooks/useMyStorage';
 import { StateContext } from '../../../App';
+import { useQueryFetch } from '../../../hooks/useQueryFetch';
+import Loading from '../../public/Loading';
 
 const Purchase = () => {
     const [state] = useContext(StateContext);
     const params = useParams();
     const { id: serviceId } = params;
-    const { data: selected, refetch } = useFetch(`${process.env.REACT_APP_Backend_url}/sensor/${serviceId}`, {});
+    const { data: selected, loading, refetch } = useQueryFetch('select-sensor',`${process.env.REACT_APP_Backend_url}/sensor/${serviceId}`, {});
 
 
     const ordering = async (e) => {
@@ -61,6 +62,7 @@ const Purchase = () => {
 
     return (
         <div className='container min-h-[calc(100vh-166.5px)] flex flex-wrap justify-center items-center px-3 py-1 gap-8'>
+            {loading && <Loading/>}
             <form onSubmit={ordering} className='p-5 rounded-xl my-shadow flex flex-wrap justify-center items-center gap-x-16 gap-y-5 bg-gray-700'>
                 <h3 className='text-center text-white font-medium text-3xl basis-full'>Purchase Form</h3>
                 <section className=' max-w-sm w-full flex flex-col justify-center items-center p-3 rounded-xl gap-3 bg-white pt-10'>

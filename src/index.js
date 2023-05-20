@@ -9,7 +9,13 @@ import "slick-carousel/slick/slick-theme.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // Create a client
-export const queryClient = new QueryClient();
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false, // default: true
+    },
+  },
+});
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

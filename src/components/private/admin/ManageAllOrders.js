@@ -1,22 +1,23 @@
-import React, { useState } from "react";
-import useFetch from "../../../hooks/useFetch";
+import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import ManageAllOrder from "./ManageAllOrder";
 import "react-toastify/dist/ReactToastify.css";
 import CancelOrderAdmin from "./CancelOrderAdmin";
 import axios from "axios";
+import { useQueryFetch } from "../../../hooks/useQueryFetch";
+import Loading from "../../public/Loading";
+import { StateContext } from "../../../App";
 
 const ManageAllOrders = () => {
   const [order, setOrder] = useState(null);
-  const url = `${process.env.REACT_APP_Backend_url}/get/orders`;
-
-  const { data: orders, refetch } = useFetch(url, []);
+  const [state] = useContext(StateContext);
+  const { data: orders, loading, refetch } = useQueryFetch('all-order',`${process.env.REACT_APP_Backend_url}/get/orders`, []);
 
   const handelShift = (id) => {
     axios.put(`${process.env.REACT_APP_Backend_url}/shift/order/${id}`, { shift: true },
       {
         headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          uid: state.user?.uid,
         },
       }
     )
@@ -35,7 +36,7 @@ const ManageAllOrders = () => {
       {
         method: "DELETE",
         headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          uid: state.user?.uid,
         },
       }
     )
@@ -49,6 +50,7 @@ const ManageAllOrders = () => {
   };
   return (
     <div className="space-y-2">
+      {loading && <Loading/>}
       <h2 className="text-center text-3xl font-bold text-white">
         Manage All Orders
       </h2>

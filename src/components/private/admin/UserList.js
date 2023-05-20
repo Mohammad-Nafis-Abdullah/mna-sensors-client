@@ -1,12 +1,11 @@
-import React from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
+import React, { useContext } from "react";
 import { toast } from "react-toastify";
-import auth from "../../../firebase.init";
 import { FaCheck } from 'react-icons/fa';
+import { StateContext } from "../../../App";
 
 
 const UserList = ({ user, index, refetch }) => {
-  const [currentUser] = useAuthState(auth);
+  const [state] = useContext(StateContext);
   const { uid, email, role } = user;
 
   const makeAdmin = () => {
@@ -18,7 +17,7 @@ const UserList = ({ user, index, refetch }) => {
     fetch(url, {
       method: "PATCH",
       headers: {
-        uid: currentUser?.uid,
+        uid: state.user?.uid,
       },
     })
       .then((res) => {
@@ -40,9 +39,9 @@ const UserList = ({ user, index, refetch }) => {
 
   return (
     <tr className="text-center">
-      <th className={`${currentUser?.uid === uid && 'bg-green-500'}`}>{index + 1}</th>
-      <td className={`${currentUser?.uid === uid && 'bg-green-500'}`}>{email}</td>
-      <td className={`${currentUser?.uid === uid && 'bg-green-500'}`}>
+      <th className={`${state.user?.uid === uid && 'bg-green-500'}`}>{index + 1}</th>
+      <td className={`${state.user?.uid === uid && 'bg-green-500'}`}>{email}</td>
+      <td className={`${state.user?.uid === uid && 'bg-green-500'}`}>
         {role !== "admin" ?
           <button onClick={makeAdmin} className="btn btn-xs text-white">
             Make Admin
@@ -50,8 +49,8 @@ const UserList = ({ user, index, refetch }) => {
           <FaCheck className="w-5 h-5 mx-auto" />
         }
       </td>
-      {/* <td className={`${currentUser?.uid === uid && 'bg-green-500'}`}>
-        <button className={`btn btn-error btn-xs text-white`} disabled={currentUser?.uid === uid}>Remove User</button>
+      {/* <td className={`${state.user?.uid === uid && 'bg-green-500'}`}>
+        <button className={`btn btn-error btn-xs text-white`} disabled={state.user?.uid === uid}>Remove User</button>
       </td> */}
     </tr>
   );

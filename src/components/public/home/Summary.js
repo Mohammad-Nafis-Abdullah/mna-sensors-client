@@ -1,10 +1,10 @@
 import React from 'react';
-import useFetch from '../../../hooks/useFetch';
+import { useQueryFetch } from '../../../hooks/useQueryFetch';
 
 const Summary = () => {
-    const { data: items } = useFetch(`${process.env.REACT_APP_Backend_url}/sensors`, {});
-    const { data: users } = useFetch(`${process.env.REACT_APP_Backend_url}/users/count`, {});
-    const { data: orders } = useFetch(`${process.env.REACT_APP_Backend_url}/orders/count`, {});
+    const { data: items } = useQueryFetch('all-sensor',`${process.env.REACT_APP_Backend_url}/sensors`, []);
+    const { data: users } = useQueryFetch('user-count',`${process.env.REACT_APP_Backend_url}/users/count`, {});
+    const { data: orders } = useQueryFetch('order-count',`${process.env.REACT_APP_Backend_url}/orders/count`, {});
 
 
     return (

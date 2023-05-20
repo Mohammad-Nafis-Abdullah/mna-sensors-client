@@ -1,16 +1,17 @@
 // import axios from "axios";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import useFetch from "../../../hooks/useFetch";
 import DeleteConfirmModel from "./DeleteConfirmModal";
 import ManageTool from "./ManageTool";
+import { useQueryFetch } from "../../../hooks/useQueryFetch";
+import Loading from "../../public/Loading";
 
 const ManageTools = () => {
   const [deleteTool, setDeleteTool] = useState(null);
-  const url = `${process.env.REACT_APP_Backend_url}/sensors`;
-  const { data: tools, refetch } = useFetch(url, []);
+  const { data: tools, loading, refetch } = useQueryFetch('all-sensor',`${process.env.REACT_APP_Backend_url}/sensors`, []);
   return (
     <div className="py-5">
+      {loading && <Loading/>}
       <h2 className="text-left ml-3 text-lg text-white font-bold">
         Manage Tools : {tools?.length}
       </h2>
