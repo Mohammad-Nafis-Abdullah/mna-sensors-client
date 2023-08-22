@@ -20,7 +20,7 @@ const ReviewsComp = () => {
                     }
                     // console.log(review);
                     return (
-                        <div key={review._id} className="max-w-xs w-full rounded-xl p-3 text-neutral-focus ring-4 ring-neutral-focus font-medium">
+                        <div key={review._id} className="max-w-xs w-full rounded-xl p-3 text-white ring-4 ring-neutral-focus font-medium">
                             {loading && <Loading/>}
                             <h3 className=''>Email: {review?.email}</h3>
                             <h4>Comment : </h4>

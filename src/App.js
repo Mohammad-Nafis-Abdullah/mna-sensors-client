@@ -40,44 +40,47 @@ function App() {
 
   return (
     <StateContext.Provider value={[state, dispatch]}>
-      <div className={` max-w-[86rem] mx-auto`}>
+      <div className={`bg-slate-900`}>
 
-        <Navbar />
+        <section className="max-w-[86rem] mx-auto">
+          <Navbar />
 
-        <div className={`min-h-[calc(100vh-144px)] fadeIn`}>
-          <Routes>
-            <Route path="/home" element={<Navigate to={"/"} />} />
-            <Route path="/" element={<Home />} />
-            <Route path="/purchase/:id" element={<Private> <Purchase /> </Private>} />
-            <Route path="/sensor/:id" element={<SensorDetails />} />
+          <div className={`min-h-[calc(100vh-144px)] fadeIn`}>
+            <Routes>
+              <Route path="/home" element={<Navigate to={"/"} />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/purchase/:id" element={<Private> <Purchase /> </Private>} />
+              <Route path="/sensor/:id" element={<SensorDetails />} />
 
-            <Route path="/dashboard" element={<Private> <Dashboard /> </Private>} >
+              <Route path="/dashboard" element={<Private> <Dashboard /> </Private>} >
 
-              <Route index element={<Navigate to={'/dashboard/my-profile'} />} />
-              <Route path="my-profile" element={<MyProfile />} />
-              <Route path="add-review" element={<AddAReview />} />
-              <Route path="my-orders" element={<MyOrders />} />
-              <Route path="payment/:id" element={<Payment />} />
+                <Route index element={<Navigate to={'/dashboard/my-profile'} />} />
+                <Route path="my-profile" element={<MyProfile />} />
+                <Route path="add-review" element={<AddAReview />} />
+                <Route path="my-orders" element={<MyOrders />} />
+                <Route path="payment/:id" element={<Payment />} />
 
-              <Route path="make-admin" element={<RequireAdmin> <MakeAdmin /> </RequireAdmin>} />
-              <Route path="add-sensor" element={<RequireAdmin> <AddATool /> </RequireAdmin>} />
-              {/* <Route path="manage-sensors" element={<RequireAdmin> <ManageTools /> </RequireAdmin>} /> */}
-              <Route path="manage-all-orders" element={<RequireAdmin> <ManageAllOrders /> </RequireAdmin>} />
+                <Route path="make-admin" element={<RequireAdmin> <MakeAdmin /> </RequireAdmin>} />
+                <Route path="add-sensor" element={<RequireAdmin> <AddATool /> </RequireAdmin>} />
+                {/* <Route path="manage-sensors" element={<RequireAdmin> <ManageTools /> </RequireAdmin>} /> */}
+                <Route path="manage-all-orders" element={<RequireAdmin> <ManageAllOrders /> </RequireAdmin>} />
 
-            </Route>
+              </Route>
 
-            <Route path="/reviews" element={<ReviewsComp />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/Signup" element={<SignUp />} />
-            <Route path="/*" element={<NotFound />} />
-          </Routes>
-        </div>
+              <Route path="/reviews" element={<ReviewsComp />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/Signup" element={<SignUp />} />
+              <Route path="/*" element={<NotFound />} />
+            </Routes>
+          </div>
 
 
-        <Footer />
+          <Footer />
 
-        <ToastContainer />
-        <Modal />
+          <ToastContainer />
+          <Modal />
+        </section>
+
       </div>
     </StateContext.Provider>
   );

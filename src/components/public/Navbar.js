@@ -3,7 +3,7 @@
 import { signOut } from "firebase/auth";
 import React, { useContext, useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import { toast } from "react-toastify";
 import Loading from "./Loading";
@@ -36,13 +36,18 @@ const Navbar = () => {
         navigate('/');
         localStorage.removeItem("accessToken");
     };
+
+    const style = ({isActive})=> {
+        return isActive?"font-medium text-sm text-amber-400 underline decoration-2 underline-offset-4":"font-medium text-sm text-amber-400";
+    }
+
     const menuItems = (
         <div className="flex flex-col lg:flex-row lg:items-center gap-x-5 gap-y-2 px-5">
-                <Link to="/" className="font-medium text-sm">Home</Link>
+                <NavLink to="/" className={style}>Home</NavLink>
             {user && !loading &&
-            <Link to="/dashboard" className="font-medium text-sm">Dashboard</Link>
+            <NavLink to="/dashboard" className={style}>Dashboard</NavLink>
             }
-            <Link to="/reviews" className="font-medium text-sm">Reviews</Link>
+            <NavLink to="/reviews" className={style}>Reviews</NavLink>
             <div className="self-center">
                 {user ? (
                     <div className="text-xs relative z-20">
@@ -70,10 +75,10 @@ const Navbar = () => {
 
     // console.log(user);
     return (
-        <div className="shadow-md sticky top-0 z-[999] bg-white">
+        <div className="shadow-md sticky top-0 z-[999] bg-slate-900">
             {loading && <Loading/>}
             {error && toast.error('There was an error',{theme:'colored'})}
-            <div className="navbar bg-base-100 max-w-7xl mx-auto">
+            <div className="navbar max-w-7xl mx-auto">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex="0" className="btn btn-ghost lg:hidden">
@@ -99,7 +104,7 @@ const Navbar = () => {
                             {menuItems}
                         </ul>
                     </div>
-                    <Link to="/" className="btn btn-ghost normal-case text-xl">
+                    <Link to="/" className="btn btn-ghost normal-case text-xl text-amber-400">
                         MNA Sensors
                     </Link>
                 </div>
