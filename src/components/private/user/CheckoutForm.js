@@ -92,7 +92,7 @@ const CheckoutForm = ({ order }) => {
         })
         .then((data) => {
           setProcessing(false);
-          console.log(data.data);
+          // console.log(data.data);
         });
     }
   };

@@ -79,7 +79,7 @@ const ConfigureModal = forwardRef(({ refetch }, ref) => {
             })
             data?.acknowledged && data?.matchedCount && toast.success('Successfully updated', { theme: 'dark' });
         } catch (err) {
-            console.log(err);
+            // console.log(err);
         }
         refetch();
         e.target.reset();

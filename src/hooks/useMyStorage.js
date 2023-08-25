@@ -28,7 +28,7 @@ const useMyStorage = () => {
 
     const uploadImage = (file=undefined) => {
         if(!file){
-            console.log('no file');
+            // console.log('no file');
             return;
         }
         return new Promise(async(resolve, reject) => {

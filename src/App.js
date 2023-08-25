@@ -40,10 +40,9 @@ function App() {
 
   return (
     <StateContext.Provider value={[state, dispatch]}>
-      <div className={`bg-slate-900`}>
-
-        <section className="max-w-[86rem] mx-auto">
+      <div className={`bg-slate-950`}>
           <Navbar />
+        <section className="max-w-[86rem] mx-auto">
 
           <div className={`min-h-[calc(100vh-144px)] fadeIn`}>
             <Routes>
@@ -75,11 +74,11 @@ function App() {
           </div>
 
 
-          <Footer />
 
           <ToastContainer />
           <Modal />
         </section>
+        <Footer />
 
       </div>
     </StateContext.Provider>

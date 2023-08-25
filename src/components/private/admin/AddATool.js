@@ -52,7 +52,7 @@ const AddATool = () => {
 
     } catch (err) {
       toast.error("Failed to Add sensor", { theme: "colored" });
-      console.log(err);
+      // console.log(err);
     }
     setLoading(false);
   };

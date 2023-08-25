@@ -17,7 +17,7 @@ const Navbar = () => {
     const [state,dispatch] = useContext(StateContext);
     const navigate = useNavigate();
     const [dropDown,setDropDown] = useState(false);
-    console.log(state);
+    // console.log(state);
 
     useEffect(()=> {
         if (user) {
@@ -75,10 +75,10 @@ const Navbar = () => {
 
     // console.log(user);
     return (
-        <div className="shadow-md sticky top-0 z-[999] bg-slate-900">
+        <div className="sticky top-0 z-[999] bg-slate-950">
             {loading && <Loading/>}
             {error && toast.error('There was an error',{theme:'colored'})}
-            <div className="navbar max-w-7xl mx-auto">
+            <div className="navbar container mx-auto">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex="0" className="btn btn-ghost lg:hidden">
